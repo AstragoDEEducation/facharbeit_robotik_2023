@@ -1,3 +1,6 @@
+// ========== Document settings ==========
+
+// Template setup
 #import "template.typ": *
 
 #show: project.with(
@@ -7,6 +10,11 @@
   ),
   date: datetime.today().display(),
 )
+
+// Underline links
+#show link: underline
+
+// ========== Content ==========
 
 = Einführung
 
@@ -24,11 +32,10 @@ $
 (a dot b dot cancel(x)) / (cancel(x)) = a dot b 
 $
 
-== Die PQ-Formel
-
+== Die #link("https://www.youtube.com/watch?v=tRblwTsX6hQ")[PQ-Formel]
 \
 $
-minus frac(p, 2) plus.minus root(2, (frac(p,2))^2 -q) approx x
+x eq minus frac(p, 2) plus.minus root(2, frac(p,2))^2 -q)
 $
 
 
