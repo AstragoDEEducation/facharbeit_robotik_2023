@@ -14,8 +14,9 @@
 // your document will look. Go ahead and replace it with
 // your own content!
 
-= Introduction
-#lorem(60)
+= Einführung
+Mathematik ist cool, weil $pi dot "r"^2$ cool ist.
+@harry ist töpfer.
 
 == In this paper
 #lorem(20)
@@ -25,3 +26,10 @@
 
 = Related Work
 #lorem(500)
+
+
+// Quellen
+
+#pagebreak()
+
+#bibliography("bibliography.yml")
