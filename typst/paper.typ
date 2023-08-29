@@ -35,7 +35,7 @@ $
 == Die #link("https://www.youtube.com/watch?v=tRblwTsX6hQ")[PQ-Formel]
 \
 $
-x eq minus frac(p, 2) plus.minus root(2, frac(p,2))^2 -q)
+x eq minus frac(p, 2) plus.minus root(2, (frac(p,2))^2 -q)
 $
 
 
