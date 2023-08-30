@@ -4,11 +4,12 @@
 #import "template.typ": *
 
 #show: project.with(
-  title: "Interpolation zwischen Punkten mittels eines 3R-Roboterarmes" ,
+  title: "Interpolation zwischen Punkten mittels eines 3R-Roboterarmes in der Ebene" ,
   authors: (
     "Justus John Michael Seeck",
   ),
   date: datetime.today().display(),
+  logo: "./assets/pgwv_logo.svg",
 )
 
 // Underline links
@@ -35,7 +36,7 @@ $
 == Die #link("https://www.youtube.com/watch?v=tRblwTsX6hQ")[PQ-Formel]
 \
 $
-x eq minus frac(p, 2) plus.minus root(2, (frac(p,2))^2 - q) < 7
+x eq minus frac(p, 2) plus.minus root(2, (frac(p,2))^2 - q)
 $
 
 == Limes mag Limetten
@@ -45,9 +46,53 @@ op("custom",
      limits: #true)_(n->oo) n 
 $
 
+== Vektoren
 
-// Quellen
+$
+vec(a, b, c) dot vec(1, 2, 3) = a + 2b + 3c
+$
 
-#pagebreak()
+== LOL
 
-#bibliography("bibliography.yml")
+$
+f(x, y) := cases(
+  1 "if" (x dot y)/2 <= 0,
+  2 "if" x "is even",
+  3 "if" x in NN,
+  4 "else",
+)
+$
+
+== Matrizen
+
+$
+mat(
+  1, 2, ..., 10;
+  2, 2, ..., 10;
+  dots.v, dots.v, dots.down, dots.v;
+  10, 10, ..., 10;
+)
+$
+
+== Summen
+
+// With syntax.
+$
+sum_(i=0)^n a_i = 2^(1+i)
+$
+
+// With function call.
+$
+attach(
+  Pi, t: alpha, b: beta,
+  tl: 1, tr: 2+3, bl: 4+5, br: 6,
+)
+$
+
+== Irgendeine Quellen
+
+Terminator 2 @terminator-2 ist ein Toller film, @interior Rind-?fleisch-?e-?ti-?kett-?
+
+== Irgendein Text
+
+#text("LOL", font: "Bebas Neue", fill: rgb("#FF80ff"))

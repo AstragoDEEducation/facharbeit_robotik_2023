@@ -50,4 +50,8 @@
   set par(justify: true)
 
   body
+  
+  // Bibliography.
+  pagebreak()
+  bibliography("bibliography.yml")
 }
