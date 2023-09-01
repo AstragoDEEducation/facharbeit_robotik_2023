@@ -96,3 +96,15 @@ Terminator 2 @terminator-2 ist ein Toller film, @interior Rind-?fleisch-?e-?ti-?
 == Irgendein Text
 
 #text("LOL", font: "Bebas Neue", fill: rgb("#FF80ff"))
+
+= Überschrift
+
+*Fett*
+
+_Kursiv_
+
+$
+x = - frac(p,2) plus.minus root(2, (frac(p,2))^2 -q)
+$
+
+== Unterüberschrift
