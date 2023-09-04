@@ -9,3 +9,7 @@
   - Kameraroboter / Kräne
     - Relevanz durch Präzision
 - Winel nach Zeit ableiten für Winkelgeschwingigkeit
+
+# Videos
+
+- 4 -> 4/5

@@ -22,11 +22,18 @@
 - mehr lesen
 - mehr notizen
 - Arbeitsrestriktionen definieren
-  - EZ?
+  - Radius?
+    - Siehe inv. kin. Problem
   - kann die gerade gezeichnet werden
 
 ## Donnerstag
 
 - Modellierung des Arms in GGB (siehe _SET_'s Datei)
 - Differenzieren der Bewegung
-  - --> Winkelgeschwindigkeit
+  - Winkelgeschwindigkeit
+    - easing für smothere Bewegung
+      - Schränkt das Genauigkeit ein?
+
+## Wenn noch Platz und Zeit ist
+
+- Bezierkurven
