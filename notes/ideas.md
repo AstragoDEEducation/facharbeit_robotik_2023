@@ -8,4 +8,4 @@
   - Plotter
   - Kameraroboter / Kräne
     - Relevanz durch Präzision
-- wWinel nach Zeit ableiten für Winkelgeschwingigkeit
+- Winel nach Zeit ableiten für Winkelgeschwingigkeit
