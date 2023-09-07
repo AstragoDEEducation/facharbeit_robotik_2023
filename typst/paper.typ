@@ -19,92 +19,67 @@
 
 = Einführung
 
-== Ziel dieser Arbeit
+== Ziel dieser Arbeit (WORK IN PROGRESS)
 
 Das Ziel der Arbeit ist die mathematische Beschreibung der Interpolation zwischen zwei Punkten mittels eines 3R-Roboterarmes. Dazu wird zunächst die Kinematik des Roboters beschrieben und mittels Analogien zum Menschlichen Körper erläutert. Anschließend wird die Interpolation zwischen zwei Punkten mittels der Inversen Kinematik beschrieben. Im Anschluss werden Beispiele für die anwendung von geradliniger Interpolation in der Industrie gegeben.
 
-== Mögliche Herangehensweisen
-#lorem(50)
+= Allgemeines
 
-= Playground
+Ziel der in dieser Arbeit beshriebenen Interpolation ist es, einen 3R-Roboterarm Zwischen zwei Punkten $A$ und $B$ geradlienig in Form einer Strecke zu bewegen. 
 
-Here, we can simplify:
-$
-(a dot b dot cancel(x)) / (cancel(x)) = a dot b 
-$
+Um eine geradliniege Interpolation auszuführen, wird die Aufgabe in mehrere Teilaufgaben zerlegt die anschließend sequenziell ausgeführt werden.
+Zuerst wird die Bewegung vom Startpunkt $A$ zum Zielpunkt $B$ geplant.
+Diese Aufgabe nennt sich Trajektorienplanung.
+Eine Referenztrajektorie oder Referenzpfad wird generiert @SeyrMartin2006Amrm, an dem sich der Roboter in den anschließenden Phasen orientiert.
 
-== Die #link("https://www.youtube.com/watch?v=tRblwTsX6hQ")[PQ-Formel]
-\
-$
-x eq minus frac(p, 2) plus.minus root(2, (frac(p,2))^2 - q)
-$
+In der Navigations- und Steuerungsphase muss der Roboter anschließend seine eigene Position mittels der Lösung des direkten kinematischen Problems finden und im anschluss so gesteuert werden, dass die Referenztrajektorie bestmöglich eingehalten wird.
 
-== Limes mag Limetten
+Diese Arbeit geht jedoch nicht weiter auf Navigation und Ansteuerung ein. 
 
-$
-op("custom",
-     limits: #true)_(n->oo) n 
-$
+== Trajektorienplanung
 
-== Vektoren
+Um den Weg des roboterarmes zu planen, ist es hilfreich, diesen als Funktion darstellen zu können. Hierfür gibt es verschiedene Wege.
 
-$
-vec(a, b, c) dot vec(1, 2, 3) = a + 2b + 3c
-$
+== Zeichnen einer Strecke, welche dem Koordinatenursprung $O_"U"$ zuläufig ist.
 
-== LOL
+Um eine Strecke zu zeichen, welche dem Koordinatenursprung zuläufig ist,
+kann als einfachste Methode ein 2R-Roboterarm, wie in @gerade_zentrum dargestellt, verwendet werden.
 
+Als Eingabeparameter werden zwei Winkel angegeben. $alpha$ als Steuerungswinkel, welcher beim Durchlauf der Bewegung kontinuierlich erhöht wird, und $delta$, welcher den Rotationswinkel der entstehenden Gerade ausgehend von der X-Achse angibt.
+
+Es gelten die folgenden 
 $
-f(x, y) := cases(
-  1 "if" (x dot y)/2 <= 0,
-  2 "if" x "is even",
-  3 "if" x in NN,
-  4 "else",
-)
+0 <= alpha <= 180° \
+0 <= delta <= 360°
 $
 
-== Matrizen
 
-$
-mat(
-  1, 2, ..., 10;
-  2, 2, ..., 10;
-  dots.v, dots.v, dots.down, dots.v;
-  10, 10, ..., 10;
-)
-$
+#pagebreak()
 
-== Summen
+= Abbildungen
 
-// With syntax.
-$
-sum_(i=0)^n a_i = 2^(1+i)
-$
+#figure(
+  image("./assets/gerade_zentrum.png", width: 70%),
+  caption: [
+    Ein 2R-Roboterarm mit gleichlangen Armen $l_"1"$ und $l_"2"$.
+  ],
+) <gerade_zentrum>
 
-// With function call.
-$
-attach(
-  Pi, t: alpha, b: beta,
-  tl: 1, tr: 2+3, bl: 4+5, br: 6,
-)
-$
 
-== Irgendeine Quellen
+  
+#pagebreak()
+#bibliography("bibliography.bib")
 
-Terminator 2 @terminator-2 ist ein Toller film, @interior Rind-?fleisch-?e-?ti-?kett-?
+// === Eigener Ansatz
 
-== Irgendein Text
+// Um eine Bewegung des Robortearmes aufzuführen zu können, muss sich die gesamte Strecke zwischen $A$ und $B$ in einem vom Roboter erreichbaren Bereich befinden.
 
-#text("LOL", font: "Bebas Neue", fill: rgb("#FF80ff"))
+// Da der hier referenzierte Roboter eine feste Basis am Koordinatenursprung des Weltsystems $O_U$ hat, ergeben sich die folgenden Einschränkungen:
 
-= Überschrift
+// $
+// l_"Gesamt" <= l_"1" + l_"2" + l_"3"
+// $
 
-*Fett*
-
-_Kursiv_
-
-$
-x = - frac(p,2) plus.minus root(2, (frac(p,2))^2 -q)
-$
-
-== Unterüberschrift
+// $
+// l_"Gesamt" >= abs(l_"1" - l_"2" - l_"3")
+// $

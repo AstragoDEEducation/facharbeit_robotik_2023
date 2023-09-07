@@ -1,1 +1,1 @@
-typst watch facharbeit.typ
+typst watch paper.typ

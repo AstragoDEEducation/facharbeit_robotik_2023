@@ -1,1 +1,1 @@
-typst compile facharbeit.typ
+typst compile papera.typ
