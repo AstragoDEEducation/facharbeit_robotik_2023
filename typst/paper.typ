@@ -4,7 +4,7 @@
 #import "template.typ": *
 
 #show: project.with(
-  title: "Interpolation zwischen Punkten mittels eines 3R-Roboterarmes in der Ebene" ,
+  title: "Interpolation zwischen Punkten für das Zeichnen von Strecken in der Ebene mittels eines Roboterarmes" ,
   authors: (
     "Justus John Michael Seeck",
   ),
@@ -36,36 +36,68 @@ In der Navigations- und Steuerungsphase muss der Roboter anschließend seine eig
 
 Diese Arbeit geht jedoch nicht weiter auf Navigation und Ansteuerung ein. 
 
-== Trajektorienplanung
+= Trajektorienplanung
 
-Um den Weg des roboterarmes zu planen, ist es hilfreich, diesen als Funktion darstellen zu können. Hierfür gibt es verschiedene Wege.
+== Gültigkeit von Koordinaten
 
-== Zeichnen einer Strecke, welche dem Koordinatenursprung $O_"U"$ zuläufig ist.
+Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor, insbesondere in praktischen Anwendungen, eine Überprüfung der Erreichbarkeit von Koordinaten nötig.
+Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Armlängen für den Roboter nicht erreichbar sind.
+
+=== Koordinatengültigkeitsprüfung für einen 2R-Arm
+
+Für einen 2R-Arm mit den Armlängen $l_"1"$ und $l_"2"$ lassen sich kreisförmig ausgehend vom Koordinatenursprung $O_"U"$ grenzbereiche der Erreichbarkeit eines Punktes durch einen Roboter bestimmen.
+Für die Länge $l-"erreichbar"$ gilt:
+$
+abs(l_"1" - l_"2") <= l_"erreichbar" <= l_"1" + l_"2"
+$
+
+= Zeichnen einer Strecke durch den Koordinatenursprung $O_"U"$ mit einem 2R-Arm
 
 Um eine Strecke zu zeichen, welche dem Koordinatenursprung zuläufig ist,
-kann als einfachste Methode ein 2R-Roboterarm, wie in @gerade_zentrum dargestellt, verwendet werden.
+kann als einfachste Methode ein 2R-Roboterarm, wie in @gerade_zentrum und @gerade_zentrum_2 dargestellt, verwendet werden.
 
-Als Eingabeparameter werden zwei Winkel angegeben. $alpha$ als Steuerungswinkel, welcher beim Durchlauf der Bewegung kontinuierlich erhöht wird, und $delta$, welcher den Rotationswinkel der entstehenden Gerade ausgehend von der X-Achse angibt.
+Als Eingabeparameter werden zwei Winkel angegeben. $alpha$ als Steuerungswinkel, welcher beim Durchlauf der Bewegung kontinuierlich erhöht wird, und $gamma$, welcher den Rotationswinkel der entstehenden Gerade ausgehend von der X-Achse angibt.
 
-Es gelten die folgenden 
+Es gelten die folgenden Einschränkungen, um eine Strecke der größtmöglichen Länge ausgehend von einem beliebigen Ausgangswinkel $gamma$
+zu zeichnen:
 $
 0 <= alpha <= 180° \
-0 <= delta <= 360°
+0 <= gamma <= 180°
 $
 
+Der Winkel $beta$ gibt den Winkel zwischen X-Achse und dem Oberarm des Roboters (hier: $mono("f")$) an. Der Winkel $delta$ gibt den Winkel zwischen dem Oberarm $mono("f")$ und dem Unterarm $mono("g")$ an.
+
+Für die Interpolation zum Zeischnen einer Strecke ergeben sich nun die folgenden Formeln:
+
+$
+beta (alpha) = alpha + gamma \
+delta (alpha) = 180° - 2 alpha
+$
+
+== 
+
+// ===== Abbildungen
 
 #pagebreak()
 
 = Abbildungen
 
 #figure(
-  image("./assets/gerade_zentrum.png", width: 70%),
+  image("./assets/gerade_zentrum.png", width: 60%),
   caption: [
     Ein 2R-Roboterarm mit gleichlangen Armen $l_"1"$ und $l_"2"$.
   ],
 ) <gerade_zentrum>
 
+#figure(
+  image("./assets/gerade_zentrum_2.png", width: 60%),
+  caption: [
+    Ein 2R-Roboterarm mit gleichlangen Armen $l_"1"$ und $l_"2"$ sowie
+    den Winkeln $beta$ und $gamma$.
+  ],
+) <gerade_zentrum_2>
 
+// ===== Bibliographie
   
 #pagebreak()
 #bibliography("bibliography.bib")
