@@ -13,3 +13,14 @@
 # Videos
 
 - 4 -> 4/5
+
+---
+
+Interpolationsarten
+
+Welche Interpolationsarten gibt es?
+
+Für Interpolation:
+
+- Zuerst gerade mit zwei Punkten zu linearer Funktion umformen.
+- Dann Punkte Samplen
