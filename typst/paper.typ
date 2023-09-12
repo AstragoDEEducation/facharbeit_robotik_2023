@@ -80,7 +80,7 @@ Der Winkel $beta$ gibt den Winkel zwischen x-Achse und dem Oberarm des Roboters 
 Für den Winkel $delta$ bei bekanntem $beta$ gilt:
 
 $
-delta = 180° - 2 alpha
+delta = 180° - 2 beta
 $
 
 Beziehungsweise für den Winkel $beta$ bei bekanntem $delta$ gilt:
