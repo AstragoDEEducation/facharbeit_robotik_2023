@@ -56,7 +56,7 @@ $
 Um eine Strecke zu zeichen, welche dem Koordinatenursprung zuläufig ist,
 kann als einfachste Methode, mit elementargeometrischen Mitteln, ein 2R-Roboterarm mit gleichlangen Armen ($l_"1" = l_"2"$), wie in @gerade_zentrum und @gerade_zentrum_2 dargestellt, verwendet werden.
 
-// Als Eingabeparameter werden zwei Winkel angegeben. $alpha$ als Steuerungswinkel, welcher beim Durchlauf der Bewegung kontinuierlich erhöht wird, und $gamma$, welcher den Rotationswinkel der entstehenden Gerade ausgehend von der X-Achse angibt.
+// Als Eingabeparameter werden zwei Winkel angegeben. $alpha$ als Steuerungswinkel, welcher beim Durchlauf der Bewegung kontinuierlich erhöht wird, und $gamma$, welcher den Rotationswinkel der entstehenden Gerade ausgehend von der x-Achse angibt.
 
 // Es gelten die folgenden Einschränkungen, um eine Strecke der größtmöglichen Länge ausgehend von einem beliebigen Ausgangswinkel $gamma$
 // zu zeichnen:
@@ -66,7 +66,7 @@ kann als einfachste Methode, mit elementargeometrischen Mitteln, ein 2R-Robotera
 // 0 <= gamma <= 180°
 // $
 
-// Der Winkel $beta$ gibt den Winkel zwischen X-Achse und dem Oberarm des Roboters (hier: $mono("f")$) an. Der Winkel $delta$ gibt den Winkel zwischen dem Oberarm $mono("f")$ und dem Unterarm $mono("g")$ an.
+// Der Winkel $beta$ gibt den Winkel zwischen x-Achse und dem Oberarm des Roboters (hier: $mono("f")$) an. Der Winkel $delta$ gibt den Winkel zwischen dem Oberarm $mono("f")$ und dem Unterarm $mono("g")$ an.
 
 // Für die Interpolation zum Zeischnen einer Strecke ergeben sich nun die folgenden Formeln:
 
@@ -86,8 +86,29 @@ $
 Beziehungsweise für den Winkel $beta$ bei bekanntem $delta$ gilt:
 
 $
-90° - alpha = beta
+beta = (180° - delta) / 2
 $
+
+Die Winkel können jedoch nicht nur durch ihre gegenseitigen Abhängigkeiten, sondern auch mit Hilfe eines Kontrollwinbkels $alpha$ und eines Rotationswinkels $gamma$ beschrieben werden. 
+Diese Kontroll- und Rotationswinkel ermöglichen eine Darstellung der Winkel, welche ähnlich der Darstellung von Funktionen ist.
+Diese Funktionsartige Darstellung kann verwendet werden, um das Voranschreiten der Bewegung mit einem Computerprogramm zu steuern und wird später noch genauer anhand eines komplexeren Roboterarmes weiter sperzifiziert und erläutert.
+
+Es gelten die folgenden Einschränkungen, um eine Strecke der größtmöglichen Länge ausgehend von einem beliebigen Ausgangswinkel $gamma$
+zu zeichnen:
+
+$
+0 <= alpha <= 180° \
+0 <= gamma <= 180°
+$
+
+Für die Interpolation zum Zeischnen einer Strecke ergeben sich nun die folgenden Formeln:
+
+$
+beta (alpha) = alpha + gamma \
+delta (alpha) = 180° - 2 alpha
+$
+
+$alpha$ wird dabei kontinuierlich ehröht oder vermindert, um die Bewegung des Roboters zu steuern. $gamma$ bleibt dabei konstant.
 
 // ===== Abbildungen
 
