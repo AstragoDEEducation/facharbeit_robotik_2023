@@ -15,6 +15,10 @@
 // Underline links
 #show link: underline
 
+// Text Settings
+#set text(spacing: 150%)
+#set text(size: 11pt)
+
 // ========== Content ==========
 
 = Einführung
@@ -118,6 +122,14 @@ $x &= A + accent("Ax", arrow) = A + accent("x", arrow)$ #h(4em) mit $accent("x",
 $accent("Ax", arrow) || accent("AB", arrow) => accent("Ax", arrow) = s dot accent("AB", arrow)$ #h(4em) mit $0 <= s <= 1$
 
 $s$ beschreibt den Anteil der Strecke $x$, welcher von dem Vektor $accent("Ax", arrow)$ beschrieben wird. $s = 0$ beschreibt den Punkt $"[A]"_"S"$, $s = 1$ beschreibt den Punkt $"[B]"_"S"$.
+
+#text("Video: 12:00 Minuten", fill: red, style: "italic", size: 1.1em)
+
+= LOL
+
+#repeat("Ich bin Dumm. ")
+
+#lorem(4500)
 
 // ===== Abbildungen
 
