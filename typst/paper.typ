@@ -107,14 +107,17 @@ $
 
 #text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
 
-Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher von der Zeit $t$ abhängt.
+Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher einem Parameter $s$ abhängt.
 
-Ziel ist es, die eine Funktion $s(t)$ zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ beschreibt. Bei $s(0)$ soll der Roboterarm sich am Punkt $"[A]"_"S"$ befinden und bei $s(t_1)$ am Punkt $"[B]"_"S"$.
+Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ beschreibt.
 
 Gegeben sind die Punkte $"[A]"_"S" = mat(a_1; b_1)$ und $"[B]"_"S" = mat(b_1; b_2)$. Zwischen den Punkten befindet sich die Strecke $x$, sowie der Vektor $accent("x", arrow)$, welcher sich auf der Strecke $x$ befindet, und damit auch parallel zu ihr ist.
 
-$x &= A + accent("Ax", arrow) = A + accent("x", arrow)$ #h(3em) mit $accent("x", arrow) = accent("Ax", arrow)$
+$x &= A + accent("Ax", arrow) = A + accent("x", arrow)$ #h(4em) mit $accent("x", arrow) = accent("Ax", arrow)$
 
+$accent("Ax", arrow) || accent("AB", arrow) => accent("Ax", arrow) = s dot accent("AB", arrow)$ #h(4em) mit $0 <= s <= 1$
+
+$s$ beschreibt den Anteil der Strecke $x$, welcher von dem Vektor $accent("Ax", arrow)$ beschrieben wird. $s = 0$ beschreibt den Punkt $"[A]"_"S"$, $s = 1$ beschreibt den Punkt $"[B]"_"S"$.
 
 // ===== Abbildungen
 
