@@ -125,11 +125,6 @@ $s$ beschreibt den Anteil der Strecke $x$, welcher von dem Vektor $accent("Ax", 
 
 #text("Video: 12:00 Minuten", fill: red, style: "italic", size: 1.1em)
 
-= LOL
-
-#repeat("Ich bin Dumm. ")
-
-#lorem(4500)
 
 // ===== Abbildungen
 
