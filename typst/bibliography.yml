@@ -1,0 +1,15 @@
+src-SeyrMartin2006Amrm:
+  type: thesis
+  title: Autonomous mobile robot motion control
+  author: Martin Seyr
+  date: 2006
+  language: en
+  url: http://media.obvsg.at/AC05033038-2001
+
+src-ms:
+  type: video
+  title: "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
+  author: "Prof. Dr. Harald Löwe"
+  date: "2021-05-02"
+  url: "https://www.youtube.com/watch?v=-ONzaWY9ZUo"
+  runtime: "53:02"
