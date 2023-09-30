@@ -32,7 +32,7 @@ Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob
 Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten.
 
 = Aufbau des 3R-Roboterarmes
-#text("ABBILDUNGEN Unvollständig (O_S und O_T fehlen)", fill: red, style: "italic", size: 1.1em)
+#text("ABBILDUNGEN UNVOLLSTÄNDIG (O_S UND O_T FEHLEN)", fill: red, style: "italic", size: 1.1em)
 
 Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind. Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem _S_ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem _T_ am 3. Gelenk ($"R"_"3"$). @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_"1"$, $l_"2"$ und $l_"3"$ ist bekannt.
 
