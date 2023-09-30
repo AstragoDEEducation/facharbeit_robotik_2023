@@ -28,8 +28,9 @@ Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob
 Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten.
 
 = Aufbau des 3R-Roboterarmes
+#text("ABBILDUNGEN Unvollständig (O_S und O_T fehlen)", fill: red, style: "italic", size: 1.1em)
 
-Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über einen Schaft mit fester Länge miteinander verbunden sind. Am Ende des drittem Schaftes befindet sich ein Manipulator (hier: ein Greifarm), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem _S_ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem _T_ am 3. Gelenk ($"R"_"3"$). @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Schäfte $l_"1"$, $l_"2"$ und $l_"3"$ ist bekannt.
+Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind. Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem _S_ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem _T_ am 3. Gelenk ($"R"_"3"$). @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_"1"$, $l_"2"$ und $l_"3"$ ist bekannt.
 
 Der Manipulator greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
 
@@ -43,8 +44,10 @@ Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Ber
 
 == Erreichbarkeit von Koordinaten
 
+#text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
+
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor eine Überprüfung der Erreichbarkeit der Koordinaten nötig.
-Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Armlängen für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
+Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
 
 Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems _T_ ($[theta_3]_S$) zur x-Achse des Weltsystems _S_ dem Winkel zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$.
 
@@ -63,9 +66,9 @@ Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um d
 Um den Vektor $accent(v, arrow)$ zu erhalten, wird $"[P]"_"t"$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta$ multipliziert.
 
 $
-accent(v, arrow) = vec(v_1, v_2) &= "[P]"_"t" * "Rot"_theta \
-&= mat("l"_"3" + rho; 0) * mat("cos"(theta), "-sin"(theta); "sin"(theta), "cos"(theta)) \
-&= mat("l"_"3" + rho) * mat("cos"(theta); "sin"(theta)) \
+accent(v, arrow) = vec(v_1, v_2) &= "[P]"_"t" dot "Rot"_theta \
+&= mat("l"_"3" + rho; 0) dot mat("cos"(theta), "-sin"(theta); "sin"(theta), "cos"(theta)) \
+&= mat("l"_"3" + rho) dot mat("cos"(theta); "sin"(theta)) \
 $
 
 Der Mittelpunkt der Kreise $M$, welche die Erreichbarkeit des Roboters begrenzen, liegt dann bei $M = "[O]"_"S" + accent(v, arrow)$.
@@ -82,7 +85,30 @@ $
 "r"_"min" = abs("l"_"1" - "l"_"2")
 $
 
-$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $"r"_"max"$ und dem Mittelpunkt $"[O]"_"S" + accent(v, arrow)$, und außerhalb des Kreises mit dem Radius $abs("l"_"1"-"l"_"2")$ und dem Mittelpunkt $"[O]"_"S" + accent(v, arrow)$ liegt.
+$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $"r"_"max"$ und dem Mittelpunkt $M$ und außerhalb des Kreises mit dem Radius $"r"_"min"$ und dem Mittelpunkt $M$ liegt.
+
+Die Überprüfung, ob ein Punkt innerhalb eines Kreises liegt, könnte beispielsweise mit dem folgenden, hier nicht näher erläuterten Verfahren erfolgen:
+
++ Prüfen, ob der Startpunkt $"[A]"_"S"$ und der Endpunkt $"[B]"_"S"$ innerhalb des erreichbaren Bereiches liegen. Hierzu kann die Distanz zwischen dem Mittelpunkt $M$ und den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ berechnet werden. Beispielsweise mit dem Satz des Pythagoras. Liegt mindestens einer der Punkte außerhalb des erreichbaren Bereiches, ist die Strecke nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
++ Prüfen, ob die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ den erreichbaren Bereich schneidet. Hierzu kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert und mittels eines Vektors dargestellt werden, und mit der Kreisgleichung ein weiterer Vektor erstellt werden, welcher der Kreisgleichung folgt. Schneiden sich die beiden Vektoren, so schneidet die Strecke den Kreis und ist somit nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
+
+== Bestimmung des Punktes $"[P]"_"S"$ (Wird das benötigt?)
+
+// Da die Längen der einzelnen Armglieder bekannt sind und auch die Position der Stiftspitze _P_ im Bezug auf das Toolsystem _T_ bekannt ist, kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert werden.
+
+Durch anwendung des direkten kinematischen Problems kann der Punkt $"[P]"_"S"$ bestimmt werden.
+
+$
+"[P]"_"S" &= "Rot"(theta_1 + theta_2 + theta_3) dot vec("l"_"3" + rho, 0) + "Rot"(theta_1 + theta_2) dot vec("l"_"2", 0) + "Rot"(theta_1) dot vec("l"_"1", 0) \
+&= vec((l_3 + rho) dot "cos"(theta_1 + theta_2 + theta_3) + l_2 "cos"(theta_1 + theta_2) + l_1 "cos"(theta_1), (l_3 + rho) dot "sin"(theta_1 + theta_2 + theta_3) + l_2 "sin"(theta_1 + theta_2) + l_1 "sin"(theta_1)) 
+$
+
+== Parametrisierung der Strecke
+
+#text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
+
+Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher von der Zeit $t$ abhängt.
+
 
 // ===== Abbildungen
 
