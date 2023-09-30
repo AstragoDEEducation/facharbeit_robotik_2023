@@ -109,6 +109,12 @@ $
 
 Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher von der Zeit $t$ abhängt.
 
+Ziel ist es, die eine Funktion $s(t)$ zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ beschreibt. Bei $s(0)$ soll der Roboterarm sich am Punkt $"[A]"_"S"$ befinden und bei $s(t_1)$ am Punkt $"[B]"_"S"$.
+
+Gegeben sind die Punkte $"[A]"_"S" = mat(a_1; b_1)$ und $"[B]"_"S" = mat(b_1; b_2)$. Zwischen den Punkten befindet sich die Strecke $x$, sowie der Vektor $accent("x", arrow)$, welcher sich auf der Strecke $x$ befindet, und damit auch parallel zu ihr ist.
+
+$x &= A + accent("Ax", arrow) = A + accent("x", arrow)$ #h(3em) mit $accent("x", arrow) = accent("Ax", arrow)$
+
 
 // ===== Abbildungen
 
@@ -126,7 +132,7 @@ Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wir
 #figure(
   image("./assets/3r_arm_ts.png", width: 60%),
   caption: [
-    Manipulator des Roboters mit dem #text("Stift (rot)", fill: red) und dem Stiftradius $rho$.
+    Manipulator des Roboters mit dem Stift (rot) und dem Stiftradius $rho$.
   ],
 ) <fig-3r_arm_ts>
 
