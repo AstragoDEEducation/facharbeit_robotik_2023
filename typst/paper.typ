@@ -19,98 +19,29 @@
 
 = Einführung
 
-== Ziel dieser Arbeit (WORK IN PROGRESS)
+== Ziel dieser Arbeit 
 
-Das Ziel der Arbeit ist die mathematische Beschreibung der Interpolation zwischen zwei Punkten mittels eines 3R-Roboterarmes. 
+Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei Punkten $"[A]"_"S"$ und $"[B]"_"S"$ mittels eines 3R-Roboterarmes. 
 
-Hierzu wird zunächst die Kinematik des Roboters beschrieben und mittels Analogien zum Menschlichen Körper erläutert. Anschließend wird die Interpolation zwischen zwei Punkten mittels der Inversen Kinematik beschrieben. Im Anschluss werden Beispiele für die anwendung von geradliniger Interpolation in der Industrie gegeben.
+Dazu wird die Aufgabe der Interpolation in mehrere Teilbereiche aufgeteilt, welche im Folgenden erläutert werden.
+Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ in einem vom Roboter erreichbaren Bereich liegt.
+Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten.
 
-= Allgemeines
+= Aufbau des 3R-Roboterarmes
 
-Ziel der in dieser Arbeit beshriebenen Interpolation ist es, einen 3R-Roboterarm Zwischen zwei Punkten $A$ und $B$ geradlienig in Form einer Strecke zu bewegen. 
+Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über einen Schaft mit fester Länge miteinander verbunden sind. Am Ende des drittem Schaftes befindet sich ein Manipulator (hier: ein Greifarm), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem _S_ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem _T_ am Manipulator. @fig-3r_arm zeigt den Aufbau des Roboterarmes.
 
-Um eine geradliniege Interpolation auszuführen, wird die Aufgabe in mehrere Teilaufgaben zerlegt die anschließend sequenziell ausgeführt werden.
-Zuerst wird die Bewegung vom Startpunkt $A$ zum Zielpunkt $B$ geplant.
-Diese Aufgabe nennt sich Trajektorienplanung.
-Eine Referenztrajektorie oder Referenzpfad wird generiert @src-SeyrMartin2006Amrm, an dem sich der Roboter in den anschließenden Phasen orientiert.
-
-In der Navigations- und Steuerungsphase muss der Roboter anschließend seine eigene Position mittels der Lösung des direkten kinematischen Problems finden und im anschluss so gesteuert werden, dass die Referenztrajektorie bestmöglich eingehalten wird.
-
-Diese Arbeit geht jedoch nicht weiter auf Navigation und Ansteuerung ein. 
+Der Manipulator greift einen Stift mit dem Radius $rho$, in dessen Zentrum sich die Spitze $P$ befindet (siehe: @fig-3r_arm_ts).  
 
 = Trajektorienplanung
+
+- Kreise
 
 == Gültigkeit von Koordinaten
 
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor, insbesondere in praktischen Anwendungen, eine Überprüfung der Erreichbarkeit von Koordinaten nötig.
 Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Armlängen für den Roboter nicht erreichbar sind.
 
-=== Koordinatengültigkeitsprüfung für einen 2R-Arm
-
-Für einen 2R-Arm mit den Armlängen $l_"1"$ und $l_"2"$ lassen sich kreisförmig ausgehend vom Koordinatenursprung $O_"U"$ grenzbereiche der Erreichbarkeit eines Punktes durch einen Roboter bestimmen.
-Für die Länge $l-"erreichbar"$ gilt:
-$
-abs(l_"1" - l_"2") <= l_"erreichbar" <= l_"1" + l_"2"
-$
-
-= Zeichnen einer Strecke durch den Koordinatenursprung $O_"U"$ mit einem 2R-Arm
-
-Um eine Strecke zu zeichen, welche dem Koordinatenursprung zuläufig ist,
-kann als einfachste Methode, mit elementargeometrischen Mitteln, ein 2R-Roboterarm mit gleichlangen Armen ($l_"1" = l_"2"$), wie in @fig-gerade_zentrum und @fig-gerade_zentrum_2 dargestellt, verwendet werden.
-
-// Als Eingabeparameter werden zwei Winkel angegeben. $alpha$ als Steuerungswinkel, welcher beim Durchlauf der Bewegung kontinuierlich erhöht wird, und $gamma$, welcher den Rotationswinkel der entstehenden Gerade ausgehend von der x-Achse angibt.
-
-// Es gelten die folgenden Einschränkungen, um eine Strecke der größtmöglichen Länge ausgehend von einem beliebigen Ausgangswinkel $gamma$
-// zu zeichnen:
-
-// $
-// 0 <= alpha <= 180° \
-// 0 <= gamma <= 180°
-// $
-
-// Der Winkel $beta$ gibt den Winkel zwischen x-Achse und dem Oberarm des Roboters (hier: $mono("f")$) an. Der Winkel $delta$ gibt den Winkel zwischen dem Oberarm $mono("f")$ und dem Unterarm $mono("g")$ an.
-
-// Für die Interpolation zum Zeischnen einer Strecke ergeben sich nun die folgenden Formeln:
-
-// $
-// beta (alpha) = alpha + gamma \
-// delta (alpha) = 180° - 2 alpha
-// $
-
-Der Winkel $beta$ gibt den Winkel zwischen x-Achse und dem Oberarm des Roboters (hier: $mono("f")$) an. Der Winkel $delta$ gibt den Winkel zwischen dem Oberarm $mono("f")$ und dem Unterarm $mono("g")$ an.
-
-Für den Winkel $delta$ bei bekanntem $beta$ gilt:
-
-$
-delta = 180° - 2 beta
-$
-
-Beziehungsweise für den Winkel $beta$ bei bekanntem $delta$ gilt:
-
-$
-beta = (180° - delta) / 2
-$
-
-Die Winkel können jedoch nicht nur durch ihre gegenseitigen Abhängigkeiten, sondern auch mit Hilfe eines Kontrollwinbkels $alpha$ und eines Rotationswinkels $gamma$ beschrieben werden. 
-Diese Kontroll- und Rotationswinkel ermöglichen eine Darstellung der Winkel, welche ähnlich der Darstellung von Funktionen ist.
-Diese Funktionsartige Darstellung kann verwendet werden, um das Voranschreiten der Bewegung mit einem Computerprogramm zu steuern und wird später noch genauer anhand eines komplexeren Roboterarmes weiter sperzifiziert und erläutert.
-
-Es gelten die folgenden Einschränkungen, um eine Strecke der größtmöglichen Länge ausgehend von einem beliebigen Ausgangswinkel $gamma$
-zu zeichnen:
-
-$
-0 <= alpha <= 180° \
-0 <= gamma <= 180°
-$
-
-Für die Interpolation zum Zeischnen einer Strecke ergeben sich nun die folgenden Formeln:
-
-$
-beta (alpha) = alpha + gamma \
-delta (alpha) = 180° - 2 alpha
-$
-
-$alpha$ wird dabei kontinuierlich ehröht oder vermindert, um die Bewegung des Roboters zu steuern. $gamma$ bleibt dabei konstant.
 
 // ===== Abbildungen
 
@@ -119,19 +50,18 @@ $alpha$ wird dabei kontinuierlich ehröht oder vermindert, um die Bewegung des R
 = Abbildungen
 
 #figure(
-  image("./assets/gerade_zentrum.png", width: 60%),
+  image("./assets/3r_arm.png", width: 60%),
   caption: [
-    Ein 2R-Roboterarm mit gleichlangen Armen $l_"1"$ und $l_"2"$.
+    Ein 3R-Roboterarm mit dem Weltsystem _S_ und dem Toolsystem _T_.
   ],
-) <fig-gerade_zentrum>
+) <fig-3r_arm>
 
 #figure(
-  image("./assets/gerade_zentrum_2.png", width: 60%),
+  image("./assets/3r_arm_ts.png", width: 60%),
   caption: [
-    Ein 2R-Roboterarm mit gleichlangen Armen $l_"1"$ und $l_"2"$ sowie
-    den Winkeln $beta$ und $gamma$.
+    Manipulator des Roboters mit dem #text("Stift (rot)", fill: red) und dem Stiftradius $rho$.
   ],
-) <fig-gerade_zentrum_2>
+) <fig-3r_arm_ts>
 
 // ===== Bibliographie
   
