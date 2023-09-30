@@ -58,14 +58,31 @@ $
 theta = "atan2"("b"_"2" - "a"_"2", "b"_"1" - "a"_"1")
 $
 
-Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um den Ursprung des Weltsystems, verschoben um den Vektor $accent(v, arrow)$.
+Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, arrow)$.
 
-Für $accent(v, arrow)$ gilt:
+Um den Vektor $accent(v, arrow)$ zu erhalten, wird $"[P]"_"t"$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta$ multipliziert.
+
 $
-accent(v, arrow) &= "[P]"_"t" * "Rot"_theta \
+accent(v, arrow) = vec(v_1, v_2) &= "[P]"_"t" * "Rot"_theta \
 &= mat("l"_"3" + rho; 0) * mat("cos"(theta), "-sin"(theta); "sin"(theta), "cos"(theta)) \
 &= mat("l"_"3" + rho) * mat("cos"(theta); "sin"(theta)) \
 $
+
+Der Mittelpunkt der Kreise $M$, welche die Erreichbarkeit des Roboters begrenzen, liegt dann bei $M = "[O]"_"S" + accent(v, arrow)$.
+
+Nun müssen die Radien der beiden Kreise bestimmt werden, welche die Erreichbarkeit des Roboters begrenzen.
+
+Für den Maximalradius $"r"_"max"$ gilt:
+$
+"r"_"max" = "l"_"1" + "l"_"2"
+$
+
+Für den Minimalradius $"r"_"min"$ gilt:
+$
+"r"_"min" = abs("l"_"1" - "l"_"2")
+$
+
+$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $"r"_"max"$ und dem Mittelpunkt $"[O]"_"S" + accent(v, arrow)$, und außerhalb des Kreises mit dem Radius $abs("l"_"1"-"l"_"2")$ und dem Mittelpunkt $"[O]"_"S" + accent(v, arrow)$ liegt.
 
 // ===== Abbildungen
 
