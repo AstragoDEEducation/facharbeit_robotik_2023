@@ -136,7 +136,7 @@ lässt sich die Funktion $X(s)$ wie folgt darstellen:
 #text("Großes X benötigt?", fill: red, style: "italic", size: 1.1em)
 
 $
-x(s) = [X(s)]_S &= [A]_S + s dot [accent("AB", ->)]_S \
+X(s) = [X(s)]_S &= [A]_S + s dot [accent("AB", ->)]_S \
 &= a + s dot (b - a) \
 &= (1 - s) dot a + s dot b
 $
@@ -231,6 +231,7 @@ c_3 + c_4 + c_5 &= 1 \
 $
 
 Bei der Lösung des Gleichungssystems ergeben sich die Koeffizienten:
+
 $
 c_3 &= 10 \
 c_4 &= -15 \
@@ -242,6 +243,66 @@ Durch Einsetzen der Koeffizienten in die Gleichung ergibt sich die Funktion $s(t
 $
 s(t) = 10t^3 - 15t^4 + 6t^5
 $
+
+#text("Abbildung generieren!", fill: red, style: "italic", size: 1.1em)
+
+Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Erfüllung der obrigen Anforderungen (1. - 6.) geprüft werden:
+
+#enum(
+  enum.item(1)[
+    Der Roboterarm befindet sich zum Zeitpunkt $t = 0$ am Punkt $"[A]"_"S"$.
+
+    $
+    s(0) &= 10 dot 0^3 - 15 dot 0^4 + 6 dot 0^5 \
+    &= 0
+    $
+
+    $s(0)$ in die Funktion $X(s)$ eingesetzt ergibt:
+
+    $
+    X(s(0)) &= (1 - s(0)) dot a + s(0) dot b \
+    X(0) &= (1 - 0) dot a + 0 dot b \
+    &= a
+    $
+
+    #sym.checkmark Diese Bedingung ist erfüllt.
+  ],
+
+  enum.item(2)[
+    Der Roboterarm befindet sich zum Zeitpunkt $t = t_1 = 1$ am Punkt $"[B]"_"S"$.
+
+    $
+    s(1) &= 10 dot 1^3 - 15 dot 1^4 + 6 dot 1^5 \
+    &= 1
+    $
+
+    $s(1)$ in die Funktion $X(s)$ eingesetzt ergibt:
+
+    $
+    X(s(1)) &= (1 - s(1)) dot a + s(1) dot b \
+    X(1) &= (1 - 1) dot a + 1 dot b \
+    &= b
+    $
+
+    #sym.checkmark Diese Bedingung ist erfüllt.
+  ],
+
+  enum.item(3)[
+    
+  ],
+
+  enum.item(4)[
+    
+  ],
+
+  enum.item(5)[
+    
+  ],
+
+  enum.item(6)[
+    
+  ],
+)
 
 // ===== Abbildungen
 
