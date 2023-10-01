@@ -163,7 +163,7 @@ F체r die Funktion $s(t)$ gibt es einige Anforderungen, welche erf체llt werden m�
     $s(t) = 1$ #h(4em) f체r $t = t_1$
   ],
   enum.item(3)[
-    Die Funktion $s(t)$ muss stetig auf dem Intervall $[0, t_1]$ streng monoton wachsend sein ($=> accent("s", .)(t) >= 0$), sie darf also keine Spr체nge enthalten oder sich verringern.
+    Die Funktion $s(t)$ muss auf dem Intervall $[0, t_1]$ streng monoton wachsend sein ($=> accent("s", .)(t) >= 0$), sie darf sich also nicht verringern.
   ],
 )
 
@@ -288,6 +288,16 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
   ],
 
   enum.item(3)[
+    Die Funktion $s(t)$ ist auf dem Intervall $[0, 1]$ streng monoton wachsend.
+    Hierzu wird 체berpr체ft, ob die Ableitung $accent("s", dot)(t)$ auf dem Intervall $[0, 1]$ streng positiv ist, also $accent("s", .)(t) >= 0$ f체r $0 < t < 0$.
+
+    $
+    accent("s", dot)(t) &= 30t^2 - 60t^3 + 30t^4
+    &= 30t^2 (t-1)^2
+    $
+
+    #sym.checkmark $accent("s", .)(t) >= 0$ auf dem Intervall $[0, 1]$. Damit ist diese Bedingung erf체llt.
+
     
   ],
 
