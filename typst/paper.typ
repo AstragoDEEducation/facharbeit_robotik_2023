@@ -297,8 +297,6 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     $
 
     #sym.checkmark $accent("s", .)(t) >= 0$ auf dem Intervall $[0, 1]$. Damit ist diese Bedingung erfüllt.
-
-    
   ],
 
   enum.item(4)[
@@ -313,6 +311,9 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     
   ],
 )
+
+#text("Video: 32:35", fill: red, style: "italic", size: 1.1em)
+
 
 // ===== Abbildungen
 
