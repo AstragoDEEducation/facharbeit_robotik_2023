@@ -65,17 +65,17 @@ $
 theta = "atan2"("b"_"2" - "a"_"2", "b"_"1" - "a"_"1")
 $
 
-Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, arrow)$.
+Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, ->)$.
 
-Um den Vektor $accent(v, arrow)$ zu erhalten, wird $"[P]"_"t"$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta$ multipliziert.
+Um den Vektor $accent(v, ->)$ zu erhalten, wird $"[P]"_"t"$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta$ multipliziert.
 
 $
-accent(v, arrow) = vec(v_1, v_2) &= "[P]"_"t" dot "Rot"_theta \
+accent(v, ->) = vec(v_1, v_2) &= "[P]"_"t" dot "Rot"_theta \
 &= mat("l"_"3" + rho; 0) dot mat("cos"(theta), "-sin"(theta); "sin"(theta), "cos"(theta)) \
 &= mat("l"_"3" + rho) dot mat("cos"(theta); "sin"(theta)) \
 $
 
-Der Mittelpunkt der Kreise $M$, welche die Erreichbarkeit des Roboters begrenzen, liegt dann bei $M = "[O]"_"S" + accent(v, arrow)$.
+Der Mittelpunkt der Kreise $M$, welche die Erreichbarkeit des Roboters begrenzen, liegt dann bei $M = "[O]"_"S" + accent(v, ->)$.
 
 Nun müssen die Radien der beiden Kreise bestimmt werden, welche die Erreichbarkeit des Roboters begrenzen.
 
@@ -112,19 +112,136 @@ $
 #text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
 
 Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher einem Parameter $s$ abhängt.
-
 Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ beschreibt.
 
-Gegeben sind die Punkte $"[A]"_"S" = mat(a_1; b_1)$ und $"[B]"_"S" = mat(b_1; b_2)$. Zwischen den Punkten befindet sich die Strecke $x$, sowie der Vektor $accent("x", arrow)$, welcher sich auf der Strecke $x$ befindet, und damit auch parallel zu ihr ist.
+Gegeben sind die Punkte $"[A]"_"S" = mat(a_1; b_1)$ und $"[B]"_"S" = mat(b_1; b_2)$. Auf der Strecke zwischen den Punkten befindet sich der Punkt $X$, welcher mit dem Vektor $accent("x", ->)$ ausgehend vom Punkt $"[A]"_"S"$ in Richtung von Punkt $"[B]"_"S"$ verschoben werden kann.
 
-$x &= A + accent("Ax", arrow) = A + accent("x", arrow)$ #h(4em) mit $accent("x", arrow) = accent("Ax", arrow)$
+$X &= A + accent("AX", ->) = A + accent("x", ->)$ #h(4em) mit $accent("x", ->) = accent("AX", ->)$
 
-$accent("Ax", arrow) || accent("AB", arrow) => accent("Ax", arrow) = s dot accent("AB", arrow)$ #h(4em) mit $0 <= s <= 1$
+$accent("AX", ->)$ und $accent("AB", ->)$ sind parallel zueinander. Somit gilt:
 
-$s$ beschreibt den Anteil der Strecke $x$, welcher von dem Vektor $accent("Ax", arrow)$ beschrieben wird. $s = 0$ beschreibt den Punkt $"[A]"_"S"$, $s = 1$ beschreibt den Punkt $"[B]"_"S"$.
+$accent("AX", ->) || accent("AB", ->) => accent("AX", ->) = s dot accent("AB", ->)$ #h(4em) mit $0 <= s <= 1$
 
-#text("Video: 12:00 Minuten", fill: red, style: "italic", size: 1.1em)
+Die Funktion $X(s) = A + s dot accent("AB", ->)$ beschreibt dann alle Punkte auf der Strecke $accent("AB", -)$ im Bezug auf den Parameter $s$. 
 
+Diese Funktion lässt sich ebenfalls in Koordinaten darstellen.
+
+Mit
+$
+[accent("AB", ->)]_S = [B]_S - [A]_S = b - a
+$
+
+lässt sich die Funktion $X(s)$ wie folgt darstellen:
+
+#text("Großes X benötigt?", fill: red, style: "italic", size: 1.1em)
+
+$
+x(s) = [X(s)]_S &= [A]_S + s dot [accent("AB", ->)]_S \
+&= a + s dot (b - a) \
+&= (1 - s) dot a + s dot b
+$
+
+Auch andere Interpolationen zwischen Punkten, zum Beispiel Bezierkurven, können parametrisiert werden, sodass der Roboterarm diese abfahren kann.
+
+== Beschreibung der Bewegung des Roboters
+
+#text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
+
+Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ berechnet werden. Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[A]"_"S"$, und am Zeitpunkt $t = t_1$ beendet sein; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[B]"_"S"$.
+Gesucht ist also eine Funktion $s(t)$, welche den Fortschritt der Bewegung des Roboters in Abhängigkeit von der Zeit $t$ beschreibt.
+
+Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden müssen:
+#enum(
+  enum.item(1)[
+    Zum Zeitpunkt $t = 0$ muss sich der Roboterarm in seiner Ausgangsposition, also am Punkt $"[A]"_"S"$ befinden.
+
+    $s(t) = 0$ #h(4em) für $t = 0$
+  ],
+  enum.item(2)[
+    Zum Zeitpunkt $t = t_1$ muss sich der Roboterarm in seiner Endposition, also am Punkt $"[B]"_"S"$ befinden.
+    
+    $s(t) = 1$ #h(4em) für $t = t_1$
+  ],
+  enum.item(3)[
+    Die Funktion $s(t)$ muss stetig auf dem Intervall $[0, t_1]$ streng monoton wachsend sein ($=> accent("s", .)(t) >= 0$), sie darf also keine Sprünge enthalten oder sich verringern.
+  ],
+)
+
+Der wohl einfachste Lösungsansatz wäre es, die Bewegung des Roboters linear zu beschreiben, also $s(t) = t / t_1$ auf dem Intervall $[0, t_1]$. Dies würde in der Anwendung jedoch problematisch sein, da die Geschwindigkeit des Roboters nicht konstant wäre. Der Roboter müsste also innerhalb von $Delta t = 0$ von $accent("s", dot)(t) = 0$ auf $accent("s", dot)(t) = 1$ beschleunigen, was nicht möglich ist.  
+
+Gesucht ist also eine Funktion $s(t)$, welche die obrigen Anforderungen erfüllt, sowie die Geschwindigkeit ($accent("s", dot)(t)$) und die Beschleunigung ($accent("s", dot.double)(t)$) des Roboters stetig hält.
+
+Für die Funktion $s(t)$ bietet sich eine Polynomfunktion an, da diese stetig differenzierbar ist. Diese Polynomfunktion muss dann so angepasst werden, dass die obrigen Anforderungen erfüllt werden.
+
+Die Anforderungen an die Polynomfunktion $s(t)$ lauten fortlaufend:
+
+#enum(
+  enum.item(4)[
+    Die Geschwindigkeit des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1$ gleich 0.
+    $
+    accent("s", dot)(0) = accent("s", dot)(t_1) = 0
+    $
+  ],
+  enum.item(5)[
+    Die Beschleunigung des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1$ gleich 0.
+    $
+    accent("s", dot.double)(0) = accent("s", dot.double)(t_1) = 0
+    $
+  ],
+  enum.item(6)[
+    $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ sind beschränkt. Die maximale Geschwindigkeit $accent("s", dot)(t)$ und die maximale Beschleunigung $accent("s", dot.double)(t)$ dürfen nicht überschritten werden.
+    $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ hängen vom Roboter ab.
+
+    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, muss $Delta t$ erhöht werden, indem $t_1$ vergrößert wird.
+  ],
+)
+
+Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ zu binden, wird $t_1 = 1$ gesetzt. Sollten Geschwindigkeiten oder Beschleunigungen des Roboters überschritten werden, wird $t_1$ erhöht, bis die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
+Alternativ könnte auch eine andere Methode zur Vergrößerung von $Delta t$ verwendet werden, welche jedoch nicht ineffizientern Gesamtablauf der Bewegung des Roboters zur Folge hätte. Diese Methode wird im Verlauf der Arbeit kurz dargestellt.
+
+Es ergeben sich die folgenden Polynomfunktionen für $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$:
+
+$
+s(t) &= c_0 + c_1t + c_2t^2 + c_3t^3 + ... + c_n t^n \
+accent("s", dot)(t) &= c_1 + 2c_2t + 3c_3t^2 + ... + n c_n t^(n - 1) \
+accent("s", dot.double)(t) &= 2c_2 + 6c_3t + ... + n(n - 1) c_n t^(n - 2)
+$
+
+Für die Erfüllung folgender Anforderungen am Zeitpunkt $t = 0$ ergibt sich:
+$
+s(0) = 0 &=> c_0 = 0 \
+accent("s", dot)(0) = 0 &=> c_1 = 0 \
+accent("s", dot.double)(0) = 0 &=> c_2 = 0 \
+$
+
+Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1$ werden $n = 5$ Koeffizienten benötigt. Da $c_0$ bis $c_2$ $= 0$ sind fallen diese nun weg. Es ergibt sich:
+
+$
+s(t) &= c_3 t^3 + c_4 t^4 + c_5 t^5 \
+accent("s", dot)(t) &= 3c_3 t^2 + 4c_4 t^3 + 5c_5 t^4 \
+accent("s", dot.double)(t) &= 6c_3 t + 12c_4 t^2 + 20c_5 t^3 \
+$
+
+$s(t)$ muss an der Stelle $t = 1$ den Wert $1$ annehmen, die Geschwindigkeit $accent("s", dot)$ und die Beschleunigung $accent("s", dot.double)$ den Wert $0$. Es ergibt sich das folgende lineare Gleichungssystem:
+
+$
+c_3 + c_4 + c_5 &= 1 \
+3c_3 + 4c_4 + 5c_5 &= 0 \
+6c_3 + 12c_4 + 20c_5 &= 0 \
+$
+
+Bei der Lösung des Gleichungssystems ergeben sich die Koeffizienten:
+$
+c_3 &= 10 \
+c_4 &= -15 \
+c_5 &= 6 \
+$
+
+Durch Einsetzen der Koeffizienten in die Gleichung ergibt sich die Funktion $s(t)$:
+
+$
+s(t) = 10t^3 - 15t^4 + 6t^5
+$
 
 // ===== Abbildungen
 
