@@ -412,7 +412,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
     Diese Funktion wird im Folgenden kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
 
-    Wie in #text("ABBILDUNG HIER EINFÜGEN", fill: red) sichtbar, ist die Funktion $s_"neu" (t)$ 
+    Wie in #text("ABBILDUNG HIER EINFÜGEN", fill: red) sichtbar, ist die Funktion $s_"neu" (t)$ im graphischen Vergleich zu der Funktion $s_"neu"_"poly" (t)$ keine Punktspiegelung am Punkt $mat(1/2 t_1; 1/2)$, sondern vielmehr eine im letzten drittel _langgezogene_ Version der Funktion $s (t)$.
+    Dies führt dazu, dass die Funktion $s_"neu" (t)$ zwar eine geringere Geschwindigkeit aufweist (durch die Kettenregel ergibt sich für die Geschwindigkeit $accent("s", dot)_"neu" (t) = 1/t_1 dot accent("s", dot) (t/t_1)$), diese Reduktion jedoch nicht die höchste Effizienz aufweist.
   ],
 )
 
