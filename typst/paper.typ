@@ -41,7 +41,7 @@ Der Manipulator greift einen Stift mit dem bekannten Radius $rho$, in dessen Zen
 = Trajektorienplanung
 
 In der Trajektorienplanung wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant.
-Hierbei wird die Strecke zwischen den gegebenen Punkten $"[A]"_"S"$ und $"[B]"_"S"$ unter Zurhilfenahme von Vektoren parametrisiert.
+Hierbei wird die Strecke zwischen den gegebenen Punkten $"[A]"_"S"$ und $"[B]"_"S"$ unter Zuhilfenahme von Vektoren parametrisiert.
 Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können. 
 
 Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich liegt.
@@ -100,7 +100,7 @@ Die Überprüfung, ob ein Punkt innerhalb eines Kreises liegt, könnte beispiels
 
 // Da die Längen der einzelnen Armglieder bekannt sind und auch die Position der Stiftspitze _P_ im Bezug auf das Toolsystem _T_ bekannt ist, kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert werden.
 
-Durch anwendung des direkten kinematischen Problems kann der Punkt $"[P]"_"S"$ bestimmt werden.
+Durch Anwendung des direkten kinematischen Problems kann der Punkt $"[P]"_"S"$ bestimmt werden.
 
 $
 "[P]"_"S" &= "Rot"(theta_1 + theta_2 + theta_3) dot vec("l"_"3" + rho, 0) + "Rot"(theta_1 + theta_2) dot vec("l"_"2", 0) + "Rot"(theta_1) dot vec("l"_"1", 0) \
@@ -147,7 +147,7 @@ Auch andere Interpolationen zwischen Punkten, zum Beispiel Bezierkurven, können
 
 #text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
 
-Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ berechnet werden. Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[A]"_"S"$, und am Zeitpunkt $t = t_1$ beendet sein; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[B]"_"S"$.
+Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des Stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ berechnet werden. Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[A]"_"S"$, und am Zeitpunkt $t = t_1$ beendet sein; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[B]"_"S"$.
 Gesucht ist also eine Funktion $s(t)$, welche den Fortschritt der Bewegung des Roboters in Abhängigkeit von der Zeit $t$ beschreibt.
 
 Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden müssen:
@@ -169,9 +169,9 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
 
 Der wohl einfachste Lösungsansatz wäre es, die Bewegung des Roboters linear zu beschreiben, also $s(t) = t / t_1$ auf dem Intervall $[0, t_1]$. Dies würde in der Anwendung jedoch problematisch sein, da die Geschwindigkeit des Roboters nicht konstant wäre. Der Roboter müsste also innerhalb von $Delta t = 0$ von $accent("s", dot)(t) = 0$ auf $accent("s", dot)(t) = 1$ beschleunigen, was nicht möglich ist.  
 
-Gesucht ist also eine Funktion $s(t)$, welche die obrigen Anforderungen erfüllt, sowie die Geschwindigkeit ($accent("s", dot)(t)$) und die Beschleunigung ($accent("s", dot.double)(t)$) des Roboters stetig hält.
+Gesucht ist also eine Funktion $s(t)$, welche die oben genannten Anforderungen erfüllt, sowie die Geschwindigkeit ($accent("s", dot)(t)$) und die Beschleunigung ($accent("s", dot.double)(t)$) des Roboters stetig hält.
 
-Für die Funktion $s(t)$ bietet sich eine Polynomfunktion an, da diese stetig differenzierbar ist. Diese Polynomfunktion muss dann so angepasst werden, dass die obrigen Anforderungen erfüllt werden.
+Für die Funktion $s(t)$ bietet sich eine Polynomfunktion an, da diese stetig differenzierbar ist. Diese Polynomfunktion muss dann so angepasst werden, dass die oben genannten Anforderungen erfüllt werden.
 
 Die Anforderungen an die Polynomfunktion $s(t)$ lauten fortlaufend:
 
@@ -197,7 +197,7 @@ Die Anforderungen an die Polynomfunktion $s(t)$ lauten fortlaufend:
 )
 
 Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ zu binden, wird $t_1 = 1$ gesetzt. Sollten Geschwindigkeiten oder Beschleunigungen des Roboters überschritten werden, wird $t_1$ erhöht, bis die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
-Alternativ könnte auch eine andere Methode zur Vergrößerung von $Delta t$ verwendet werden, welche jedoch nicht ineffizientern Gesamtablauf der Bewegung des Roboters zur Folge hätte. Diese Methode wird im Verlauf der Arbeit kurz dargestellt.
+Alternativ könnte auch eine andere Methode zur Vergrößerung von $Delta t$ verwendet werden, welche jedoch einen weniger effizienteren Gesamtablauf der Bewegung des Roboters zur Folge hätte. Diese Methode wird im Verlauf der Arbeit kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
 
 Es ergeben sich die folgenden Polynomfunktionen für $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$:
 
@@ -246,7 +246,7 @@ $
 
 #text("Abbildung generieren!", fill: red, style: "italic", size: 1.1em)
 
-Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Erfüllung der obrigen Anforderungen (1. - 6.) geprüft werden:
+Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Erfüllung der oben genannten Anforderungen (1. - 6.) geprüft werden:
 
 #enum(
   enum.item(1)[
@@ -300,20 +300,121 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
   ],
 
   enum.item(4)[
+    Die Geschwindigkeit des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1 = 1$ gleich 0.
     
+    Einsetzen von $t = 0$ und $t = 1$ in die Funktion $accent("s", dot)(t)$ ergibt:
+
+    $
+    accent("s", dot)(0) &= 30 dot 0^2 - 60 dot 0^3 + 30 dot 0^4 \
+    &= 0
+    $
+
+    $
+    accent("s", dot)(1) &= 30 dot 1^2 - 60 dot 1^3 + 30 dot 1^4 \
+    &= 0
+    $
   ],
 
   enum.item(5)[
-    
+    Die Beschleunigung des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1 = 1$ gleich 0.
+
+    Einsetzen von $t = 0$ und $t = 1$ in die Funktion $accent("s", dot.double)(t)$ ergibt:
+
+    $
+    accent("s", dot.double)(0) &= 60 dot 0 - 180 dot 0^2 + 120 dot 0^3 \
+    &= 0
+    $
+
+    $
+    accent("s", dot.double)(1) &= 60 dot 1 - 180 dot 1^2 + 120 dot 1^3 \
+    &= 0
+    $
   ],
 
   enum.item(6)[
-    
+    Die maximalen Geschwindigkeiten und Beschleunigungen des Roboters dürfen nicht überschritten werden.
+    Zur Überprüfung wird die Funktion $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ mithilfe der _PQ-Formel_ auf lokale Maxima (und Minima) untersucht.
+    Dafür wird die Funktion $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ abgeleitet und gleich 0 gesetzt.
+
+    Die _PQ-Formel_ lautet mit $f(x) = x^2 + p x + q$:  
+    $
+    x = - p/2 plus.minus sqrt((p/2)^2 - q)
+    $
+
+    #enum(
+      enum.item(1)[
+        Für die maximale Geschwindigkeit $accent("s", dot)(t)$ ergibt sich auf dem Intervall $(0, 1)$ (hier wird ein offenes Intervall verwendet, da die Geschwindigkeit am Anfang und am Ende der Bewegung des Roboters bereits bekannt $= 0$ ist):
+
+        $
+        accent("s", dot.double)(t) &= 60 t - 180 t^2 + 120 t^3 \
+        &= 60 t (1 - 3 t + 2 t^2) \
+        $
+
+        #text("Ist gekürzt der richtige Ausdruck?", fill: red, style: "italic", size: 1.1em)
+
+        Da im Intervall $t > 0$ ist, können die $60 t$ gekürzt werden und im Anschluss durch $2$ dividiert werden. Es ergibt sich:
+
+        $
+        accent("s", dot.double)(t) = 0 &= 1 - 3 t + 2 t^2 \
+        &= t^2 - 3/2 t + 1/2 \
+        $
+
+        Durch Einsetzen in die _PQ-Formel_ ergibt sich:
+
+        $
+        t &= 3/4 plus.minus sqrt(9/16 - 1/2) \
+        // &= 3/4 plus.minus 1/4 \
+        &= 1/2, 1 \
+        $
+
+        Die hier relevante Maximalgeschwindigkeit liegt bei $t = 1/2$. Durch einsetzen in die Funktion $accent("s", dot)(t)$ ergibt sich:
+
+        $
+        accent("s", dot)(1/2) &= 30 dot (1/2)^2 dot (1/2 - 1)^2 \
+        &= 15/8 = 1.875 \
+        $ 
+
+        Die maximale Geschwindigkeit des Roboters liegt in diesem Fall bei $1.875$, was mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden kann.
+
+        #sym.checkmark Daher wird diese Bedingung als erfüllt angesehen.
+      ],
+
+      enum.item(2)[
+        Zur Bestimmung der maximalen Beschleunigung $accent("s", dot.double)(t)$ wird analog zur Bestimmung der maximalen Geschwindigkeit vorgegangen. Es ergeben sich die folgenden Werte:
+
+        $
+        accent("s", dot.triple)(t) = 0 &= 60 - 360 t + 360 t^2 \
+        &= t^2 - 2 t + 1/3 \
+        $
+
+        $
+        t &= 1 plus.minus sqrt(1 - 1/3) \
+        $
+
+        $
+        accent("s", dot.double)(1-sqrt(2/3)) &= 60 dot (1-sqrt(2/3)) - 180 dot (1-sqrt(2/3))^2 + 120 dot (1-sqrt(2/3))^3 \
+        & approx 5.6905 \
+        $
+
+        Die maximale Beschleunigung des Roboters liegt in diesem Fall bei $5.6905$. Auch hier kann mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden. 
+
+        #sym.checkmark Daher wird diese Bedingung als erfüllt angesehen.
+      ],
+    )
+
+    #text("Abbildungen fehlen!", fill: red, style: "italic", size: 1.1em)
+
+    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Verändern von $t$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden. Ein einfacher Ansatz hierfür wäre die Bildung der folgenden Funktion:
+
+    $
+    s_"neu" (t) = s(t/t_1)
+    $
+
+    Diese Funktion wird im Folgenden kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
+
+    Wie in #text("ABBILDUNG HIER EINFÜGEN", fill: red) sichtbar, ist die Funktion $s_"neu" (t)$ 
   ],
 )
-
-#text("Video: 32:35", fill: red, style: "italic", size: 1.1em)
-
 
 // ===== Abbildungen
 

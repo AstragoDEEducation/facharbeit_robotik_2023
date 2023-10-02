@@ -1,0 +1,13 @@
+{
+  "cSpell.enableFiletypes": ["typst"],
+  "cSpell.language": "en,de",
+  "cSpell.words": [
+    "Erreichbarkeitsbegrenzung",
+    "roboterspezifischen",
+    "Seeck",
+    "Toolsystem",
+    "Toolsystems",
+    "Trajektorienplanung"
+  ],
+  "cSpell.ignoreWords": ["checkmark", "datetime", "pagebreak", "pgwv"]
+}
