@@ -96,16 +96,16 @@ Die Überprüfung, ob ein Punkt innerhalb eines Kreises liegt, könnte beispiels
 + Prüfen, ob der Startpunkt $"[A]"_"S"$ und der Endpunkt $"[B]"_"S"$ innerhalb des erreichbaren Bereiches liegen. Hierzu kann die Distanz zwischen dem Mittelpunkt $M$ und den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ berechnet werden. Beispielsweise mit dem Satz des Pythagoras. Liegt mindestens einer der Punkte außerhalb des erreichbaren Bereiches, ist die Strecke nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
 + Prüfen, ob die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ den erreichbaren Bereich schneidet. Hierzu kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert und mittels eines Vektors dargestellt werden, und mit der Kreisgleichung ein weiterer Vektor erstellt werden, welcher der Kreisgleichung folgt. Schneiden sich die beiden Vektoren, so schneidet die Strecke den Kreis und ist somit nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
 
-== Bestimmung des Punktes $"[P]"_"S"$ (Wird das benötigt?)
+// == Bestimmung des Punktes $"[P]"_"S"$ (Wird das benötigt?)
 
-// Da die Längen der einzelnen Armglieder bekannt sind und auch die Position der Stiftspitze _P_ im Bezug auf das Toolsystem _T_ bekannt ist, kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert werden.
+// // Da die Längen der einzelnen Armglieder bekannt sind und auch die Position der Stiftspitze _P_ im Bezug auf das Toolsystem _T_ bekannt ist, kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert werden.
 
-Durch Anwendung des direkten kinematischen Problems kann der Punkt $"[P]"_"S"$ bestimmt werden.
+// Durch Anwendung des direkten kinematischen Problems kann der Punkt $"[P]"_"S"$ bestimmt werden.
 
-$
-"[P]"_"S" &= "Rot"(theta_1 + theta_2 + theta_3) dot vec("l"_"3" + rho, 0) + "Rot"(theta_1 + theta_2) dot vec("l"_"2", 0) + "Rot"(theta_1) dot vec("l"_"1", 0) \
-&= vec((l_3 + rho) dot "cos"(theta_1 + theta_2 + theta_3) + l_2 "cos"(theta_1 + theta_2) + l_1 "cos"(theta_1), (l_3 + rho) dot "sin"(theta_1 + theta_2 + theta_3) + l_2 "sin"(theta_1 + theta_2) + l_1 "sin"(theta_1)) 
-$
+// $
+// "[P]"_"S" &= "Rot"(theta_1 + theta_2 + theta_3) dot vec("l"_"3" + rho, 0) + "Rot"(theta_1 + theta_2) dot vec("l"_"2", 0) + "Rot"(theta_1) dot vec("l"_"1", 0) \
+// &= vec((l_3 + rho) dot "cos"(theta_1 + theta_2 + theta_3) + l_2 "cos"(theta_1 + theta_2) + l_1 "cos"(theta_1), (l_3 + rho) dot "sin"(theta_1 + theta_2 + theta_3) + l_2 "sin"(theta_1 + theta_2) + l_1 "sin"(theta_1)) 
+// $
 
 == Parametrisierung der Strecke
 
@@ -461,27 +461,56 @@ $
 
 Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
 
-=== Bestimmung der Winkel $theta_1$ und $theta_2$ mit Hilfe des inversen kinematischen Problems
+=== Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$
 
-Um die Winkel $theta_1$ und $theta_2$ zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ in Richtung von $[O_T]_"S"$ zeigt.
+Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ in Richtung von $[O_T]_"S"$ zeigt.
 
 $
-accent("v", ->) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
+accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
 $
 
 Die Länge des Vektors $accent("v", ->)$ ist:
 
 $
-norm(accent("v", ->)) = d = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
+norm(accent("v", ->)) (t) = d (t) = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
 $
 
 Da die Längen der einzelnen Armglieder bekannt sind, kann die bereits aus der Lösung des inversen kinematischen Problems bekannte Formel zur Berechnung des Winkels $theta_2$ verwendet werden:  
 
 $
-theta_2 = plus.minus "arccos" frac(d^2 - l_1^2 - l_2^2, 2 l_1 l_2)
+theta_2 (t) = plus.minus "arccos" frac(d^2 - l_1^2 - l_2^2, 2 l_1 l_2)
 $
 
-Schließlich kann der Winkel $theta_1$ bestimmt werden:
+Mit der Bestimmung des Winkels $theta_2$ ist der Abstand zwischen dem ersten Drehgelenk $R_1$ und dem zweiten Drehgelenk $R_2$ korrekt eingestellt.
+
+Schließlich kann der Winkel $theta_1$ bestimmt werden.
+
+Der Vektor $accent("v", ->) (t)$ kann ebenfalls wie folgt dargestellt werden:
+
+$
+accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot mat(l_1; 0) + "Rot"(theta_1 (t)) dot "Rot"(theta_2 (t)) dot mat(l_2; 0) \
+&= "Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))
+$
+
+$"Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))$ wird im Folgenden als $accent("w", ->)$ bezeichnet. Es ergibt sich:
+
+$
+accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot accent("w", ->)
+$
+
+Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im folgenden versuchen, den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ zu drehen. Dies ist jedoch nur möglich, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$.
+Ist $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) = 0$ würde dies bedeuten, dass sich der Punkt $"[O]"_"S"$ und der Punkt $[O_T]_"S"$ an der selben Stelle befinden. Dies würde dazu führen, dass jeder Winkel $theta_1$ eine richtige Lösung wäre.
+
+Ist also $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) eq.not 0$ kann der Winkel $theta_1$ mit dem intelligenten Arkustangens bestimmt werden:
+
+$
+theta_1 (t) &= "atan2"(v_2(t), v_1(t)) - "atan2"(w_2(t), w_1(t)) \
+&= "atan2"(v_2(t), v_1(t)) - "atan2"(l_2 "sin"(theta_2 (t)), l_1 + l_2 "cos"(theta_2 (t)))
+$
+
+
+
+
 
 // ===== Abbildungen
 
