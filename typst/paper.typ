@@ -156,6 +156,7 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
     Zum Zeitpunkt $t = 0$ muss sich der Roboterarm in seiner Ausgangsposition, also am Punkt $"[A]"_"S"$ befinden.
 
     $s(t) = 0$ #h(4em) für $t = 0$
+    // $ s(t) = 0 space.quad space.quad "für" t = 0 $
   ],
   enum.item(2)[
     Zum Zeitpunkt $t = t_1$ muss sich der Roboterarm in seiner Endposition, also am Punkt $"[B]"_"S"$ befinden.
@@ -417,9 +418,9 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
   ],
 )
 
-// #pagebreak()
-
 == Berechnung der Gelenkwinkel
+
+
 
 // ===== Abbildungen
 
