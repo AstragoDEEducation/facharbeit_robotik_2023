@@ -463,8 +463,23 @@ Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des ind
 
 === Bestimmung der Winkel $theta_1$ und $theta_2$
 
+Um die Winkel $theta_1$ und $theta_2$ zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ in Richtung von $[O_T]_"S"$ zeigt.
 
+$
+accent("v", ->) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
+$
 
+Die Länge des Vektors $accent("v", ->)$ ist:
+
+$
+norm(accent("v", ->)) = d = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
+$
+
+Da die Längen der einzelnen Armglieder bekannt sind, kann die bereits aus der Lösung des inversen kinematischen Problems bekannte Formel zur Berechnung des Winkels $theta_2$ verwendet werden:  
+
+$
+theta_2 = plus.minus "arccos" frac(d^2 - l_1^2 - l_2^2, 2 l_1 l_2)
+$
 
 // ===== Abbildungen
 
