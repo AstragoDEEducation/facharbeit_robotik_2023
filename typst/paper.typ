@@ -461,7 +461,7 @@ $
 
 Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
 
-=== Bestimmung der Winkel $theta_1$ und $theta_2$
+=== Bestimmung der Winkel $theta_1$ und $theta_2$ mit Hilfe des inversen kinematischen Problems
 
 Um die Winkel $theta_1$ und $theta_2$ zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ in Richtung von $[O_T]_"S"$ zeigt.
 
@@ -480,6 +480,8 @@ Da die Längen der einzelnen Armglieder bekannt sind, kann die bereits aus der L
 $
 theta_2 = plus.minus "arccos" frac(d^2 - l_1^2 - l_2^2, 2 l_1 l_2)
 $
+
+Schließlich kann der Winkel $theta_1$ bestimmt werden:
 
 // ===== Abbildungen
 
@@ -506,3 +508,5 @@ $
 #pagebreak()
 
 #bibliography("bibliography.yml")
+
+
