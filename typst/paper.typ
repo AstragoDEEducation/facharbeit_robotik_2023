@@ -420,6 +420,23 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
 == Berechnung der Gelenkwinkel
 
+Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ können nun die Zielkoordinaten $"[X]"_"S"$ in Abhängigkeit von der Zeit $t$ mit $X(s(t))$ bestimmt werden. 
+Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
+
+#text("Normdarstellung richtig verwendet??? + Abbildung fehlt", fill: red, style: "italic", size: 1.1em)
+
+Mit der Ausnahme von Punkten, welche $norm(l_1 + l_2 + l_3)$ von dem Koordinatenursprung $O_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
+Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
+
+Um diesem Problem aus dem Weg zu gehen, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den gleichen Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
+Dies sorgt dafür, dass es nur noch eine Lösung für die Gelenkwinkel gibt.
+Eine solche Herangehensweise kann potentiell auch zur Reduktion von mechanischem Stress auf die Greifvorrichtung führen, da der Stift so nicht rotiert, während er auf dem Papier aufliegt.
+
+Der Winkel $theta$ zwischen der x-Ache von $T$ und der x-Achse von $S$ entspricht der Summe der Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ und soll im Verlauf der gesamten Bewegung des Roboterarmes konstant dem Winkel des Richtungsvektors $accent("AB", ->)$ entsprechen.
+
+$
+theta = theta_1 + theta_2 + theta_3 = "atan2"(b_2 - a_2, b_1 - a_1)
+$
 
 
 // ===== Abbildungen
@@ -438,7 +455,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 #figure(
   image("./assets/3r_arm_ts.png", width: 60%),
   caption: [
-    Manipulator des Roboters mit dem Stift (rot) und dem Stiftradius $rho$.
+    Endeffektor des Roboters mit dem Stift (rot) und dem Stiftradius $rho$.
   ],
 ) <fig-3r_arm_ts>
 
