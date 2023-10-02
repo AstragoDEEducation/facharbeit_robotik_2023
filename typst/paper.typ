@@ -508,7 +508,8 @@ theta_1 (t) &= "atan2"(v_2(t), v_1(t)) - "atan2"(w_2(t), w_1(t)) \
 &= "atan2"(v_2(t), v_1(t)) - "atan2"(l_2 "sin"(theta_2 (t)), l_1 + l_2 "cos"(theta_2 (t)))
 $
 
-
+Nun sind alle Winkel $theta_1$, $theta_2$ und $theta_3$ in Abhängigkeit von der Zeit $t$ bekannt. Ein Roboterarm kann nun die Strecke $accent("AB", -)$ abfahren.
+#repeat(emoji.face.party)
 
 
 
