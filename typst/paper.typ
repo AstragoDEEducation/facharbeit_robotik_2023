@@ -34,7 +34,7 @@ Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeit
 = Aufbau des 3R-Roboterarmes
 #text("ABBILDUNGEN UNVOLLSTÄNDIG (O_S UND O_T FEHLEN)", fill: red, style: "italic", size: 1.1em)
 
-Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind. Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem _S_ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem _T_ am 3. Gelenk ($"R"_"3"$). @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_"1"$, $l_"2"$ und $l_"3"$ ist bekannt.
+Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind. Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem $S$ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem $T$ am 3. Gelenk ($"R"_"3"$). @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_"1"$, $l_"2"$ und $l_"3"$ ist bekannt.
 
 Der Manipulator greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
 
@@ -53,9 +53,9 @@ Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Ber
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor eine Überprüfung der Erreichbarkeit der Koordinaten nötig.
 Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
 
-Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems _T_ ($[theta_3]_S$) zur x-Achse des Weltsystems _S_ dem Winkel zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$.
+Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems $T$ ($[theta_3]_S$) zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$.
 
-Für die Laage der Stiftspitze _P_ im Bezug auf das Toolsystem _T_ gilt:
+Für die Laage der Stiftspitze _P_ im Bezug auf das Toolsystem $T$ gilt:
 $
 "[P]"_"t" = mat("l"_"3" + rho; 0)
 $
@@ -420,6 +420,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
 == Berechnung der Gelenkwinkel
 
+=== Bestimmung des Winkels $theta_3$
+
 Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ können nun die Zielkoordinaten $"[X]"_"S"$ in Abhängigkeit von der Zeit $t$ mit $X(s(t))$ bestimmt werden. 
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
 
@@ -438,6 +440,31 @@ $
 theta = theta_1 + theta_2 + theta_3 = "atan2"(b_2 - a_2, b_1 - a_1)
 $
 
+Um die übrigen Gelenkwinkel $theta_1$ und $theta_2$ zu bestimmen, wird zuerst der Punkt $[O:T]_S$ bestimmt. Da die Zielkoordinaten $[P]_S = mat(x(t); y(t))$ bekannt sind, kann der Punkt $[O:T]_S$ bestimmt werden, indem $l_3 + rho$ in Richtung der x-Achse von $T$ subtrahiert wird.
+Die Richtung der x-Achse von $T$ lässt sich darstellen als:
+
+$
+frac(1,sqrt((b_1 - a_1)^2 + (b_2 - a_2)^))) dot mat(b_1 - a_1; b_2 - a_2)
+$
+
+Daraus folgt für den Punkt $[O_T]_S$:
+
+$
+[O_T]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2)
+$
+
+Der Winkel $theta_3$ in Abhängigkeit von der Zeit $t$ lässt sich nun wie folgt beschreiben:
+
+$
+theta_3 (t) = "atan2"(b_2 - a_2, b_1 - a_1) - theta_1 (t) - theta_2 (t)
+$
+
+Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
+
+=== Bestimmung der Winkel $theta_1$ und $theta_2$
+
+
+
 
 // ===== Abbildungen
 
@@ -448,7 +475,7 @@ $
 #figure(
   image("./assets/3r_arm.png", width: 60%),
   caption: [
-    Ein 3R-Roboterarm mit dem Weltsystem _S_ und dem Toolsystem _T_.
+    Ein 3R-Roboterarm mit dem Weltsystem $S$ und dem Toolsystem $T$.
   ],
 ) <fig-3r_arm>
 
