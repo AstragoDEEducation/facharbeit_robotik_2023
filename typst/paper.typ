@@ -204,7 +204,6 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
     $
     s(t) := 0 "für" t = 0
     $
-    
 
   ],
 
