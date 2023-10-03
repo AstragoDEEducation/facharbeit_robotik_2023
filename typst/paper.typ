@@ -173,8 +173,6 @@ $
 
 lässt sich die Funktion $X(s)$ wie folgt darstellen:
 
-#text("Großes X benötigt?", fill: red, style: "italic", size: 1.1em)
-
 $
 X(s) = [X(s)]_S &= [A]_S + s dot [accent("AB", ->)]_S \
 &= a + s dot (b - a) \
@@ -479,6 +477,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     Mit einem neuen Wert für $t_1$.
 
     Dieser Ansatz erspart zudem die Neuberechnung der Funktion $s(t)$, sowie der Ableitungen $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ und deren anschließende Überprüfung auf die Erfüllung der Anforderungen.
+
+    @fig-st_st_gstr zeigt den zeitlichen Verlauf der Interpolation für $t_1 = 1$ (grüner Funktionsgraph) im Vergleich zur gestreckten Funktion mit $t_1 = 2$ (blauer Funktionsgraph).
   ],
 )
 
@@ -639,13 +639,22 @@ Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen beispielswe
 ) <fig-st_lin>
 
 #figure(
-  image("./assets/st_vt_at_diagramm.png", width: 60%),
+  image("./assets/st_vt_at_diagramm.png", width: 50%),
   caption: [
-    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar. Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
+    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar.
+    Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
     Der blaue Graph stellt die Funktion $accent("s", dot.double)(t)$ dar.
     Der orangefarbene Graph stellt die Funktion $accent("s", dot.triple)(t)$ dar.
   ],
 ) <fig-st_vt_at>
+
+#figure(
+  image("./assets/st_st_gstr_diagramm.png", width: 75%),
+  caption: [
+    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar.
+    Der blaue Graph stellt die Funktion $s(t)_"neu" = s(t/t_1)$ mit $t_1 = 2$ dar.
+  ],
+) <fig-st_st_gstr>
 
 // ===== Quellen und Bibliographie 
   

@@ -37,3 +37,8 @@ src-bezier:
   date: "2021-08-19"
   url: "https://www.youtube.com/watch?v=aVwxzDHniEw"
   runtime: "53:02"
+
+src-strecken:
+  type: web
+  title: "Funktionsgraphen stauchen und strecken "
+  url: "https://de.serlo.org/mathe/1859/funktionsgraphen-stauchen-und-strecken"
