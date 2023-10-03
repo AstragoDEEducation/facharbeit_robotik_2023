@@ -13,3 +13,19 @@ src-ms:
   date: "2021-05-02"
   url: "https://www.youtube.com/watch?v=-ONzaWY9ZUo"
   runtime: "53:02"
+
+src-kin_4_2:
+  type: video
+  title: "Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
+  author: "Prof. Dr. Harald Löwe"
+  date: "2021-05-02"
+  url: "https://www.youtube.com/watch?v=iozyhA0z3lk"
+  runtime: "15:13"
+
+src-kin_4_3:
+  type: video
+  title: "Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
+  author: "Prof. Dr. Harald Löwe"
+  date: "2021-05-02"
+  url: "https://www.youtube.com/watch?v=cjMWJupFtt4"
+  runtime: "19:55"

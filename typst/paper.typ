@@ -44,8 +44,8 @@ Der Endeffektor greift einen Stift mit dem bekannten Radius $rho$, in dessen Zen
 
 = Trajektorienplanung
 
-In der Trajektorienplanung @src-SeyrMartin2006Amrm wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant.
-Hierbei wird die Strecke zwischen den gegebenen Punkten $[A]_S$ und $[B]_S$ unter Zuhilfenahme von Vektoren parametrisiert @src-ms.
+In der Trajektorienplanung wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant @src-SeyrMartin2006Amrm.
+Hierbei wird die Strecke zwischen den gegebenen Punkten $[A]_S$ und $[B]_S$ unter Zuhilfenahme von Vektoren parametrisiert @src-ms, also in Abhängigkeit von einem Parameter $s$ dargestellt.
 Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können @src-ms. 
 
 Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich liegt.
@@ -103,7 +103,7 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
     Hierzu kann die Distanz $d$ zwischen dem Mittelpunkt $[M]_S$ und den Punkten $[A]_S$ und $[B]_S$ berechnet werden.
     Liegt mindestens einer der Punkte außerhalb des erreichbaren Bereiches, ist die Strecke nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
 
-    Hierfür kann der Satz des Pythagoras verwendet werden:
+    Zur Berechnung der Distanz $d$ kann der Satz des Pythagoras verwendet werden:
 
     $
     [M]_s &= mat(m_1; m_2) \
@@ -116,14 +116,15 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
     d_([M]_s, [B]_S) = sqrt((m_1 - b_1)^2 + (m_2 - b_2)^2) \
     $
 
-    Sind die Bedingungen $r_min < d_([M]_s, [A]_S) < r_max$ beziehungsweise $r_min < d_([M]_s, [B]_S) < r_max$ erfüllt, kann mit der nächsten Überprüfung fortgefahren werden. Sind die Bedingungen nicht erfüllt, ist die Strecke nicht zeichenbar. Das Programm, welches den Roboter steuert, kann dann vorzeitig beendet werden und eine Fehlermeldung ausgeben.
-     
+    Sind die Bedingungen $r_min < d_([M]_s, [A]_S) < r_max$ beziehungsweise $r_min < d_([M]_s, [B]_S) < r_max$ erfüllt, kann mit der nächsten Überprüfung fortgefahren werden.
+    Sind die Bedingungen nicht erfüllt, ist die Strecke nicht zeichenbar.
+    Das Programm, welches den Roboter steuert, kann dann vorzeitig beendet werden und eine Fehlermeldung ausgeben.
   ],
 
   enum.item(2)[
     Prüfen, ob die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ den erreichbaren Bereich schneidet.
-    Hierzu kann die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ parametrisiert und mittels eines Vektors dargestellt werden (siehe unten), und mit der Kreisgleichung ein weiterer Vektor erstellt werden, welcher der Kreisgleichung folgt.
-    Schneiden sich die beiden Vektoren, so schneidet die Strecke den Kreis und ist somit nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar. Auch hier kann das Programm, welches den Roboter steuert, vorzeitig beendet werden und eine Fehlermeldung ausgeben.
+    Hierzu kann die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ parametrisiert und mittels eines Vektors dargestellt werden (siehe unten), und mit der Kreisgleichung jeweils ein weiterer Vektor erstellt werden, welcher der Kreisgleichung folgt.
+    Schneidet sich der Vektor der Strecke mit mindestens einem Vektor welcher einem Kreisbogen folgt, so schneidet die Strecke mindestens einen der Kreise und ist somit nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar. Auch hier kann das Programm, welches den Roboter steuert, vorzeitig beendet werden und eine Fehlermeldung ausgeben.
 
     Eine genaue mathematische Beschreibung dieser Überprüfung erfolgt in dieser Arbeit nicht.
   ],
@@ -140,20 +141,28 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
 // &= vec((l_3 + rho) dot "cos"(theta_1 + theta_2 + theta_3) + l_2 "cos"(theta_1 + theta_2) + l_1 "cos"(theta_1), (l_3 + rho) dot "sin"(theta_1 + theta_2 + theta_3) + l_2 "sin"(theta_1 + theta_2) + l_1 "sin"(theta_1)) 
 // $
 
-== Parametrisierung der Strecke
+== Parametrisierung der Strecke @src-ms
 
 #text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
 
 Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher einem Parameter $s$ abhängt.
-Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ beschreibt.
+Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $[A]_S = mat(a_1; b_1)$ und $[B]_S = mat(b_1; b_2)$ beschreibt.
 
-Gegeben sind die Punkte $"[A]"_"S" = mat(a_1; b_1)$ und $"[B]"_"S" = mat(b_1; b_2)$. Auf der Strecke zwischen den Punkten befindet sich der Punkt $X$, welcher mit dem Vektor $accent("x", ->)$ ausgehend vom Punkt $"[A]"_"S"$ in Richtung von Punkt $"[B]"_"S"$ verschoben werden kann.
+Auf der Strecke zwischen den Punkten befindet sich der Punkt $X$, welcher mit dem Vektor $accent("x", ->)$ ausgehend vom Punkt $"[A]"_"S"$ in Richtung von Punkt $"[B]"_"S"$ verschoben werden kann.
+
+#set align(center)
 
 $X &= A + accent("AX", ->) = A + accent("x", ->)$ #h(4em) mit $accent("x", ->) = accent("AX", ->)$
 
+#set align(start)
+
 $accent("AX", ->)$ und $accent("AB", ->)$ sind parallel zueinander. Somit gilt:
 
+#set align(center)
+
 $accent("AX", ->) || accent("AB", ->) => accent("AX", ->) = s dot accent("AB", ->)$ #h(4em) mit $0 <= s <= 1$
+
+#set align(start)
 
 Die Funktion $X(s) = A + s dot accent("AB", ->)$ beschreibt dann alle Punkte auf der Strecke $accent("AB", -)$ im Bezug auf den Parameter $s$. 
 
@@ -176,52 +185,75 @@ $
 
 Auch andere Interpolationen zwischen Punkten, zum Beispiel Bezierkurven, können parametrisiert werden, sodass der Roboterarm diese abfahren kann.
 
-== Beschreibung der Bewegung des Roboters
+== Beschreibung der Bewegung des Roboters @src-ms
 
 #text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
 
-Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des Stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ berechnet werden. Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[A]"_"S"$, und am Zeitpunkt $t = t_1$ beendet sein; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $"[B]"_"S"$.
+Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des Stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden.
+Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[A]_S$, und am Zeitpunkt $t = t_1$ beendet sein; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[B]_S$.
 Gesucht ist also eine Funktion $s(t)$, welche den Fortschritt der Bewegung des Roboters in Abhängigkeit von der Zeit $t$ beschreibt.
 
 Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden müssen:
 #enum(
   enum.item(1)[
-    Zum Zeitpunkt $t = 0$ muss sich der Roboterarm in seiner Ausgangsposition, also am Punkt $"[A]"_"S"$ befinden.
+    Zum Zeitpunkt $t = 0$ muss sich der Roboterarm in seiner Ausgangsposition, also am Punkt $[A]_S$ befinden.
 
-    $s(t) = 0$ #h(4em) für $t = 0$
-    // $ s(t) = 0 space.quad space.quad "für" t = 0 $
-  ],
-  enum.item(2)[
-    Zum Zeitpunkt $t = t_1$ muss sich der Roboterarm in seiner Endposition, also am Punkt $"[B]"_"S"$ befinden.
+    // #set align(center)
+    // $s(t) = 0$ #h(4em) für $t = 0$
+    // #set align(start)
+
     
-    $s(t) = 1$ #h(4em) für $t = t_1$
+    $
+    s(t) := 0 "für" t = 0
+    $
+    
+
   ],
+
+  enum.item(2)[
+    Zum Zeitpunkt $t = t_1$ muss sich der Roboterarm in seiner Endposition, also am Punkt $[B]_"S"$ befinden.
+    
+    // #set align(center)
+    // $s(t) = 1$ #h(4em) für $t = t_1$
+    // #set align(start)
+
+    $
+    s(t) := 1 "für" t = t_1
+    $
+
+  ],
+
   enum.item(3)[
     Die Funktion $s(t)$ muss auf dem Intervall $[0, t_1]$ streng monoton wachsend sein ($=> accent("s", .)(t) >= 0$), sie darf sich also nicht verringern.
   ],
 )
 
-Der wohl einfachste Lösungsansatz wäre es, die Bewegung des Roboters linear zu beschreiben, also $s(t) = t / t_1$ auf dem Intervall $[0, t_1]$. Dies würde in der Anwendung jedoch problematisch sein, da die Geschwindigkeit des Roboters nicht konstant wäre. Der Roboter müsste also innerhalb von $Delta t = 0$ von $accent("s", dot)(t) = 0$ auf $accent("s", dot)(t) = 1$ beschleunigen, was nicht möglich ist.  
+Der wohl einfachste Lösungsansatz wäre es, die Bewegung des Roboters linear zu beschreiben, also $s(t) = t / t_1$ auf dem Intervall $[0, t_1]$.
+Dies würde in der Anwendung jedoch problematisch sein, da die Geschwindigkeit des Roboters nicht konstant wäre. Der Roboter müsste also innerhalb von $Delta t = 0$ von $accent("s", dot)(t) = 0$ auf $accent("s", dot)(t) = 1$ beschleunigen, was nicht möglich ist.
 
 Gesucht ist also eine Funktion $s(t)$, welche die oben genannten Anforderungen erfüllt, sowie die Geschwindigkeit ($accent("s", dot)(t)$) und die Beschleunigung ($accent("s", dot.double)(t)$) des Roboters stetig hält.
 
 Für die Funktion $s(t)$ bietet sich eine Polynomfunktion an, da diese stetig differenzierbar ist. Diese Polynomfunktion muss dann so angepasst werden, dass die oben genannten Anforderungen erfüllt werden.
 
-Die Anforderungen an die Polynomfunktion $s(t)$ lauten fortlaufend:
+Die Anforderungen an die Polynomfunktion $s(t)$ lauten zudem fortlaufend:
 
 #enum(
   enum.item(4)[
-    Die Geschwindigkeit des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1$ gleich 0.
+    Die Geschwindigkeit des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1$ gleich $0$.
+
     $
     accent("s", dot)(0) = accent("s", dot)(t_1) = 0
     $
   ],
+
   enum.item(5)[
-    Die Beschleunigung des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1$ gleich 0.
+    Die Beschleunigung des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1$ gleich $0$.
+
     $
     accent("s", dot.double)(0) = accent("s", dot.double)(t_1) = 0
     $
   ],
+
   enum.item(6)[
     $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ sind beschränkt. Die maximale Geschwindigkeit $accent("s", dot)(t)$ und die maximale Beschleunigung $accent("s", dot.double)(t)$ dürfen nicht überschritten werden.
     $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ hängen vom Roboter ab.
@@ -230,7 +262,8 @@ Die Anforderungen an die Polynomfunktion $s(t)$ lauten fortlaufend:
   ],
 )
 
-Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ zu binden, wird $t_1 = 1$ gesetzt. Sollten Geschwindigkeiten oder Beschleunigungen des Roboters überschritten werden, wird $t_1$ erhöht, bis die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
+Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ mit konkreter Lösung zu binden, wird $t_1 = 1$ gesetzt.
+Sollten Geschwindigkeiten oder Beschleunigungen des Roboters überschritten werden, wird $t_1$ erhöht, bis die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
 Alternativ könnte auch eine andere Methode zur Vergrößerung von $Delta t$ verwendet werden, welche jedoch einen weniger effizienteren Gesamtablauf der Bewegung des Roboters zur Folge hätte. Diese Methode wird im Verlauf der Arbeit kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
 
 Es ergeben sich die folgenden Polynomfunktionen für $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$:
@@ -248,7 +281,7 @@ accent("s", dot)(0) = 0 &=> c_1 = 0 \
 accent("s", dot.double)(0) = 0 &=> c_2 = 0 \
 $
 
-Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1$ werden $n = 5$ Koeffizienten benötigt. Da $c_0$ bis $c_2$ $= 0$ sind fallen diese nun weg. Es ergibt sich:
+Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1$ werden $n = 5$ Koeffizienten benötigt. Da $c_0 = c_1 = c_2 = 0$ sind fallen diese nun weg. Es ergibt sich:
 
 $
 s(t) &= c_3 t^3 + c_4 t^4 + c_5 t^5 \
@@ -438,7 +471,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
     #text("Abbildungen fehlen!", fill: red, style: "italic", size: 1.1em)
 
-    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Verändern von $t$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden. Ein einfacher Ansatz hierfür wäre die Bildung der folgenden Funktion:
+    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Verändern von $t$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
+    Ein einfacher Ansatz hierfür wäre die Bildung der folgenden Funktion:
 
     $
     s_"neu" (t) = s(t/t_1)
@@ -446,26 +480,27 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
     Diese Funktion wird im Folgenden kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
 
-    Wie in #text("ABBILDUNG HIER EINFÜGEN", fill: red) sichtbar, ist die Funktion $s_"neu" (t)$ im graphischen Vergleich zu der Funktion $s_"neu"_"poly" (t)$ keine Punktspiegelung am Punkt $mat(1/2 t_1; 1/2)$ auf dem Intervall $[0, t_1]$, sondern vielmehr eine im letzten drittel _langgezogene_ Version der Funktion $s (t)$.
-    Dies führt dazu, dass die Funktion $s_"neu" (t)$ zwar eine geringere Geschwindigkeit aufweist (durch die Kettenregel ergibt sich für die Geschwindigkeit $accent("s", dot)_"neu" (t) = 1/t_1 dot accent("s", dot) (t/t_1)$), diese Reduktion jedoch keine hohe Effizienz aufweist. Ähnliches gilt für die Beschleunigung $accent("s", dot.double)_"neu" (t)$.
+    Wie in #text("ABBILDUNG HIER EINFÜGEN", fill: red) sichtbar, ist die Funktion $s_"neu" (t)$ im graphischen Vergleich zu der Funktion $s_"neu"_"poly" (t)$ keine Punktspiegelung am Punkt $mat(1/2 t_1; 1/2)$ auf dem Intervall $[0, t_1]$, sondern vielmehr eine im letzten drittel gestreckte Version der Funktion $s (t)$.
+    Dies führt dazu, dass die Funktion $s_"neu" (t)$ zwar eine geringere Geschwindigkeit aufweist (durch die Kettenregel ergibt sich für die Geschwindigkeit $accent("s", dot)_"neu" (t) = 1/t_1 dot accent("s", dot) (t/t_1)$), diese Reduktion jedoch keine hohe Effizienz aufweist.
+    Ähnliches gilt für die Beschleunigung $accent("s", dot.double)_"neu" (t)$.
   ],
 )
 
 == Berechnung der Gelenkwinkel
 
-=== Bestimmung des Winkels $theta_3$
+=== Bestimmung des Winkels $theta_3$ @src-ms
 
 Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ können nun die Zielkoordinaten $"[X]"_"S"$ in Abhängigkeit von der Zeit $t$ mit $X(s(t))$ bestimmt werden. 
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
 
 #text("Normdarstellung richtig verwendet??? + Abbildung fehlt", fill: red, style: "italic", size: 1.1em)
 
-Mit der Ausnahme von Punkten, welche $norm(l_1 + l_2 + l_3)$ von dem Koordinatenursprung $O_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
+Mit der Ausnahme von Punkten, welche $norm(l_1 + l_2 + l_3)$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
 
-Um diesem Problem aus dem Weg zu gehen, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den gleichen Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
+Um dieses Problem zu vermeiden, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
 Dies sorgt dafür, dass es nur noch eine Lösung für die Gelenkwinkel gibt.
-Eine solche Herangehensweise kann potentiell auch zur Reduktion von mechanischem Stress auf die Greifvorrichtung führen, da der Stift so nicht rotiert, während er auf dem Papier aufliegt.
+Eine solche Herangehensweise kann potentiell auch zur Reduktion von mechanischem Stress auf die Greifvorrichtung führen, da der Stift so nicht um sein Zentrum $[P]_T$ rotiert, während er auf dem Papier aufliegt.
 
 Der Winkel $theta$ zwischen der x-Ache von $T$ und der x-Achse von $S$ entspricht der Summe der Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ und soll im Verlauf der gesamten Bewegung des Roboterarmes konstant dem Winkel des Richtungsvektors $accent("AB", ->)$ entsprechen.
 
@@ -473,7 +508,7 @@ $
 theta = theta_1 + theta_2 + theta_3 = "atan2"(b_2 - a_2, b_1 - a_1)
 $
 
-Um die übrigen Gelenkwinkel $theta_1$ und $theta_2$ zu bestimmen, wird zuerst der Punkt $[O:T]_S$ bestimmt. Da die Zielkoordinaten $[P]_S = mat(x(t); y(t))$ bekannt sind, kann der Punkt $[O:T]_S$ bestimmt werden, indem $l_3 + rho$ in Richtung der x-Achse von $T$ subtrahiert wird.
+Um die übrigen Gelenkwinkel $theta_1$ und $theta_2$ zu bestimmen, wird zuerst der Punkt $[O_T]_S$ bestimmt. Da die Zielkoordinaten $[P]_S = mat(x(t); y(t))$ bekannt sind, kann der Punkt $[O_T]_S$ bestimmt werden, indem $l_3 + rho$ in Richtung der x-Achse von $T$ subtrahiert wird.
 Die Richtung der x-Achse von $T$ lässt sich darstellen als:
 
 $
@@ -494,9 +529,9 @@ $
 
 Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
 
-=== Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$
+=== Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$ @src-kin_4_2 @src-kin_4_3
 
-Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ in Richtung von $[O_T]_"S"$ zeigt.
+Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
 
 $
 accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
@@ -533,6 +568,7 @@ $
 
 Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im folgenden versuchen, den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ zu drehen. Dies ist jedoch nur möglich, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$.
 Ist $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) = 0$ würde dies bedeuten, dass sich der Punkt $"[O]"_"S"$ und der Punkt $[O_T]_"S"$ an der selben Stelle befinden. Dies würde dazu führen, dass jeder Winkel $theta_1$ eine richtige Lösung wäre.
+In diesem Fall kann ein beliebiger Winkel $theta_1$ gewählt werden.
 
 Ist also $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) eq.not 0$ kann der Winkel $theta_1$ mit dem intelligenten Arkustangens bestimmt werden:
 
@@ -548,6 +584,11 @@ Diese Winkelbestimmung erfolgt für jeden Zeitpunkt $t$.
 = Nachwort & Fazit
 
 Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisnah, und nicht sonderlich komplex. Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
+
+Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve (Bezierkurven liegt die Lineare interpolation zu Grunde $->$ Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
+Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
+
+
 
 // ===== Abbildungen
 
@@ -569,9 +610,11 @@ Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisn
   ],
 ) <fig-3r_arm_ts>
 
-// ===== Bibliographie
+// ===== Quellen und Bibliographie 
   
 #pagebreak()
+
+// = Quellen
 
 #bibliography("bibliography.yml")
 
