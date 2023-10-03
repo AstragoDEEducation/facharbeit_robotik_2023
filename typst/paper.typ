@@ -264,7 +264,7 @@ Die Anforderungen an die Polynomfunktion $s(t)$ lauten zudem fortlaufend:
 
 Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ mit konkreter Lösung zu binden, wird $t_1 = 1$ gesetzt.
 Sollten Geschwindigkeiten oder Beschleunigungen des Roboters überschritten werden, wird $t_1$ erhöht, bis die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
-Alternativ könnte auch eine andere Methode zur Vergrößerung von $Delta t$ verwendet werden, welche jedoch einen weniger effizienteren Gesamtablauf der Bewegung des Roboters zur Folge hätte. Diese Methode wird im Verlauf der Arbeit kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
+Eine Methode um $Delta t$ mittels der Verschiebung von $t_1$ zu erhöhen wird im Verlauf der Arbeit erläutert.
 
 Es ergeben sich die folgenden Polynomfunktionen für $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$:
 
@@ -469,18 +469,16 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
     @fig-st_vt_at zeigt die Funktionen $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ mit $t_1 = 1$.
 
-    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Verändern von $t$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
-    Ein einfacher Ansatz hierfür wäre die Bildung der folgenden Funktion:
+    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Erhöhen von $t_1$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
+    Ein einfacher Ansatz hierfür wäre die Streckung oder Stauchung der Funktion $s(t)$ auf der x-Achse:
 
     $
     s_"neu" (t) = s(t/t_1)
     $
 
-    Diese Funktion wird im Folgenden kurz dargestellt und mit einer Neuberechnung des Polynoms für ein neuen Wert $t_1$ verglichen.
+    Mit einem neuen Wert für $t_1$.
 
-    Wie in #text("ABBILDUNG HIER EINFÜGEN", fill: red) sichtbar, ist die Funktion $s_"neu" (t)$ im graphischen Vergleich zu der Funktion $s_"neu"_"poly" (t)$ keine Punktspiegelung am Punkt $mat(1/2 t_1; 1/2)$ auf dem Intervall $[0, t_1]$, sondern vielmehr eine im letzten drittel gestreckte Version der Funktion $s (t)$.
-    Dies führt dazu, dass die Funktion $s_"neu" (t)$ zwar eine geringere Geschwindigkeit aufweist (durch die Kettenregel ergibt sich für die Geschwindigkeit $accent("s", dot)_"neu" (t) = 1/t_1 dot accent("s", dot) (t/t_1)$), diese Reduktion jedoch keine hohe Effizienz aufweist.
-    Ähnliches gilt für die Beschleunigung $accent("s", dot.double)_"neu" (t)$.
+    Dieser Ansatz erspart zudem die Neuberechnung der Funktion $s(t)$, sowie der Ableitungen $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ und deren anschließende Überprüfung auf die Erfüllung der Anforderungen.
   ],
 )
 
@@ -583,7 +581,8 @@ Diese Winkelbestimmung erfolgt für jeden Zeitpunkt $t$.
 
 = Nachwort & Fazit
 
-Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisnah, und nicht sonderlich komplex. Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
+Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisnah, und nicht sonderlich komplex.
+Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
 
 Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegt die Lineare interpolation zu Grunde $->$ Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
 Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
