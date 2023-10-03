@@ -199,7 +199,6 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
     // #set align(center)
     // $s(t) = 0$ #h(4em) für $t = 0$
     // #set align(start)
-
     
     $
     s(t) := 0 "für" t = 0
