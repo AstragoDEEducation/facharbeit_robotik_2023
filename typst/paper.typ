@@ -51,14 +51,14 @@ Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Ber
 
 == Erreichbarkeit von Koordinaten
 
-#text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
-
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor eine Überprüfung der Erreichbarkeit der Koordinaten nötig.
 Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
 
 Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems $T$ ($[theta_3]_S$) zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $[A]_S$ und $[B]_S$.
 
-Für die Laage der Stiftspitze _P_ im Bezug auf das Toolsystem $T$ gilt:
+Für die Laage der Stiftspitze $P$ im Bezug auf das Toolsystem $T$ gilt (vergleiche:
+@fig-3r_arm_ts):
+
 $
 [P]_t = mat(l_3 + rho; 0)
 $
@@ -92,7 +92,8 @@ $
 r_"min" = abs(l_1 - l_2)
 $
 
-$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $r_"max"$ und dem Mittelpunkt $[M]_S$ und außerhalb des Kreises mit dem Radius $r_"min"$ und dem Mittelpunkt $[M]_S$ liegt.
+$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $r_"max"$ und dem Mittelpunkt $[M]_S$ und außerhalb des Kreises mit dem Radius $r_"min"$ und dem Mittelpunkt $[M]_S$ liegt. \
+@fig-erreichbarkeit zeigt die Erreichbarkeitsbereiche des Roboters.
 
 Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Strecke $accent("AB", -)$ innerhalb des für den Roboter erreichbaren Bereiches liegen kann beispielhaft wie folgt durchgeführt werden:
 
@@ -142,8 +143,6 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
 
 == Parametrisierung der Strecke @src-kin_4_4
 
-#text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
-
 Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher einem Parameter $s$ abhängt.
 Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $[A]_S = mat(a_1; b_1)$ und $[B]_S = mat(b_1; b_2)$ beschreibt.
 
@@ -181,6 +180,8 @@ X(s) = [X(s)]_S &= [A]_S + s dot [accent("AB", ->)]_S \
 &= a + s dot (b - a) \
 &= (1 - s) dot a + s dot b
 $
+
+@fig-para zeigt die Parametrisierung anhand eines Beispiels.
 
 Auch andere Interpolationen zwischen Punkten, zum Beispiel Bezierkurven, können parametrisiert werden, sodass der Roboterarm diese abfahren kann.
 
@@ -309,8 +310,6 @@ Durch Einsetzen der Koeffizienten in die Gleichung ergibt sich die Funktion $s(t
 $
 s(t) = 10t^3 - 15t^4 + 6t^5
 $
-
-#text("Abbildung generieren!", fill: red, style: "italic", size: 1.1em)
 
 Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Erfüllung der oben genannten Anforderungen (1. - 6.) geprüft werden:
 
@@ -468,7 +467,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
       ],
     )
 
-    #text("Abbildungen fehlen!", fill: red, style: "italic", size: 1.1em)
+    @fig-st_vt_at zeigt die Funktionen $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ mit $t_1 = 1$.
 
     Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Verändern von $t$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
     Ein einfacher Ansatz hierfür wäre die Bildung der folgenden Funktion:
@@ -610,6 +609,44 @@ Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen beispielswe
     Endeffektor des Roboters mit dem Stift (rot) und dem Stiftradius $rho$.
   ],
 ) <fig-3r_arm_ts>
+
+
+#figure(
+  image("./assets/erreichbarkeit.png", width: 100%),
+  caption: [
+    Ein 3R-Roboterarm und die Strecke $accent("AB", -)$.
+    Eingezeichnet ist der Punkt $[M]_S$ welcher um den Vektor $accent("v", ->)$ ausgehend vom Punkt $[O]_S$ verschoben wurde.
+    Der orangefarbene Kreis stellt $r_max$ dar. 
+    Der blaue Kreis stellt $r_min$ dar.
+    Beide Kreise haben den selben Mittelpunkt $[M]_S$.
+  ],
+) <fig-erreichbarkeit>
+
+#figure(
+  image("./assets/para.png", width: 70%),
+  caption: [
+    Die Strecke $accent("AB", -)$ mit dem Punkt $[X]_S$.
+    Der Punkt $[X]_S$ befindet sich an der Stelle $X(1/4)$
+  ],
+) <fig-para>
+
+#figure(
+  image("./assets/st_lin.png", width: 70%),
+  caption: [
+    Der blaue Graph stellt die Funktion $s(t) = t/t_1$ mit $t_1 = 1$ dar. Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
+    Der rote Graph ist nicht stetig.
+    Eine Ansteuerung des Roboters mit dieser Funktion ist nicht möglich.
+  ],
+) <fig-st_lin>
+
+#figure(
+  image("./assets/st_vt_at_diagramm.png", width: 60%),
+  caption: [
+    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar. Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
+    Der blaue Graph stellt die Funktion $accent("s", dot.double)(t)$ dar.
+    Der orangefarbene Graph stellt die Funktion $accent("s", dot.triple)(t)$ dar.
+  ],
+) <fig-st_vt_at>
 
 // ===== Quellen und Bibliographie 
   

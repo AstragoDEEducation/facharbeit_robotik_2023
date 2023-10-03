@@ -2,16 +2,17 @@
   "cSpell.enableFiletypes": ["typst"],
   "cSpell.language": "en,de",
   "cSpell.words": [
+    "Bézier",
     "Erreichbarkeitsbegrenzung",
+    "Erreichbarkeitsbereiche",
+    "Holmér",
     "Interpolationsmethoden",
     "Normdarstellung",
     "roboterspezifischen",
     "Seeck",
     "Toolsystem",
     "Toolsystems",
-    "Trajektorienplanung",
-    "Bézier",
-    "Holmér"
+    "Trajektorienplanung"
   ],
   "cSpell.ignoreWords": [
     "Amrm",
