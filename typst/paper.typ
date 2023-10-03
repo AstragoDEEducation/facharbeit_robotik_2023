@@ -588,7 +588,8 @@ Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters üb
 Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen sehr oft Anwendung.
 Beispielsweise in der Filmproduktion, um eine Kamera auf einem immer gleichen Pfad zu bewegen oder in der Produktion von Fahrzeugen oder anderer Produkte, um einen Roboterarm auf einem vorbestimmten Pfad zu bewegen und Kollisionen mit anderen Roboterarmen, Objekten oder Lebewesen zu vermeiden.
 
-Es ist jedoch zu beachten, dass die (lineare) Interpolation nicht immer die beste Lösung ist, um einen Roboterarm zu bewegen. Wenn der Endeffektor keinem vorbestimmten Pfad folgen muss, können alle Gelenkwinkel des Roboters sofort auf den gewünschten Zielwert eingestellt werden.
+Es ist jedoch zu beachten, dass die (lineare) Interpolation nicht immer die beste Lösung ist, um einen Roboterarm zu bewegen.
+Wenn der Endeffektor keinem vorbestimmten Pfad folgen muss, können alle Gelenkwinkel des Roboters sofort auf den gewünschten Zielwert eingestellt werden.
 Dadurch braucht die Bewegung nur noch die Zeit, welche das langsamste Gelenk benötigt, um sich auf den Zielwert einzustellen. 
 Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter Umständen schwer vorhersehbar.
 
