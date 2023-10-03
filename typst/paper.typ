@@ -542,7 +542,7 @@ $
 Da die Längen der einzelnen Armglieder bekannt sind, kann die bereits aus der Lösung des inversen kinematischen Problems bekannte Formel zur Berechnung des Winkels $theta_2$ verwendet werden:  
 
 $
-theta_2 (t) = plus.minus "arccos" frac(d^2 - l_1^2 - l_2^2, 2 l_1 l_2)
+theta_2 (t) = plus.minus "arccos" frac(d(t)^2 - l_1^2 - l_2^2, 2 l_1 l_2)
 $
 
 Mit der Bestimmung des Winkels $theta_2$ ist der Abstand zwischen dem ersten Drehgelenk $R_1$ und dem zweiten Drehgelenk $R_2$ korrekt eingestellt.
