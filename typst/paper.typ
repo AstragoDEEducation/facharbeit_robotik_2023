@@ -4,7 +4,7 @@
 #import "template.typ": *
 
 #show: project.with(
-  title: "Lineare Interpolation zwischen Punkten mittels eines 3R-Roboterarmes in der Ebene" ,
+  title: "Lineare Interpolation zwischen zwei Punkten mittels eines 3R-Roboterarmes in der Ebene" ,
   authors: (
     "Justus John Michael Seeck",
   ),
@@ -35,7 +35,7 @@ Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der R
 = Aufbau des 3R-Roboterarmes
 
 Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
-Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen.
+Am Ende des dritten Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
 Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Gelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
 @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
 
@@ -52,7 +52,7 @@ Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Ber
 == Erreichbarkeit von Koordinaten
 
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor eine Überprüfung der Erreichbarkeit der Koordinaten nötig.
-Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
+Durch den Aufbau eines Roboterarms ist es möglich, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
 
 Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems $T$ ($[theta_3]_S$) zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $[A]_S$ und $[B]_S$.
 
@@ -95,7 +95,7 @@ $
 $==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $r_"max"$ und dem Mittelpunkt $[M]_S$ und außerhalb des Kreises mit dem Radius $r_"min"$ und dem Mittelpunkt $[M]_S$ liegt. \
 @fig-erreichbarkeit zeigt die Erreichbarkeitsbereiche des Roboters.
 
-Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Strecke $accent("AB", -)$ innerhalb des für den Roboter erreichbaren Bereiches liegen kann beispielhaft wie folgt durchgeführt werden:
+Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Strecke $accent("AB", -)$ innerhalb des für den Roboter zu erreichenden Bereiches liegen, kann beispielhaft wie folgt durchgeführt werden:
 
 #enum(
   enum.item(1)[
@@ -225,7 +225,7 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
 )
 
 Der wohl einfachste Lösungsansatz wäre es, die Bewegung des Roboters linear zu beschreiben, also $s(t) = t / t_1$ auf dem Intervall $[0, t_1]$.
-Dies würde in der Anwendung jedoch problematisch sein, da die Geschwindigkeit des Roboters nicht konstant wäre. Der Roboter müsste also innerhalb von $Delta t = 0$ von $accent("s", dot)(t) = 0$ auf $accent("s", dot)(t) = 1$ beschleunigen, was nicht möglich ist.
+Dies wäre in der Anwendung jedoch problematisch, da die Geschwindigkeit des Roboters nicht konstant wäre. Der Roboter müsste also innerhalb von $Delta t = 0$ von $accent("s", dot)(t) = 0$ auf $accent("s", dot)(t) = 1$ beschleunigen, was nicht möglich ist.
 
 Gesucht ist also eine Funktion $s(t)$, welche die oben genannten Anforderungen erfüllt, sowie die Geschwindigkeit ($accent("s", dot)(t)$) und die Beschleunigung ($accent("s", dot.double)(t)$) des Roboters stetig hält.
 
@@ -525,7 +525,7 @@ Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des ind
 
 === Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$ @src-kin_4_2 @src-kin_4_3
 
-Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, wird die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ benötigt. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
+Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, muss die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ bestimmt werden. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
 
 $
 accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
@@ -585,7 +585,12 @@ Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei 
 Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegt die Lineare interpolation zu Grunde $->$ Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
 Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
 
-Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen beispielsweise in der Filmproduktion Anwendung, um eine Kamera auf einem immer gleichen Pfad zu bewegen oder in der Produktion von Fahrzeugen oder anderer Produkte, um einen Roboterarm auf einem vorbestimmten Pfad zu bewegen und Kollisionen mit anderen Roboterarmen, Objekten oder Lebewesen zu vermeiden.
+Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen sehr oft Anwendung.
+Beispielsweise in der Filmproduktion, um eine Kamera auf einem immer gleichen Pfad zu bewegen oder in der Produktion von Fahrzeugen oder anderer Produkte, um einen Roboterarm auf einem vorbestimmten Pfad zu bewegen und Kollisionen mit anderen Roboterarmen, Objekten oder Lebewesen zu vermeiden.
+
+Es ist jedoch zu beachten, dass die (lineare) Interpolation nicht immer die beste Lösung ist, um einen Roboterarm zu bewegen. Wenn der Endeffektor keinem vorbestimmten Pfad folgen muss, können alle Gelenkwinkel des Roboters sofort auf den gewünschten Zielwert eingestellt werden.
+Dadurch braucht die Bewegung nur noch die Zeit, welche das langsamste Gelenk benötigt, um sich auf den Zielwert einzustellen. 
+Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter Umständen schwer vorhersehbar.
 
 // ===== Abbildungen
 
