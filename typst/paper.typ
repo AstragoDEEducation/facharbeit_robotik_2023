@@ -25,7 +25,7 @@
 
 == Ziel dieser Arbeit 
 
-Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes. 
+Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken (eng.: revolute joint)). 
 Dazu wird die Aufgabe der Interpolation in mehrere Teilbereiche aufgeteilt, welche im Folgenden  erläutert werden.
 
 Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt.
@@ -33,7 +33,6 @@ Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeit
 Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der Roboter die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ abfahren kann.
 
 = Aufbau des 3R-Roboterarmes
-#text("ABBILDUNGEN UNVOLLSTÄNDIG (O_S UND O_T FEHLEN)", fill: red, style: "italic", size: 1.1em)
 
 Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
 Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen.
