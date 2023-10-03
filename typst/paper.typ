@@ -592,7 +592,7 @@ Es ist jedoch zu beachten, dass die (lineare) Interpolation nicht immer die best
 Dadurch braucht die Bewegung nur noch die Zeit, welche das langsamste Gelenk benötigt, um sich auf den Zielwert einzustellen. 
 Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter Umständen schwer vorhersehbar.
 
-// ===== Abbildungen
+// ===== Anhang
 
 #pagebreak()
 
