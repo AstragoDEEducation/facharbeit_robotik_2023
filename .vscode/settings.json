@@ -10,5 +10,14 @@
     "Toolsystems",
     "Trajektorienplanung"
   ],
-  "cSpell.ignoreWords": ["arccos", "checkmark", "datetime", "pagebreak", "pgwv"]
+  "cSpell.ignoreWords": [
+    "Amrm",
+    "Seyr",
+    "arccos",
+    "checkmark",
+    "datetime",
+    "pagebreak",
+    "parbreak",
+    "pgwv"
+  ]
 }

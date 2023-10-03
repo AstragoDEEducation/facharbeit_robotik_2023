@@ -25,24 +25,28 @@
 
 == Ziel dieser Arbeit 
 
-Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $"[A]"_"S"$ und $"[B]"_"S"$ mittels eines 3R-Roboterarmes. 
-
+Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes. 
 Dazu wird die Aufgabe der Interpolation in mehrere Teilbereiche aufgeteilt, welche im Folgenden  erläutert werden.
-Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $"[A]"_"S"$ mit den Koordinaten $mat("a"_"1"; "a"_"2")$ und $"[B]"_"S"$ mit den Koordinaten $mat("b"_"1"; "b"_"2")$ in einem vom Roboter erreichbaren Bereich liegt.
+
+Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt.
 Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten.
+Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der Roboter die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ abfahren kann.
 
 = Aufbau des 3R-Roboterarmes
 #text("ABBILDUNGEN UNVOLLSTÄNDIG (O_S UND O_T FEHLEN)", fill: red, style: "italic", size: 1.1em)
 
-Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind. Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen. Das Weltsystem $S$ befindet sich am 1. Gelenk des Roboterarmes ($"R"_"1"$), das Toolsystem $T$ am 3. Gelenk ($"R"_"3"$). @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_"1"$, $l_"2"$ und $l_"3"$ ist bekannt.
+Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
+Am Ende des drittem Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift führen.
+Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Gelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
+@fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
 
-Der Manipulator greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
+Der Endeffektor greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
 
 = Trajektorienplanung
 
-In der Trajektorienplanung wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant.
-Hierbei wird die Strecke zwischen den gegebenen Punkten $"[A]"_"S"$ und $"[B]"_"S"$ unter Zuhilfenahme von Vektoren parametrisiert.
-Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können. 
+In der Trajektorienplanung @src-SeyrMartin2006Amrm wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant.
+Hierbei wird die Strecke zwischen den gegebenen Punkten $[A]_S$ und $[B]_S$ unter Zuhilfenahme von Vektoren parametrisiert @src-ms.
+Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können @src-ms. 
 
 Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich liegt.
 
@@ -53,48 +57,77 @@ Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Ber
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor eine Überprüfung der Erreichbarkeit der Koordinaten nötig.
 Durch den Aufbau eines Roboterarms kann es passieren, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
 
-Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems $T$ ($[theta_3]_S$) zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$.
+Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems $T$ ($[theta_3]_S$) zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $[A]_S$ und $[B]_S$.
 
 Für die Laage der Stiftspitze _P_ im Bezug auf das Toolsystem $T$ gilt:
 $
-"[P]"_"t" = mat("l"_"3" + rho; 0)
+[P]_t = mat(l_3 + rho; 0)
 $
 
 Für den Winkel $theta$ zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ gilt:
 $
-theta = "atan2"("b"_"2" - "a"_"2", "b"_"1" - "a"_"1")
+theta = "atan2"(b_2 - a_2, b_1 - a_1)
 $
 
 Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, ->)$.
 
-Um den Vektor $accent(v, ->)$ zu erhalten, wird $"[P]"_"t"$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta$ multipliziert.
+Um den Vektor $accent(v, ->)$ zu erhalten, wird $[P]_t$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta = mat("cos"(theta), - "sin"(theta); "sin"(theta), "cos"(theta))$ multipliziert.
 
 $
-accent(v, ->) = vec(v_1, v_2) &= "[P]"_"t" dot "Rot"_theta \
-&= mat("l"_"3" + rho; 0) dot mat("cos"(theta), "-sin"(theta); "sin"(theta), "cos"(theta)) \
-&= mat("l"_"3" + rho) dot mat("cos"(theta); "sin"(theta)) \
+accent(v, ->) = vec(v_1, v_2) &= [P]_t dot "Rot"_theta \
+&= mat(l_3 + rho; 0) dot mat("cos"(theta), - "sin"(theta); "sin"(theta), "cos"(theta)) \
+&= mat(l_3 + rho) dot mat("cos"(theta); "sin"(theta)) \
 $
 
-Der Mittelpunkt der Kreise $M$, welche die Erreichbarkeit des Roboters begrenzen, liegt dann bei $M = "[O]"_"S" + accent(v, ->)$.
+Der Mittelpunkt der Kreise $[M]_S$, welche die Erreichbarkeit des Roboters begrenzen, liegt dann bei $[M]_S = [O]_S + accent(v, ->)$.
 
 Nun müssen die Radien der beiden Kreise bestimmt werden, welche die Erreichbarkeit des Roboters begrenzen.
 
-Für den Maximalradius $"r"_"max"$ gilt:
+Für den Maximalradius $r_"max"$ gilt:
 $
-"r"_"max" = "l"_"1" + "l"_"2"
-$
-
-Für den Minimalradius $"r"_"min"$ gilt:
-$
-"r"_"min" = abs("l"_"1" - "l"_"2")
+r_"max" = l_1 + l_2
 $
 
-$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $"r"_"max"$ und dem Mittelpunkt $M$ und außerhalb des Kreises mit dem Radius $"r"_"min"$ und dem Mittelpunkt $M$ liegt.
+Für den Minimalradius $r_"min"$ gilt:
+$
+r_"min" = abs(l_1 - l_2)
+$
 
-Die Überprüfung, ob ein Punkt innerhalb eines Kreises liegt, könnte beispielsweise mit dem folgenden, hier nicht näher erläuterten Verfahren erfolgen:
+$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $r_"max"$ und dem Mittelpunkt $[M]_S$ und außerhalb des Kreises mit dem Radius $r_"min"$ und dem Mittelpunkt $[M]_S$ liegt.
 
-+ Prüfen, ob der Startpunkt $"[A]"_"S"$ und der Endpunkt $"[B]"_"S"$ innerhalb des erreichbaren Bereiches liegen. Hierzu kann die Distanz zwischen dem Mittelpunkt $M$ und den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ berechnet werden. Beispielsweise mit dem Satz des Pythagoras. Liegt mindestens einer der Punkte außerhalb des erreichbaren Bereiches, ist die Strecke nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
-+ Prüfen, ob die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ den erreichbaren Bereich schneidet. Hierzu kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert und mittels eines Vektors dargestellt werden, und mit der Kreisgleichung ein weiterer Vektor erstellt werden, welcher der Kreisgleichung folgt. Schneiden sich die beiden Vektoren, so schneidet die Strecke den Kreis und ist somit nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
+Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Strecke $accent("AB", -)$ innerhalb des für den Roboter erreichbaren Bereiches liegen kann beispielhaft wie folgt durchgeführt werden:
+
+#enum(
+  enum.item(1)[
+    Prüfen, ob der Startpunkt $[A]_S$ und der Endpunkt $[B]_S$ innerhalb des erreichbaren Bereiches liegen.
+    Hierzu kann die Distanz $d$ zwischen dem Mittelpunkt $[M]_S$ und den Punkten $[A]_S$ und $[B]_S$ berechnet werden.
+    Liegt mindestens einer der Punkte außerhalb des erreichbaren Bereiches, ist die Strecke nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar.
+
+    Hierfür kann der Satz des Pythagoras verwendet werden:
+
+    $
+    [M]_s &= mat(m_1; m_2) \
+    [A]_s &= mat(a_1; a_2) \
+    [B]_s &= mat(b_1; b_2) \
+    $
+
+    $
+    d_([M]_s, [A]_S) = sqrt((m_1 - a_1)^2 + (m_2 - a_2)^2) \
+    d_([M]_s, [B]_S) = sqrt((m_1 - b_1)^2 + (m_2 - b_2)^2) \
+    $
+
+    Sind die Bedingungen $r_min < d_([M]_s, [A]_S) < r_max$ beziehungsweise $r_min < d_([M]_s, [B]_S) < r_max$ erfüllt, kann mit der nächsten Überprüfung fortgefahren werden. Sind die Bedingungen nicht erfüllt, ist die Strecke nicht zeichenbar. Das Programm, welches den Roboter steuert, kann dann vorzeitig beendet werden und eine Fehlermeldung ausgeben.
+     
+  ],
+
+  enum.item(2)[
+    Prüfen, ob die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ den erreichbaren Bereich schneidet.
+    Hierzu kann die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ parametrisiert und mittels eines Vektors dargestellt werden (siehe unten), und mit der Kreisgleichung ein weiterer Vektor erstellt werden, welcher der Kreisgleichung folgt.
+    Schneiden sich die beiden Vektoren, so schneidet die Strecke den Kreis und ist somit nicht zeichenbar beziehungsweise nicht vollständig vom Roboter erreichbar. Auch hier kann das Programm, welches den Roboter steuert, vorzeitig beendet werden und eine Fehlermeldung ausgeben.
+
+    Eine genaue mathematische Beschreibung dieser Überprüfung erfolgt in dieser Arbeit nicht.
+  ],
+)
 
 // == Bestimmung des Punktes $"[P]"_"S"$ (Wird das benötigt?)
 
@@ -509,9 +542,12 @@ theta_1 (t) &= "atan2"(v_2(t), v_1(t)) - "atan2"(w_2(t), w_1(t)) \
 $
 
 Nun sind alle Winkel $theta_1$, $theta_2$ und $theta_3$ in Abhängigkeit von der Zeit $t$ bekannt. Ein Roboterarm kann nun die Strecke $accent("AB", -)$ abfahren.
-#repeat(emoji.face.party)
+Hierfür wird zuerst der Winkel $theta_2 (t)$ bestimmt, im Anschluss der Winkel $theta_1 (t)$ und zuletzt der Winkel $theta_3 (t)$.
+Diese Winkelbestimmung erfolgt für jeden Zeitpunkt $t$.
 
+= Nachwort & Fazit
 
+Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisnah, und nicht sonderlich komplex. Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
 
 // ===== Abbildungen
 
