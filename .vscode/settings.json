@@ -9,12 +9,15 @@
     "Seeck",
     "Toolsystem",
     "Toolsystems",
-    "Trajektorienplanung"
+    "Trajektorienplanung",
+    "Bézier",
+    "Holmér"
   ],
   "cSpell.ignoreWords": [
     "Amrm",
     "Seyr",
     "arccos",
+    "bezier",
     "checkmark",
     "datetime",
     "pagebreak",

@@ -6,14 +6,6 @@ src-SeyrMartin2006Amrm:
   language: en
   url: http://media.obvsg.at/AC05033038-2001
 
-src-ms:
-  type: video
-  title: "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
-  author: "Prof. Dr. Harald Löwe"
-  date: "2021-05-02"
-  url: "https://www.youtube.com/watch?v=-ONzaWY9ZUo"
-  runtime: "53:02"
-
 src-kin_4_2:
   type: video
   title: "Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
@@ -29,3 +21,19 @@ src-kin_4_3:
   date: "2021-05-02"
   url: "https://www.youtube.com/watch?v=cjMWJupFtt4"
   runtime: "19:55"
+
+src-kin_4_4:
+  type: video
+  title: "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
+  author: "Prof. Dr. Harald Löwe"
+  date: "2021-05-02"
+  url: "https://www.youtube.com/watch?v=-ONzaWY9ZUo"
+  runtime: "53:02"
+
+src-bezier:
+  type: video
+  title: "The Beauty of Bézier Curves"
+  author: "Freya Holmér"
+  date: "2021-08-19"
+  url: "https://www.youtube.com/watch?v=aVwxzDHniEw"
+  runtime: "53:02"
