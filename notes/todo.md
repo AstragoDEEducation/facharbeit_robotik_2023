@@ -1,7 +1,7 @@
 # To Do
 
 - [ ] Grafiken Erstellen
-- [ ] Quellen angeben
-  - [ ] Literaturverzeichnis erstellen
+- [x] Quellen angeben
+  - [x] Literaturverzeichnis erstellen
 - [ ] Texte ggf. umschreiben
 - [ ] Rechtschreib- und Grammatikfehler korrigieren
