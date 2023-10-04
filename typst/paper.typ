@@ -9,15 +9,18 @@
     "Justus John Michael Seeck",
   ),
   date: datetime.today().display(),
-  logo: "./assets/pgwv_logo.svg",
+  // Schullogo ohne Kontext unerwünscht
+  // logo: "./assets/pgwv_logo.svg",
 )
 
 // Underline links
 #show link: underline
 
 // Text Settings
+#let default_text_size = 12pt
+
 #set text(spacing: 150%)
-#set text(size: 12pt)
+#set text(size: default_text_size)
 
 // ========== Content ==========
 
@@ -25,7 +28,7 @@
 
 == Ziel dieser Arbeit 
 
-Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken (eng.: revolute joint)). 
+Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken). 
 Dazu wird die Aufgabe der Interpolation in mehrere Teilbereiche aufgeteilt, welche im Folgenden  erläutert werden.
 
 Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt.
@@ -34,9 +37,9 @@ Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der R
 
 = Aufbau des 3R-Roboterarmes
 
-Der 3R-Roboterarm besteht aus drei Gelenken, welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
+Der 3R-Roboterarm besteht aus drei Drehgelenken (eng.: revolute joints), welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
 Am Ende des dritten Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
-Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Gelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
+Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Drehgelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
 @fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
 
 Der Endeffektor greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
@@ -47,7 +50,7 @@ In der Trajektorienplanung wird der Weg, welcher vom Roboterarm zurückgelegt wi
 Hierbei wird die Strecke zwischen den gegebenen Punkten $[A]_S$ und $[B]_S$ unter Zuhilfenahme von Vektoren parametrisiert, also in Abhängigkeit von einem Parameter $s$ dargestellt.
 Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können @src-kin_4_4. 
 
-Außerdem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich liegt.
+Zudem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich liegt.
 
 == Erreichbarkeit von Koordinaten
 
@@ -533,11 +536,12 @@ $
 
 Die Länge des Vektors $accent("v", ->)$ ist:
 
-#set text(size: 9pt)
-$
-norm(accent("v", ->)) (t) = d (t) = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
-$
-#set text(size: 12pt)
+#text(
+  $
+  norm(accent("v", ->)) (t) = d (t) = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
+  $,
+  size: 9pt
+)
 
 Da die Längen der einzelnen Armglieder bekannt sind, kann die bereits aus der Lösung des inversen kinematischen Problems bekannte Formel zur Berechnung des Winkels $theta_2$ verwendet werden:  
 
@@ -660,11 +664,9 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   ],
 ) <fig-st_st_gstr>
 
-// ===== Quellen und Bibliographie 
+// ===== Bibliographie 
   
 #pagebreak()
-
-// = Quellen
 
 #bibliography("bibliography.yml")
 
