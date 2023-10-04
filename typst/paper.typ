@@ -489,7 +489,7 @@ Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);
 
 #text("Normdarstellung richtig verwendet??? + Abbildung fehlt", fill: red, style: "italic", size: 1.1em)
 
-Mit der Ausnahme von Punkten, welche $norm(l_1 + l_2 + l_3)$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
+Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
 
 Um dieses Problem zu vermeiden, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
