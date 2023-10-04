@@ -540,7 +540,7 @@ Die Länge des Vektors $accent("v", ->)$ ist:
 
 #text(
   $
-  norm(accent("v", ->)) (t) = d (t) = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
+  norm(accent("v", ->) (t)) = d (t) = sqrt((x(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_1 - a_1))^2 + (y(t) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot (b_2 - a_2))^2)
   $,
   size: 9pt
 )
