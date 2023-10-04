@@ -31,8 +31,8 @@
 Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken). 
 Dazu wird die Aufgabe der Interpolation in mehrere Teilbereiche aufgeteilt, welche im Folgenden  erläutert werden.
 
-Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt.
-Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten.
+Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt. \
+Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten. \
 Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der Roboter die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ abfahren kann.
 
 = Aufbau des 3R-Roboterarmes
@@ -40,7 +40,8 @@ Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der R
 Der 3R-Roboterarm besteht aus drei Drehgelenken (eng.: revolute joints), welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
 Am Ende des dritten Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
 Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Drehgelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
-@fig-3r_arm zeigt den Aufbau des Roboterarmes. Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
+@fig-3r_arm zeigt den Aufbau des Roboterarmes.
+Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
 
 Der Endeffektor greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
 
@@ -488,7 +489,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 === Bestimmung des Winkels $theta_3$ @src-kin_4_4
 
 Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ können nun die Zielkoordinaten $"[X]"_"S"$ in Abhängigkeit von der Zeit $t$ mit $X(s(t))$ bestimmt werden. 
-Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen. Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
+Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen.
+Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
 
 #text("Normdarstellung richtig verwendet??? + Abbildung fehlt", fill: red, style: "italic", size: 1.1em)
 
