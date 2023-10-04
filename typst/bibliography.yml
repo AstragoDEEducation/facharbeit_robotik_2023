@@ -38,7 +38,12 @@ src-bezier:
   url: "https://www.youtube.com/watch?v=aVwxzDHniEw"
   runtime: "53:02"
 
-src-strecken:
+src-streckung_stauchung:
   type: web
   title: "Funktionsgraphen stauchen und strecken "
   url: "https://de.serlo.org/mathe/1859/funktionsgraphen-stauchen-und-strecken"
+
+src-endeffektor:
+  type: web
+  title: "Endeffektor"
+  url: "https://de.wikipedia.org/wiki/Endeffektor"

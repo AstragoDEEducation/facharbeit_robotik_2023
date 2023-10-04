@@ -38,7 +38,7 @@ Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der R
 = Aufbau des 3R-Roboterarmes
 
 Der 3R-Roboterarm besteht aus drei Drehgelenken (eng.: revolute joints), welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
-Am Ende des dritten Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
+Am Ende des dritten Armgliedes befindet sich ein Endeffektor @src-endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
 Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Drehgelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
 @fig-3r_arm zeigt den Aufbau des Roboterarmes.
 Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
@@ -492,7 +492,7 @@ Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ kö
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen.
 Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
 
-#text("Normdarstellung richtig verwendet??? + Abbildung fehlt", fill: red, style: "italic", size: 1.1em)
+#text("Abbildung fehlt. Wird sie benötigt?", fill: red, style: "italic", size: 1.1em)
 
 Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
