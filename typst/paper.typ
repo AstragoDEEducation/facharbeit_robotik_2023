@@ -28,9 +28,10 @@
 
 == Ziel dieser Arbeit 
 
-Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mittels eines 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken). 
-Dazu wird die Aufgabe der Interpolation in mehrere Teilbereiche aufgeteilt, welche im Folgenden  erläutert werden.
+Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mit einem 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken).
+Diese Arbeit orientiert sich am Video "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]" @src-kin_4_4, erstellt von Herrn Professor Doktor Harald Löwe und veröffentlicht am 2021-05-02.
 
+Die Aufgabe der Interpolation wird in mehrere Teilbereiche aufgeteilt, welche im Folgenden erläutert werden. \
 Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt. \
 Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten. \
 Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der Roboter die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ abfahren kann.
@@ -205,7 +206,7 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
     // #set align(start)
     
     $
-    s(t) := 0 "für" t = 0
+    s(t) = 0 "für" t = 0
     $
 
   ],
@@ -218,7 +219,7 @@ Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden m�
     // #set align(start)
 
     $
-    s(t) := 1 "für" t = t_1
+    s(t) = 1 "für" t = t_1
     $
 
   ],
@@ -330,7 +331,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     &= a
     $
 
-    #sym.checkmark Diese Bedingung ist erfüllt.
+    Diese Bedingung ist erfüllt.
   ],
 
   enum.item(2)[
@@ -349,7 +350,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     &= b
     $
 
-    #sym.checkmark Diese Bedingung ist erfüllt.
+    Diese Bedingung ist erfüllt.
   ],
 
   enum.item(3)[
@@ -361,7 +362,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     &= 30t^2 (t-1)^2
     $
 
-    #sym.checkmark $accent("s", .)(t) >= 0$ auf dem Intervall $[0, 1]$. Damit ist diese Bedingung erfüllt.
+    $accent("s", .)(t) >= 0$ auf dem Intervall $[0, 1]$. Damit ist diese Bedingung erfüllt.
   ],
 
   enum.item(4)[
@@ -441,7 +442,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
         Die maximale Geschwindigkeit des Roboters liegt in diesem Fall bei $1.875$, was mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden kann.
 
-        #sym.checkmark Daher wird diese Bedingung als erfüllt angesehen.
+        Daher wird diese Bedingung als erfüllt angesehen.
       ],
 
       enum.item(2)[
@@ -463,7 +464,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
         Die maximale Beschleunigung des Roboters liegt in diesem Fall bei $5.6905$. Auch hier kann mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden. 
 
-        #sym.checkmark Daher wird diese Bedingung als erfüllt angesehen.
+        Daher wird diese Bedingung als erfüllt angesehen.
       ],
     )
 
@@ -551,9 +552,9 @@ $
 theta_2 (t) = plus.minus "arccos" frac(d(t)^2 - l_1^2 - l_2^2, 2 l_1 l_2)
 $
 
-Mit der Bestimmung des Winkels $theta_2$ ist der Abstand zwischen dem ersten Drehgelenk $R_1$ und dem zweiten Drehgelenk $R_2$ korrekt eingestellt.
+Mit der Bestimmung des Winkels $theta_2 (t)$ ist der Abstand zwischen dem ersten Drehgelenk $R_1$ und dem zweiten Drehgelenk $R_2$ korrekt eingestellt.
 
-Schließlich kann der Winkel $theta_1$ bestimmt werden.
+Schließlich kann der Winkel $theta_1 (t)$ bestimmt werden.
 
 Der Vektor $accent("v", ->) (t)$ kann ebenfalls wie folgt dargestellt werden:
 
@@ -569,10 +570,10 @@ accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot accent("w", ->)
 $
 
 Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im folgenden versuchen, den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ zu drehen. Dies ist jedoch nur möglich, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$.
-Ist $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) = 0$ würde dies bedeuten, dass sich der Punkt $"[O]"_"S"$ und der Punkt $[O_T]_"S"$ an der selben Stelle befinden. Dies würde dazu führen, dass jeder Winkel $theta_1$ eine richtige Lösung wäre.
-In diesem Fall kann ein beliebiger Winkel $theta_1$ gewählt werden.
+Ist $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) = 0$ würde dies bedeuten, dass sich der Punkt $"[O]"_"S"$ und der Punkt $[O_T]_"S"$ an der selben Stelle befinden. Dies würde dazu führen, dass jeder Winkel $theta_1 (t)$ eine richtige Lösung wäre.
+In diesem Fall kann ein beliebiger Winkel $theta_1 (t)$ gewählt werden.
 
-Ist also $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) eq.not 0$ kann der Winkel $theta_1$ mit dem intelligenten Arkustangens bestimmt werden:
+Ist also $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) eq.not 0$ kann der Winkel $theta_1 (t)$ mit dem intelligenten Arkustangens bestimmt werden:
 
 $
 theta_1 (t) &= "atan2"(v_2(t), v_1(t)) - "atan2"(w_2(t), w_1(t)) \
