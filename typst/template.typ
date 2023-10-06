@@ -11,10 +11,7 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
-
   set text(font: "Linux Libertine", lang: "de")
-  // set text(font: "Blankenburg", lang: "de")
-
   set heading(numbering: "1.1.")
 
   // Title page.

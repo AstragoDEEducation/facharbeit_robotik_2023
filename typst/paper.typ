@@ -20,6 +20,7 @@
 #let default_text_size = 12pt
 
 #set text(spacing: 150%)
+#set text()
 #set text(size: default_text_size)
 
 // ========== Content ==========
@@ -672,5 +673,3 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 #pagebreak()
 
 #bibliography("bibliography.yml")
-
-
