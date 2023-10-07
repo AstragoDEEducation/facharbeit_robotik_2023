@@ -373,7 +373,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
   ],
 
   enum.item(4)[
-    Die Geschwindigkeit des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1 = 1$ gleich 0.
+    Die Geschwindigkeit des Roboters ist zum Zeitpunkt $t = 0$ und zum Zeitpunkt $t = t_1 = 1$ gleich 0.
     
     Einsetzen von $t = 0$ und $t = 1$ in die Funktion $accent("s", dot)(t)$ ergibt:
 
@@ -391,7 +391,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
   ],
 
   enum.item(5)[
-    Die Beschleunigung des Roboters ist am Zeitpunkt $t = 0$ und am Zeitpunkt $t = t_1 = 1$ gleich 0.
+    Die Beschleunigung des Roboters ist zum Zeitpunkt $t = 0$ und zum Zeitpunkt $t = t_1 = 1$ gleich 0.
 
     Einsetzen von $t = 0$ und $t = 1$ in die Funktion $accent("s", dot.double)(t)$ ergibt:
 
