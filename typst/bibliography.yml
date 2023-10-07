@@ -47,3 +47,8 @@ src-endeffektor:
   type: web
   title: "Endeffektor"
   url: "https://de.wikipedia.org/wiki/Endeffektor"
+
+src-konzentizitaet:
+  type: web
+  title: "Konzentizität"
+  url: "https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t"

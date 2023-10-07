@@ -14,6 +14,8 @@
   set text(font: "Linux Libertine", lang: "de")
   set heading(numbering: "1.1.")
 
+  set enum(full: true)
+
   // Title page.
   // The page can contain a logo if you pass one with `logo: "logo.png"`.
   v(0.6fr)

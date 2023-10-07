@@ -4,7 +4,7 @@
 #import "template.typ": *
 
 #show: project.with(
-  title: "Lineare Interpolation zwischen zwei Punkten mittels eines 3R-Roboterarmes in der Ebene" ,
+  title: "Lineare Interpolation zwischen zwei Punkten für einen 3R-Roboterarm in der Ebene",
   authors: (
     "Justus John Michael Seeck",
   ),
@@ -17,7 +17,7 @@
 #show link: underline
 
 // Text Settings
-#let default_text_size = 12pt
+#let default_text_size = 11pt
 
 #set text(spacing: 150%)
 #set text(size: default_text_size)
@@ -26,10 +26,11 @@
 
 = Einführung
 
+Diese Arbeit orientiert sich an der Online-Vorlesung "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]" @src-kin_4_4, erstellt von Herrn Professor Doktor Harald Löwe, veröffentlicht am 2021-05-02.
+
 == Ziel dieser Arbeit 
 
-Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mit einem 3R-Roboterarmes (3R-Roboterarm = Roboterarm mit drei rotationsgelenken).
-Diese Arbeit orientiert sich am Video "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]" @src-kin_4_4, erstellt von Herrn Professor Doktor Harald Löwe und veröffentlicht am 2021-05-02.
+Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpolation zwischen zwei gegebenen Punkten $[A]_S$ und $[B]_S$ mit einem 3R-Roboterarm (3R-Roboterarm = Roboterarm mit drei Rotationsgelenken).
 
 Die Aufgabe der Interpolation wird in mehrere Teilbereiche aufgeteilt, welche im Folgenden erläutert werden. \
 Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt. \
@@ -59,7 +60,7 @@ Zudem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich
 Um einen Pfad für die Bewegung des Roboters zu planen, ist zuvor eine Überprüfung der Erreichbarkeit der Koordinaten nötig.
 Durch den Aufbau eines Roboterarms ist es möglich, dass gewisse Punkte aufgrund der Längen der einzelnen Armglieder für den Roboter nicht erreichbar sind, und somit das Zeichnen der Strecke nicht möglich ist.
 
-Aus Gründen, welche im Verlauf der Arbeit erläutert werden, entspricht der Winkel des Toolsystems $T$ ($[theta_3]_S$) zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $[A]_S$ und $[B]_S$.
+Aus im späteren Verlauf der Arbeit erläuterten Gründen, entspricht der Winkel der x-Achse des Toolsystems $T$, $theta$, zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $[A]_S$ und $[B]_S$.
 
 Für die Laage der Stiftspitze $P$ im Bezug auf das Toolsystem $T$ gilt (vergleiche:
 @fig-3r_arm_ts):
@@ -70,10 +71,10 @@ $
 
 Für den Winkel $theta$ zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ gilt:
 $
-theta = "atan2"(b_2 - a_2, b_1 - a_1)
+theta = theta_1 + theta_2 + theta_3 = "atan2"(b_2 - a_2, b_1 - a_1)
 $
 
-Die Erreichbarkeitsbegrenzung des Roboterarms ist konzentrisch kreisförmig um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, ->)$.
+Die Erreichbarkeitsbegrenzung des Roboterarms ist begrenzt durch zwei konzentrische Kreise ("Von konzentrischen Kreisen spricht man, wenn mehrere Kreise ein und denselben Mittelpunkt, jedoch unterschiedliche Radien aufweisen" @src-konzentizitaet) um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, ->)$.
 
 Um den Vektor $accent(v, ->)$ zu erhalten, wird $[P]_t$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta = mat("cos"(theta), - "sin"(theta); "sin"(theta), "cos"(theta))$ multipliziert.
 
@@ -97,7 +98,7 @@ $
 r_"min" = abs(l_1 - l_2)
 $
 
-$==>$ Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $r_"max"$ und dem Mittelpunkt $[M]_S$ und außerhalb des Kreises mit dem Radius $r_"min"$ und dem Mittelpunkt $[M]_S$ liegt. \
+Ein Punkt ist dann erreichbar, wenn er innerhalb eines Kreises mit dem Radius $r_"max"$ und dem Mittelpunkt $[M]_S$ und außerhalb des Kreises mit dem Radius $r_"min"$ und dem Mittelpunkt $[M]_S$ liegt. \
 @fig-erreichbarkeit zeigt die Erreichbarkeitsbereiche des Roboters.
 
 Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Strecke $accent("AB", -)$ innerhalb des für den Roboter zu erreichenden Bereiches liegen, kann beispielhaft wie folgt durchgeführt werden:
@@ -148,7 +149,7 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
 
 == Parametrisierung der Strecke @src-kin_4_4
 
-Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher einem Parameter $s$ abhängt.
+Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher von einem Parameter $s$ abhängt.
 Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $[A]_S = mat(a_1; b_1)$ und $[B]_S = mat(b_1; b_2)$ beschreibt.
 
 Auf der Strecke zwischen den Punkten befindet sich der Punkt $X$, welcher mit dem Vektor $accent("x", ->)$ ausgehend vom Punkt $"[A]"_"S"$ in Richtung von Punkt $"[B]"_"S"$ verschoben werden kann.
@@ -190,10 +191,8 @@ Auch andere Interpolationen zwischen Punkten, zum Beispiel Bezierkurven, können
 
 == Beschreibung der Bewegung des Roboters @src-kin_4_4
 
-#text("ABBILDUNGEN FEHLEN", fill: red, style: "italic", size: 1.1em)
-
 Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des Stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden.
-Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[A]_S$, und am Zeitpunkt $t = t_1$ beendet sein; der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[B]_S$.
+Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen -- der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[A]_S$, und am Zeitpunkt $t = t_1$ beendet sein -- der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[B]_S$.
 Gesucht ist also eine Funktion $s(t)$, welche den Fortschritt der Bewegung des Roboters in Abhängigkeit von der Zeit $t$ beschreibt.
 
 Für die Funktion $s(t)$ gibt es einige Anforderungen, welche erfüllt werden müssen:
@@ -275,14 +274,14 @@ accent("s", dot)(t) &= c_1 + 2c_2t + 3c_3t^2 + ... + n c_n t^(n - 1) \
 accent("s", dot.double)(t) &= 2c_2 + 6c_3t + ... + n(n - 1) c_n t^(n - 2)
 $
 
-Für die Erfüllung folgender Anforderungen am Zeitpunkt $t = 0$ ergibt sich:
+Für die Erfüllung der Anforderungen am Zeitpunkt $t = 0$ ergibt sich:
 $
 s(0) = 0 &=> c_0 = 0 \
 accent("s", dot)(0) = 0 &=> c_1 = 0 \
 accent("s", dot.double)(0) = 0 &=> c_2 = 0 \
 $
 
-Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1$ werden $n = 5$ Koeffizienten benötigt. Da $c_0 = c_1 = c_2 = 0$ sind fallen diese nun weg. Es ergibt sich:
+Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1 = 1$ werden $6$ Koeffizienten benötigt. Da $c_0 = c_1 = c_2 = 0$ sind fallen diese nun weg. Es ergibt sich:
 
 $
 s(t) &= c_3 t^3 + c_4 t^4 + c_5 t^5 \
@@ -290,12 +289,20 @@ accent("s", dot)(t) &= 3c_3 t^2 + 4c_4 t^3 + 5c_5 t^4 \
 accent("s", dot.double)(t) &= 6c_3 t + 12c_4 t^2 + 20c_5 t^3 \
 $
 
-$s(t)$ muss an der Stelle $t = 1$ den Wert $1$ annehmen, die Geschwindigkeit $accent("s", dot)$ und die Beschleunigung $accent("s", dot.double)$ den Wert $0$. Es ergibt sich das folgende lineare Gleichungssystem:
+$s(t)$ muss an der Stelle $t = t_1 = 1$ den Wert $1$ annehmen, die Geschwindigkeit $accent("s", dot)$ und die Beschleunigung $accent("s", dot.double)$ den Wert $0$. Es ergibt sich:
 
 $
-c_3 + c_4 + c_5 &= 1 \
-3c_3 + 4c_4 + 5c_5 &= 0 \
-6c_3 + 12c_4 + 20c_5 &= 0 \
+s(1) = 1 &=> c_3 + c_4 + c_5 &= 1 \
+accent("s", dot)(1) = 0 &=> 3c_3 + 4c_4 + 5c_5 &= 0 \
+accent("s", dot.double)(1) = 0 &=> 6c_3 + 12c_4 + 20c_5 &= 0 \
+$
+
+Es entsteht das folgende Gleichungssystem, mit dem die Koeffizienten bestimmt werden können:
+
+$
+#text("(I)") &#h(2em) c_3 + c_4 + c_5 &= 1 \
+#text("(II)") &#h(2em) 3c_3 + 4c_4 + 5c_5 &= 0 \
+#text("(III)") &#h(2em) 6c_3 + 12c_4 + 20c_5 &= 0 \
 $
 
 Bei der Lösung des Gleichungssystems ergeben sich die Koeffizienten:
@@ -379,6 +386,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     accent("s", dot)(1) &= 30 dot 1^2 - 60 dot 1^3 + 30 dot 1^4 \
     &= 0
     $
+
+    Diese Bedingung ist erfüllt.
   ],
 
   enum.item(5)[
@@ -395,6 +404,8 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
     accent("s", dot.double)(1) &= 60 dot 1 - 180 dot 1^2 + 120 dot 1^3 \
     &= 0
     $
+
+    Diese Bedingung ist erfüllt.
   ],
 
   enum.item(6)[
@@ -430,7 +441,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
         $
         t &= 3/4 plus.minus sqrt(9/16 - 1/2) \
         // &= 3/4 plus.minus 1/4 \
-        &= 1/2, 1 \
+        &= 1/2; 1 \
         $
 
         Die hier relevante Maximalgeschwindigkeit liegt bei $t = 1/2$. Durch einsetzen in die Funktion $accent("s", dot)(t)$ ergibt sich:
@@ -440,9 +451,9 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
         &= 15/8 = 1.875 \
         $ 
 
-        Die maximale Geschwindigkeit des Roboters liegt in diesem Fall bei $1.875$, was mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden kann.
+        Die maximale Geschwindigkeit des Roboters liegt in diesem Fall bei $1.875$, welche mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden kann.
 
-        Daher wird diese Bedingung als erfüllt angesehen.
+        Aus diesem Grund wird diese Bedingung als erfüllt angesehen.
       ],
 
       enum.item(2)[
@@ -450,21 +461,22 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
         $
         accent("s", dot.triple)(t) = 0 &= 60 - 360 t + 360 t^2 \
-        &= t^2 - 2 t + 1/3 \
+        &= t^2 - 1t + 1/6 \
         $
 
         $
-        t &= 1 plus.minus sqrt(1 - 1/3) \
+        t &= 1/2 plus.minus sqrt(1/4 - 1/6) \
+        t &= 1/6 (sqrt(3) + 3); 1/6 (- sqrt(3) + 3)
         $
 
         $
-        accent("s", dot.double)(1-sqrt(2/3)) &= 60 dot (1-sqrt(2/3)) - 180 dot (1-sqrt(2/3))^2 + 120 dot (1-sqrt(2/3))^3 \
-        & approx 5.6905 \
+        accent("s", dot.double)(1/6 (sqrt(3) + 3)) &= -5.7735 \
+        accent("s", dot.double)(1/6 (- sqrt(3) + 3)) &= 5.7735 \
         $
 
-        Die maximale Beschleunigung des Roboters liegt in diesem Fall bei $5.6905$. Auch hier kann mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden. 
+        Die maximale Beschleunigung des Roboters liegt in diesem Fall bei $plus.minus 5.6905$. Auch hier kann mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden. 
 
-        Daher wird diese Bedingung als erfüllt angesehen.
+        Aus diesem Grund wird diese Bedingung als erfüllt angesehen.
       ],
     )
 
