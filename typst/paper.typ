@@ -600,6 +600,7 @@ Diese Winkelbestimmung erfolgt für jeden Zeitpunkt $t$.
 
 Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisnah, und nicht sonderlich komplex.
 Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
+Es könnten zudem weitere Faktoren wie zum Beispiel die Winkelgeschwindigkeit der einzelnen Drehgelenke des Roboters betrachtet werden, was die Komplexität weiter erhöht.
 
 Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegt die Lineare interpolation zu Grunde: Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
 Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
