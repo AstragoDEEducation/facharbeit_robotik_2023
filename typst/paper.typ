@@ -560,6 +560,7 @@ $
 theta_2 (t) = plus.minus "arccos" frac(d(t)^2 - l_1^2 - l_2^2, 2 l_1 l_2)
 $
 
+Es gibt zwei Lösungen für $theta_2 (t)$. Um unnötige Rotationen des Gelenkes $R_2$ zu vermeiden, wird die Lösung gewählt, welche den Winkel $theta_2 (t)$ weniger weit rotieren lässt. 
 Mit der Bestimmung des Winkels $theta_2 (t)$ ist der Abstand zwischen dem ersten Drehgelenk $R_1$ und dem zweiten Drehgelenk $R_2$ korrekt eingestellt.
 
 Schließlich kann der Winkel $theta_1 (t)$ bestimmt werden.
