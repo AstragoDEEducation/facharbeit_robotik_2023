@@ -4,14 +4,15 @@ src-SeyrMartin2006Amrm:
   author: Martin Seyr
   date: 2006
   language: en
-  url: http://media.obvsg.at/AC05033038-2001
+  url: { value: "http://media.obvsg.at/AC05033038-2001", date: 2023-09-06 }
 
 src-kin_4_2:
   type: video
   title: "Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
   author: "Prof. Dr. Harald Löwe"
   date: "2021-05-02"
-  url: "https://www.youtube.com/watch?v=iozyhA0z3lk"
+  url:
+    { value: "https://www.youtube.com/watch?v=iozyhA0z3lk", date: 2023-10-03 }
   runtime: "15:13"
 
 src-kin_4_3:
@@ -19,7 +20,8 @@ src-kin_4_3:
   title: "Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
   author: "Prof. Dr. Harald Löwe"
   date: "2021-05-02"
-  url: "https://www.youtube.com/watch?v=cjMWJupFtt4"
+  url:
+    { value: "https://www.youtube.com/watch?v=cjMWJupFtt4", date: 2023-10-03 }
   runtime: "19:55"
 
 src-kin_4_4:
@@ -27,7 +29,8 @@ src-kin_4_4:
   title: "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]"
   author: "Prof. Dr. Harald Löwe"
   date: "2021-05-02"
-  url: "https://www.youtube.com/watch?v=-ONzaWY9ZUo"
+  url:
+    { value: "https://www.youtube.com/watch?v=-ONzaWY9ZUo", date: 2023-10-03 }
   runtime: "53:02"
 
 src-bezier:
@@ -35,20 +38,29 @@ src-bezier:
   title: "The Beauty of Bézier Curves"
   author: "Freya Holmér"
   date: "2021-08-19"
-  url: "https://www.youtube.com/watch?v=aVwxzDHniEw"
+  url:
+    { value: "https://www.youtube.com/watch?v=aVwxzDHniEw", date: 2023-10-03 }
   runtime: "53:02"
 
 src-streckung_stauchung:
   type: web
   title: "Funktionsgraphen stauchen und strecken "
-  url: "https://de.serlo.org/mathe/1859/funktionsgraphen-stauchen-und-strecken"
+  url:
+    {
+      value: "https://de.serlo.org/mathe/1859/funktionsgraphen-stauchen-und-strecken",
+      date: 2023-10-03,
+    }
 
 src-endeffektor:
   type: web
   title: "Endeffektor"
-  url: "https://de.wikipedia.org/wiki/Endeffektor"
+  url: { value: "https://de.wikipedia.org/wiki/Endeffektor", date: 2023-10-03 }
 
 src-konzentizitaet:
   type: web
   title: "Konzentizität"
-  url: "https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t"
+  url:
+    {
+      value: "https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t",
+      date: 2023-10-07,
+    }
