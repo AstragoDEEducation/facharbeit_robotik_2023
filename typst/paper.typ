@@ -639,7 +639,7 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   caption: [
     Ein 3R-Roboterarm und die Strecke $accent("AB", -)$.
     Eingezeichnet ist der Punkt $[M]_S$ welcher um den Vektor $accent("v", ->)$ ausgehend vom Punkt $[O]_S$ verschoben wurde.
-    Der orangefarbene Kreis stellt $r_max$ dar. 
+    Der grüne Kreis stellt $r_max$ dar. 
     Der blaue Kreis stellt $r_min$ dar.
     Beide Kreise haben den selben Mittelpunkt $[M]_S$.
   ],
