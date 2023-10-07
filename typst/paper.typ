@@ -656,7 +656,8 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 #figure(
   image("./assets/st_lin.png", width: 70%),
   caption: [
-    Der blaue Graph stellt die Funktion $s(t) = t/t_1$ mit $t_1 = 1$ dar. Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
+    Der blaue Graph stellt die Funktion $s(t) = t/t_1$ mit $t_1 = 1$ im Intervall $[0, t_1]$ dar.
+    Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
     Der rote Graph ist nicht stetig.
     Eine Ansteuerung des Roboters mit dieser Funktion ist nicht möglich.
   ],
@@ -665,7 +666,7 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 #figure(
   image("./assets/st_vt_at_diagramm.png", width: 50%),
   caption: [
-    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar.
+    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ dar.
     Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
     Der blaue Graph stellt die Funktion $accent("s", dot.double)(t)$ dar.
     Der orangefarbene Graph stellt die Funktion $accent("s", dot.triple)(t)$ dar.
@@ -675,7 +676,7 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 #figure(
   image("./assets/st_st_gstr_diagramm.png", width: 75%),
   caption: [
-    Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar.
+    Der grüne Graph stellt die Funktion $s(t/t_1) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar.
     Der blaue Graph stellt die Funktion $s(t)_"neu" = s(t/t_1)$ mit $t_1 = 2$ dar.
   ],
 ) <fig-st_st_gstr>
