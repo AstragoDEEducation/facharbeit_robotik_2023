@@ -20,7 +20,6 @@
 #let default_text_size = 12pt
 
 #set text(spacing: 150%)
-#set text()
 #set text(size: default_text_size)
 
 // ========== Content ==========
