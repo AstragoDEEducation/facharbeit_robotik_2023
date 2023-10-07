@@ -507,11 +507,11 @@ Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werd
 
 #text("Abbildung fehlt. Wird sie benötigt?", fill: red, style: "italic", size: 1.1em)
 
-Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
+Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es, unter der Annahme, dass $theta_3$ frei wählbar ist, unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
 
 Um dieses Problem zu vermeiden, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
-Dies sorgt dafür, dass es nur noch eine Lösung für die Gelenkwinkel gibt.
+Dies sorgt dafür, dass es nur noch zwei Lösungen für die Gelenkwinkel gibt.
 Eine solche Herangehensweise kann potentiell auch zur Reduktion von mechanischem Stress auf die Greifvorrichtung führen, da der Stift so nicht um sein Zentrum $[P]_T$ rotiert, während er auf dem Papier aufliegt.
 
 Der Winkel $theta$ zwischen der x-Ache von $T$ und der x-Achse von $S$ entspricht der Summe der Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ und soll im Verlauf der gesamten Bewegung des Roboterarmes konstant dem Winkel des Richtungsvektors $accent("AB", ->)$ entsprechen.
@@ -524,7 +524,7 @@ Um die übrigen Gelenkwinkel $theta_1$ und $theta_2$ zu bestimmen, wird zuerst d
 Die Richtung der x-Achse von $T$ lässt sich darstellen als:
 
 $
-frac(1,sqrt((b_1 - a_1)^2 + (b_2 - a_2)^))) dot mat(b_1 - a_1; b_2 - a_2)
+frac(1,sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2)
 $
 
 Daraus folgt für den Punkt $[O_T]_S$:
@@ -549,7 +549,7 @@ $
 accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
 $
 
-Die Länge des Vektors $accent("v", ->)$ ist:
+Die Länge des Vektors $accent("v", ->) (t)$ ist:
 
 #text(
   $
@@ -601,7 +601,7 @@ Diese Winkelbestimmung erfolgt für jeden Zeitpunkt $t$.
 Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisnah, und nicht sonderlich komplex.
 Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
 
-Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegt die Lineare interpolation zu Grunde $->$ Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
+Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegt die Lineare interpolation zu Grunde: Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
 Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
 
 Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen sehr oft Anwendung.
