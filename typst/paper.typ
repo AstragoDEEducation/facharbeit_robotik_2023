@@ -427,8 +427,6 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
         &= 60 t (1 - 3 t + 2 t^2) \
         $
 
-        #text("Ist gekürzt der richtige Ausdruck?", fill: red, style: "italic", size: 1.1em)
-
         Da im Intervall $t > 0$ ist, können die $60 t$ gekürzt werden und im Anschluss durch $2$ dividiert werden. Es ergibt sich:
 
         $
@@ -504,8 +502,6 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ können nun die Zielkoordinaten $"[X]"_"S"$ in Abhängigkeit von der Zeit $t$ mit $X(s(t))$ bestimmt werden. 
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen.
 Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
-
-#text("Abbildung fehlt. Wird sie benötigt?", fill: red, style: "italic", size: 1.1em)
 
 Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es, unter der Annahme, dass $theta_3$ frei wählbar ist, unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
