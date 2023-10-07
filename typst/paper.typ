@@ -620,14 +620,14 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 = Anhang
 
 #figure(
-  image("./assets/3r_arm.png", width: 60%),
+  image("./assets/3r_arm.png", width: 80%),
   caption: [
     Ein 3R-Roboterarm mit dem Weltsystem $S$ und dem Toolsystem $T$.
   ],
 ) <fig-3r_arm>
 
 #figure(
-  image("./assets/3r_arm_ts.png", width: 60%),
+  image("./assets/3r_arm_ts.png", width: 70%),
   caption: [
     Endeffektor des Roboters mit dem Stift (rot) und dem Stiftradius $rho$.
   ],
