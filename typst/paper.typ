@@ -539,7 +539,8 @@ Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des ind
 
 === Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$ @src-kin_4_2 @src-kin_4_3
 
-Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, muss die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ bestimmt werden. Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
+Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, muss die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ bestimmt werden.
+Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
 
 $
 accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
