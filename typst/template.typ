@@ -11,11 +11,13 @@
   // Set the document's basic properties.
   set document(author: authors, title: title)
   set page(numbering: "1", number-align: center)
-  set text(font: "Linux Libertine", lang: "de")
   set heading(numbering: "1.1.")
+  set text(font: "Linux Libertine", lang: "de")
+  show link: underline
 
   set enum(full: true)
-
+  
+  
   // Title page.
   // The page can contain a logo if you pass one with `logo: "logo.png"`.
   v(0.6fr)

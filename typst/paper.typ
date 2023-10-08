@@ -34,7 +34,8 @@ Das Ziel dieser Arbeit ist die mathematische Beschreibung der linearen Interpola
 
 Die Aufgabe der Interpolation wird in mehrere Teilbereiche aufgeteilt, welche im Folgenden erläutert werden. \
 Zuerst wird die Gültigkeit von Koordinaten überprüft, indem bestimmt wird, ob die gesamte Strecke zwischen den Punkten $[A]_S$ mit den Koordinaten $[A]_S = mat(a_1; a_2)$ und $[B]_S$ mit den Koordinaten $[B]_S = mat(b_1; b_2)$ in einem vom Roboter erreichbaren Bereich liegt. \
-Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit zurücklegt, ohne dabei die maximalen Geschwindigkeiten oder Beschleunigungen zu überschreiten. \
+Im Anschluss wird die Strecke mit Hilfe von Vektoren parametrisiert und ein Zeitverlauf für die Bewegung des Roboters bestimmt, sodass dieser die Strecke in einer vorgegebenen Zeit 
+zurücklegen kann, ohne dabei die maximalen Geschwindigkeiten und die maximalen Beschleunigungen zu überschreiten. \
 Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der Roboter die Strecke zwischen den Punkten $[A]_S$ und $[B]_S$ abfahren kann.
 
 = Aufbau des 3R-Roboterarmes
@@ -62,7 +63,7 @@ Durch den Aufbau eines Roboterarms ist es möglich, dass gewisse Punkte aufgrund
 
 Aus im späteren Verlauf der Arbeit erläuterten Gründen, entspricht der Winkel der x-Achse des Toolsystems $T$, $theta$, zur x-Achse des Weltsystems $S$ dem Winkel zwischen den Punkten $[A]_S$ und $[B]_S$.
 
-Für die Laage der Stiftspitze $P$ im Bezug auf das Toolsystem $T$ gilt (vergleiche:
+Für die Lage der Stiftspitze $P$ im Bezug auf das Toolsystem $T$ gilt (vergleiche:
 @fig-3r_arm_ts):
 
 $
@@ -409,7 +410,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
   ],
 
   enum.item(6)[
-    Die maximalen Geschwindigkeiten und Beschleunigungen des Roboters dürfen nicht überschritten werden.
+    Die maximalen Geschwindigkeiten und die maximalen Beschleunigungen des Roboters dürfen nicht überschritten werden.
     Zur Überprüfung wird die Funktion $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ mithilfe der _PQ-Formel_ auf lokale Maxima (und Minima) untersucht.
     Dafür wird die Funktion $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ abgeleitet und gleich 0 gesetzt.
 
@@ -480,7 +481,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
     @fig-st_vt_at zeigt die Funktionen $s(t)$, $accent("s", dot)(t)$ und $accent("s", dot.double)(t)$ mit $t_1 = 1$.
 
-    Sollten die maximalen Geschwindigkeiten und Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Erhöhen von $t_1$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
+    Sollten die maximalen Geschwindigkeiten und die maximalen Beschleunigungen des Roboters überschritten werden, besteht die Möglichkeit, die Funktion $s(t)$ durch das Erhöhen von $t_1$ so anzupassen, dass die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
     Ein einfacher Ansatz hierfür wäre die Streckung oder Stauchung der Funktion $s(t)$ auf der x-Achse:
 
     $
@@ -573,13 +574,15 @@ accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot mat(l_1; 0) + "Rot"(theta_1 (t)) d
 &= "Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))
 $
 
-$"Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))$ wird im Folgenden als $accent("w", ->)$ bezeichnet. Es ergibt sich:
+$"Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))$ wird im Folgenden als $accent("w", ->)$ bezeichnet.
+$accent("w", ->)$ ist bereits vollständig rechnerisch bestimmbar.
+Es ergibt sich:
 
 $
 accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot accent("w", ->)
 $
 
-Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im folgenden versuchen, den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ zu drehen. Dies ist jedoch nur möglich, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$.
+Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im Folgenden versuchen, den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ zu drehen. Dies ist jedoch nur möglich, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$.
 Ist $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) = 0$ würde dies bedeuten, dass sich der Punkt $"[O]"_"S"$ und der Punkt $[O_T]_"S"$ an der selben Stelle befinden. Dies würde dazu führen, dass jeder Winkel $theta_1 (t)$ eine richtige Lösung wäre.
 In diesem Fall kann ein beliebiger Winkel $theta_1 (t)$ gewählt werden.
 
@@ -600,7 +603,7 @@ Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisn
 Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
 Es könnten zudem weitere Faktoren wie zum Beispiel die Winkelgeschwindigkeit der einzelnen Drehgelenke des Roboters betrachtet werden, was die Komplexität weiter erhöht.
 
-Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegt die Lineare interpolation zu Grunde: Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
+Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegen die Lineare interpolation zu Grunde: Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
 Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
 
 Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen sehr oft Anwendung.
