@@ -464,7 +464,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
         $
         t &= 1/2 plus.minus sqrt(1/4 - 1/6) \
-        t &= 1/6 (sqrt(3) + 3); 1/6 (- sqrt(3) + 3)
+        t &= 1/6 (sqrt(3) + 3); 1/6 (- sqrt(3) + 3) \
         $
 
         $
