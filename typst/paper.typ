@@ -13,9 +13,6 @@
   // logo: "./assets/pgwv_logo.svg",
 )
 
-// Underline links
-#show link: underline
-
 // Text Settings
 #let default_text_size = 11pt
 
