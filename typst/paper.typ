@@ -687,15 +687,15 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 
 #enum(
   enum.item()[
-    Prof. Dr. Harald Löwe. Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=-ONzaWY9ZUo
-  ],
-
-  enum.item()[
     Prof. Dr. Harald Löwe. Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=iozyhA0z3lk
   ],
 
   enum.item()[
     Prof. Dr. Harald Löwe. Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=cjMWJupFtt4
+  ],
+
+  enum.item()[
+    Prof. Dr. Harald Löwe. Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=-ONzaWY9ZUo
   ],
 
   enum.item()[
