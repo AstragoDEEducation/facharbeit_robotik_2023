@@ -145,7 +145,7 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
 // &= vec((l_3 + rho) dot "cos"(theta_1 + theta_2 + theta_3) + l_2 "cos"(theta_1 + theta_2) + l_1 "cos"(theta_1), (l_3 + rho) dot "sin"(theta_1 + theta_2 + theta_3) + l_2 "sin"(theta_1 + theta_2) + l_1 "sin"(theta_1)) 
 // $
 
-== Parametrisierung der Strecke @src-kin_4_4
+== Parametrisierung der Strecke
 
 Um die Gelenkwinkel des Roboters in Abhängigkeit von der Zeit zu bestimmen, wird die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert, also in einen Vektor umgewandelt, welcher von einem Parameter $s$ abhängt.
 Ziel ist es, eine Funktion zu finden, welche alle Punkte auf der Strecke zwischen den Punkten $[A]_S = mat(a_1; b_1)$ und $[B]_S = mat(b_1; b_2)$ beschreibt.
@@ -187,7 +187,7 @@ $
 
 Auch andere Interpolationen zwischen Punkten, zum Beispiel Bezierkurven, können parametrisiert werden, sodass der Roboterarm diese abfahren kann.
 
-== Beschreibung der Bewegung des Roboters @src-kin_4_4
+== Beschreibung der Bewegung des Roboters
 
 Der Roboterarm soll sich zum Zeitpunkt $t$ mit der Spitze des Stiftes am Punkt $X(s)$ der Strecke $accent("AB", -)$ befinden.
 Die Bewegung des Roboters soll am Zeitpunkt $t = 0$ beginnen -- der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[A]_S$, und am Zeitpunkt $t = t_1$ beendet sein -- der Roboter befindet sich zu diesem Zeitpunkt am Punkt $[B]_S$.
@@ -495,7 +495,7 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
 == Berechnung der Gelenkwinkel
 
-=== Bestimmung des Winkels $theta_3$ @src-kin_4_4
+=== Bestimmung des Winkels $theta_3$ 
 
 Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ können nun die Zielkoordinaten $"[X]"_"S"$ in Abhängigkeit von der Zeit $t$ mit $X(s(t))$ bestimmt werden. 
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen.
@@ -535,7 +535,7 @@ $
 
 Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
 
-=== Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$ @src-kin_4_2 @src-kin_4_3
+=== Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$
 
 Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematischen Problems zu bestimmen, muss die Distanz zwischen den Punkten $"[O]"_"S"$ und $[O_T]_"S"$ bestimmt werden.
 Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
@@ -679,8 +679,40 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   ],
 ) <fig-st_st_gstr>
 
-// ===== Bibliographie 
+// ===== Quellen und Bibliographie 
   
 #pagebreak()
+
+= Quellen
+
+#enum(
+  enum.item()[
+    Prof. Dr. Harald Löwe. Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=-ONzaWY9ZUo
+  ],
+
+  enum.item()[
+    Prof. Dr. Harald Löwe. Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=iozyhA0z3lk
+  ],
+
+  enum.item()[
+    Prof. Dr. Harald Löwe. Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=cjMWJupFtt4
+  ],
+
+  enum.item()[
+    “Endeffektor.” https://de.wikipedia.org/wiki/Endeffektor (accessed: Oct. 3, 2023).
+  ],
+
+  enum.item()[
+    Martin Seyr, “Autonomous mobile robot motion control,” Thesis, 2006. Accessed: Sep. 6, 2023. [Online]. Available: http://media.obvsg.at/AC05033038-2001
+  ],
+
+  enum.item()[
+    “Konzentizität.” https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t (accessed: Oct. 7, 2023).
+  ],
+
+  enum.item()[
+    Freya Holmér. The Beauty of Bézier Curves, (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=aVwxzDHniEw
+  ],
+)
 
 #bibliography("bibliography.yml")
