@@ -8,7 +8,7 @@
   authors: (
     "Justus John Michael Seeck",
   ),
-  date: datetime.today().display(),
+  date: "10.10.2023 | Abgabedatum: 10.10.2023",
   // Schullogo ohne Kontext unerwünscht
   // logo: "./assets/pgwv_logo.svg",
 )
@@ -23,7 +23,7 @@
 
 = Einführung
 
-Diese Arbeit orientiert sich an der Online-Vorlesung "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]" (Bibliographieverweis: @src-kin_4_4), erstellt von Herrn Professor Doktor Harald Löwe, veröffentlicht am 2021-05-02.
+Diese Arbeit orientiert sich an der Online-Vorlesung "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]", erstellt von Herrn Professor Doktor Harald Löwe, veröffentlicht am 02.05.2021.
 
 == Ziel dieser Arbeit 
 
@@ -38,7 +38,7 @@ Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der R
 = Aufbau des 3R-Roboterarmes
 
 Der 3R-Roboterarm besteht aus drei Drehgelenken (eng.: revolute joints), welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
-Am Ende des dritten Armgliedes befindet sich ein Endeffektor @src-endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
+Am Ende des dritten Armgliedes befindet sich ein Endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
 Der Ursprung des Weltsystems $S$, $[O]_S$, befindet sich am 1. Drehgelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$, $[O]_T$, am 3. Drehgelenk ($R_3$).
 @fig-3r_arm zeigt den Aufbau des Roboterarmes.
 Die Längen der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ sind bekannt.
@@ -47,9 +47,9 @@ Der Endeffektor greift einen Stift mit dem bekannten Radius $rho$, in dessen Zen
 
 = Trajektorienplanung
 
-In der Trajektorienplanung wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant @src-SeyrMartin2006Amrm.
+In der Trajektorienplanung wird der Weg, welcher vom Roboterarm zurückgelegt wird, geplant.
 Hierbei wird die Strecke zwischen den gegebenen Punkten $[A]_S$ und $[B]_S$ unter Zuhilfenahme von Vektoren parametrisiert, also in Abhängigkeit von einem Parameter $s$ dargestellt.
-Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können @src-kin_4_4. 
+Die Verwendung von Vektoren anstelle von linearen Funktionen hat den Vorteil, dass auch vertikale Strecken gezeichnet werden können. 
 
 Zudem wird überprüft, ob die Strecke in einem vom Roboter erreichbaren Bereich liegt.
 
@@ -72,7 +72,7 @@ $
 theta = theta_1 + theta_2 + theta_3 = "atan2"(b_2 - a_2, b_1 - a_1)
 $
 
-Die Erreichbarkeitsbegrenzung des Roboterarms ist begrenzt durch zwei konzentrische Kreise ("Von konzentrischen Kreisen spricht man, wenn mehrere Kreise ein und denselben Mittelpunkt, jedoch unterschiedliche Radien aufweisen" @src-konzentizitaet) um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, ->)$.
+Die Erreichbarkeitsbegrenzung des Roboterarms ist begrenzt durch zwei konzentrische Kreise ("Von konzentrischen Kreisen spricht man, wenn mehrere Kreise ein und denselben Mittelpunkt, jedoch unterschiedliche Radien aufweisen" [Quelle: https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t, letzter Zugriff: 07.10.2023]) um den Ursprung des Weltsystems, verschoben um einen Vektor $accent(v, ->)$.
 
 Um den Vektor $accent(v, ->)$ zu erhalten, wird $[P]_t$ mit der bereits aus dem direkten kinematischen Problem bekannten Rotationsmatrix $"Rot"_theta = mat("cos"(theta), - "sin"(theta); "sin"(theta), "cos"(theta))$ multipliziert.
 
@@ -600,7 +600,7 @@ Die Beschreibung der (linearen) Interpolation mit Hilfe von Vektoren ist praxisn
 Ist jedoch die Anwendung der Interpolation in der Praxis erforderlich (z.B. bei der Programmierung eines Roboters), so sind weitere Faktoren, wie die Geschwindigkeit und Beschleunigung des Roboters zu beachten. Diese Faktoren erhöhen den Komplexitätsgrad der Interpolation erheblich, und erfordern eine genaue Planung der Bewegung des Roboters über die Zeit.
 Es könnten zudem weitere Faktoren wie zum Beispiel die Winkelgeschwindigkeit der einzelnen Drehgelenke des Roboters betrachtet werden, was die Komplexität weiter erhöht.
 
-Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegen die Lineare interpolation zu Grunde: Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$ @src-bezier), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
+Da auch andere Interpolationsmethoden, wie z.B. die Bezierkurve oder Splines (Bezierkurven liegen die Lineare interpolation zu Grunde: Zwischen mehreren gegebenen Punkten wird über die Zeit linear interpoliert. Es entstehen Zwischenpunkte, zwischen denen ebenfalls so lange linear interpoliert wird, bis nur noch ein Punkt übrig ist. Dieser Punkt beschreibt dann beispielsweise den Zielpunkt des Roboterarmes zu einer Zeit $t$), parametrisiert und mit Vektoren beschrieben werden können, ist es auch möglich, komplexere Bewegungen des Roboters zu beschreiben. 
 Auch in diesem Fall ist die Beschreibung des Bewegungsfortgangs des Roboters über die Zeit jedoch komplexer. So muss zum Beispiel beachtet werden, wie scharf die Kurve ist, und wie schnell der Roboter gewisse Kurvenabschnitte abfahren kann.
 
 Im Alltag findet die Interpolation zwischen Punkten mit Roboterarmen sehr oft Anwendung.
@@ -631,7 +631,6 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   ],
 ) <fig-3r_arm_ts>
 
-
 #figure(
   image("./assets/erreichbarkeit.png", width: 100%),
   caption: [
@@ -639,7 +638,8 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
     Eingezeichnet ist der Punkt $[M]_S$ welcher um den Vektor $accent("v", ->)$ ausgehend vom Punkt $[O]_S$ verschoben wurde.
     Der grüne Kreis stellt $r_max$ dar. 
     Der blaue Kreis stellt $r_min$ dar.
-    Beide Kreise haben den selben Mittelpunkt $[M]_S$.
+    Beide Kreise haben den selben Mittelpunkt $[M]_S$. \
+    Erstellt mit GeoGebra.
   ],
 ) <fig-erreichbarkeit>
 
@@ -647,7 +647,8 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   image("./assets/para.png", width: 70%),
   caption: [
     Die Strecke $accent("AB", -)$ mit dem Punkt $[X]_S$.
-    Der Punkt $[X]_S$ befindet sich an der Stelle $X(1/4)$
+    Der Punkt $[X]_S$ befindet sich an der Stelle $X(1/4)$ \
+    Erstellt mit GeoGebra.
   ],
 ) <fig-para>
 
@@ -657,7 +658,8 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
     Der blaue Graph stellt die Funktion $s(t) = t/t_1$ mit $t_1 = 1$ im Intervall $[0, t_1]$ dar.
     Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
     Der rote Graph ist nicht stetig.
-    Eine Ansteuerung des Roboters mit dieser Funktion ist nicht möglich.
+    Eine Ansteuerung des Roboters mit dieser Funktion ist nicht möglich. \ 
+    Erstellt mit GeoGebra.
   ],
 ) <fig-st_lin>
 
@@ -667,7 +669,8 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
     Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ dar.
     Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
     Der blaue Graph stellt die Funktion $accent("s", dot.double)(t)$ dar.
-    Der orangefarbene Graph stellt die Funktion $accent("s", dot.triple)(t)$ dar.
+    Der orangefarbene Graph stellt die Funktion $accent("s", dot.triple)(t)$ dar. \
+    Erstellt mit GeoGebra.
   ],
 ) <fig-st_vt_at>
 
@@ -675,7 +678,8 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   image("./assets/st_st_gstr_diagramm.png", width: 75%),
   caption: [
     Der grüne Graph stellt die Funktion $s(t/t_1) = 10t^3 - 15t^4 + 6t^5$ mit $t_1 = 1$ dar.
-    Der blaue Graph stellt die Funktion $s(t)_"neu" = s(t/t_1)$ mit $t_1 = 2$ dar.
+    Der blaue Graph stellt die Funktion $s(t)_"neu" = s(t/t_1)$ mit $t_1 = 2$ dar. \
+    Erstellt mit GeoGebra.
   ],
 ) <fig-st_st_gstr>
 
@@ -685,37 +689,81 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 
 = Quellen
 
+// #enum(
+//   enum.item()[
+//     Prof. Dr. Harald Löwe. Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=iozyhA0z3lk
+//   ],
+
+//   enum.item()[
+//     Prof. Dr. Harald Löwe. Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=cjMWJupFtt4
+//   ],
+
+//   enum.item()[
+//     Prof. Dr. Harald Löwe. Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=-ONzaWY9ZUo
+//   ],
+
+//   enum.item()[
+//     “Endeffektor.” https://de.wikipedia.org/wiki/Endeffektor (accessed: Oct. 3, 2023).
+//   ],
+
+//   enum.item()[
+//     Martin Seyr, “Autonomous mobile robot motion control,” Thesis, 2006. Accessed: Sep. 6, 2023. [Online]. Available: http://media.obvsg.at/AC05033038-2001
+//   ],
+
+//   enum.item()[
+//     “Konzentizität.” https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t (accessed: Oct. 7, 2023).
+//   ],
+
+//   enum.item()[
+//     Freya Holmér. The Beauty of Bézier Curves, (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=aVwxzDHniEw
+//   ],
+// )
+
 #enum(
   enum.item()[
-    Prof. Dr. Harald Löwe. Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=iozyhA0z3lk
+    Prof. Dr. Harald Löwe, "Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig]", Online-Video, 2021, abgerufen am: 3. Oktober 2023 Verfügbar unter: https://www.youtube.com/watch?v=iozyhA0z3lk
   ],
 
   enum.item()[
-    Prof. Dr. Harald Löwe. Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=cjMWJupFtt4
+    Prof. Dr. Harald Löwe, "Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok Der TU Braunschweig]", Online-Video, 2021, abgerufen am: 3. Oktober 2023. Verfügbar unter: https://www.youtube.com/watch?v=cjMWJupFtt4
   ],
 
   enum.item()[
-    Prof. Dr. Harald Löwe. Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=-ONzaWY9ZUo
+    Prof. Dr. Harald Löwe, "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig]", Online-Video, 2021, abgerufen am: 3. Oktober 2023. Verfügbar unter: https://www.youtube.com/watch?v=-ONzaWY9ZUo
   ],
 
   enum.item()[
-    “Endeffektor.” https://de.wikipedia.org/wiki/Endeffektor (accessed: Oct. 3, 2023).
+    "Endeffektor", https://de.wikipedia.org/wiki/Endeffektor, abgerufen am: 3. Oktober 2023.
   ],
 
   enum.item()[
-    Martin Seyr, “Autonomous mobile robot motion control,” Thesis, 2006. Accessed: Sep. 6, 2023. [Online]. Available: http://media.obvsg.at/AC05033038-2001
+    Martin Seyr, "Autonomous mobile robot motion control", Dissertation, 2006, abgerufen am: 6. September 2023. Verfügbar unter: http://media.obvsg.at/AC05033038-2001
   ],
 
   enum.item()[
-    “Konzentizität.” https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t (accessed: Oct. 7, 2023).
+    "Konzentrizität", https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t ,abgerufen am: 7. Oktober 2023.
   ],
 
   enum.item()[
-    Freya Holmér. The Beauty of Bézier Curves, (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=aVwxzDHniEw
+    Freya Holmér, "The Beauty of Bézier Curves", Online-Video, 2021, abgerufen am: 3. Oktober 2023. Verfügbar unter: https://www.youtube.com/watch?v=aVwxzDHniEw
   ],
 )
 
-#bibliography("bibliography.yml")
+
+= Verwendete Hilfsmittel
+
+#enum(
+  enum.item()[
+    *GeoGebra Calculator Suite* \
+    Zur Erstellung von Diagrammen und Grafiken.
+  ],
+
+  enum.item()[
+    *Chat GPT* von *OpenAI* \
+    Zur Übersetzung von automatisch generierten Quellenverweisen aus dem Englischen ins Deutsche und der grammatikalischen Korrektur.
+  ]
+)
+
 
 #pagebreak()
 
@@ -723,4 +771,4 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 
 Hiermit bestätige ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet habe.
 
-#image("./assets/unterschrift.png", width: 20%)
+#image("./assets/unterschrift.png", width: 40%)

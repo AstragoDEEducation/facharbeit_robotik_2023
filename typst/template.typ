@@ -26,7 +26,7 @@
   }
   v(9.6fr)
 
-  text(1.1em, date + " | Abgabedatum: 2023-10-10")
+  text(1.1em, date)
   v(1.2em, weak: true)
   text(2em, weight: 700, title)
 
