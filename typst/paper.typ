@@ -39,9 +39,9 @@ Zuletzt wird die Bewegung des Roboters in Gelenkwinkel umgerechnet, sodass der R
 
 Der 3R-Roboterarm besteht aus drei Drehgelenken (eng.: revolute joints), welche jeweils über ein Armglied mit fester Länge miteinander verbunden sind.
 Am Ende des dritten Armgliedes befindet sich ein Endeffektor @src-endeffektor (hier: ein Greifer), welcher die Aufgabe hat, einen Stift zu führen.
-Der Ursprung des Weltsystems $S$ $[O]_S$ befindet sich am 1. Drehgelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$ $[O]_T$ am 3. Gelenk ($R_3$).
+Der Ursprung des Weltsystems $S$, $[O]_S$, befindet sich am 1. Drehgelenk des Roboterarmes ($R_1$), der Ursprung des Toolsystems $T$, $[O]_T$, am 3. Drehgelenk ($R_3$).
 @fig-3r_arm zeigt den Aufbau des Roboterarmes.
-Die Länge der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ ist bekannt.
+Die Längen der einzelnen Armglieder $l_1$, $l_2$ und $l_3$ sind bekannt.
 
 Der Endeffektor greift einen Stift mit dem bekannten Radius $rho$, in dessen Zentrum sich die Spitze _P_ befindet (siehe: @fig-3r_arm_ts).
 
@@ -120,7 +120,7 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
     d_([M]_s, [B]_S) = sqrt((m_1 - b_1)^2 + (m_2 - b_2)^2) \
     $
 
-    Sind die Bedingungen $r_min < d_([M]_s, [A]_S) < r_max$ beziehungsweise $r_min < d_([M]_s, [B]_S) < r_max$ erfüllt, kann mit der nächsten Überprüfung fortgefahren werden.
+    Sind die Bedingungen $r_min <= d_([M]_s, [A]_S) <= r_max$ beziehungsweise $r_min <= d_([M]_s, [B]_S) <= r_max$ erfüllt, kann mit der nächsten Überprüfung fortgefahren werden.
     Sind die Bedingungen nicht erfüllt, ist die Strecke nicht zeichenbar.
     Das Programm, welches den Roboter steuert, kann dann vorzeitig beendet werden und eine Fehlermeldung ausgeben.
   ],
@@ -260,7 +260,7 @@ Die Anforderungen an die Polynomfunktion $s(t)$ lauten zudem fortlaufend:
   ],
 )
 
-Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ mit konkreter Lösung zu binden, wird $t_1 = 1$ gesetzt.
+Um das Polynom $s(t) = c_0 + c_1 dot t + c_2 dot t^2 + c_3 dot t^3 + ... + c_n dot t^n$ auf $[0, t_1]$ mit konkreter Lösung zu binden, wird $t_1 = 1$ festgelegt.
 Sollten Geschwindigkeiten oder Beschleunigungen des Roboters überschritten werden, wird $t_1$ erhöht, bis die Geschwindigkeiten und Beschleunigungen des Roboters nicht mehr überschritten werden.
 Eine Methode um $Delta t$ mittels der Verschiebung von $t_1$ zu erhöhen wird im Verlauf der Arbeit erläutert.
 
@@ -279,7 +279,7 @@ accent("s", dot)(0) = 0 &=> c_1 = 0 \
 accent("s", dot.double)(0) = 0 &=> c_2 = 0 \
 $
 
-Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1 = 1$ werden $6$ Koeffizienten benötigt. Da $c_0 = c_1 = c_2 = 0$ sind fallen diese nun weg. Es ergibt sich:
+Für die Erfüllung der Anforderungen am Zeitpunkt $t = t_1 = 1$ werden weitere Koeffizienten benötigt. Da $c_0 = c_1 = c_2 = 0$ sind fallen diese nun weg. Es ergibt sich:
 
 $
 s(t) &= c_3 t^3 + c_4 t^4 + c_5 t^5 \
@@ -501,7 +501,7 @@ Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ kö
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen.
 Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
 
-Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es, unter der Annahme, dass $theta_3$ frei wählbar ist, nahezu unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
+Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es, unter der Annahme, dass $theta_3$ frei wählbar ist, nahezu unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$, also der Punkt $[O_T]_S$, auf einem Kreis mit dem Radius $l_3$ und dem Mittelpunkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
 
 Um dieses Problem zu vermeiden, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
