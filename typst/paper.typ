@@ -664,7 +664,7 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 ) <fig-st_lin>
 
 #figure(
-  image("./assets/st_vt_at_diagramm.png", width: 60%),
+  image("./assets/st_vt_at_diagramm.png", width: 50%),
   caption: [
     Der grüne Graph stellt die Funktion $s(t) = 10t^3 - 15t^4 + 6t^5$ dar.
     Der rote Graph stellt die Funktion $accent("s", dot)(t)$ dar.
