@@ -716,3 +716,11 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 )
 
 #bibliography("bibliography.yml")
+
+#pagebreak()
+
+= Eigenständigkeitserklärung
+
+Hiermit bestätige ich, dass ich die vorliegende Arbeit selbstständig verfasst und keine anderen als die angegebenen Quellen und Hilfsmittel verwendet habe.
+
+#image("./assets/unterschrift.png", width: 20%)
