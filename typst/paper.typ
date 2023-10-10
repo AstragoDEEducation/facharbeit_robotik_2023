@@ -444,10 +444,10 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
 
         $
         accent("s", dot)(1/2) &= 30 dot (1/2)^2 dot (1/2 - 1)^2 \
-        &= 15/8 = 1.875 \
+        &= 15/8 = 1,875 \
         $ 
 
-        Die maximale Geschwindigkeit des Roboters liegt in diesem Fall bei $1.875$, welche mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden kann.
+        Die maximale Geschwindigkeit des Roboters liegt in diesem Fall bei $1,875$ Geschwindigkeitseinheiten, welche mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden kann.
 
         Aus diesem Grund wird diese Bedingung als erfüllt angesehen.
       ],
@@ -466,11 +466,11 @@ Die nun erhaltene Funktion $s(t)$ muss nun auf dem Intervall $[0, 1]$ auf die Er
         $
 
         $
-        accent("s", dot.double)(1/6 (sqrt(3) + 3)) &= -5.7735 \
-        accent("s", dot.double)(1/6 (- sqrt(3) + 3)) &= 5.7735 \
+        accent("s", dot.double)(1/6 (sqrt(3) + 3)) &= -5,7735 \
+        accent("s", dot.double)(1/6 (- sqrt(3) + 3)) &= 5,7735 \
         $
 
-        Die maximale Beschleunigung des Roboters liegt in diesem Fall bei $plus.minus 5.6905$. Auch hier kann mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden. 
+        Die maximale Beschleunigung des Roboters liegt in diesem Fall bei $plus.minus 5,6905$ Beschleunigungseinheiten. Auch hier kann mangels einer roboterspezifischen Angabe nicht auf Über- oder Unterschreitung eines Grenzwertes überprüft werden. 
 
         Aus diesem Grund wird diese Bedingung als erfüllt angesehen.
       ],
@@ -501,7 +501,7 @@ Durch die in der Trajektorienplanung erhaltenen Funktionen $X(s)$ und $s(t)$ kö
 Ziel ist es nun, die Stiftspitze $P$ in den Punkt mit den Koordinaten $mat(x(t);y(t)) = (1-s(t)) dot mat(a_1; a_2) + s(t) dot mat(b_1; b_2)$ zu bewegen.
 Hierzu müssen die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ bestimmt werden.
 
-Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es, unter der Annahme, dass $theta_3$ frei wählbar ist, unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
+Mit der Ausnahme von Punkten, welche $l_1 + l_2 + l_3$ von dem Koordinatenursprung $[O]_S$ entfernt sind, gibt es, unter der Annahme, dass $theta_3$ frei wählbar ist, nahezu unendlich viele Möglichkeiten, die Gelenkwinkel $theta_1$, $theta_2$ und $theta_3$ einzustellen um den Punkt $[P]_S$ zu erreichen, solange sich das Gelenk $R_3$ auf dem Kreis mit dem Radius $l_3$ um den Punkt $[X]_S$ befindet und so eingestellt ist, dass der Punkt $[P]_S$ auf dem Punkt $[X]_S$ liegt.
 Dies ist für die Bestimmung der Gelenkwinkel problematisch, da es keine eindeutigen Lösungen für die Gelenkwinkel gibt.
 
 Um dieses Problem zu vermeiden, wird die Rotation der x-Achse des Toolsystems $T$, und damit die Rotation des Gelenkes $R_3$ im Bezug auf die x-Achse des Weltkoordinatensystem $S$ auf den Winkel des Richtungsvektors $accent("AB", ->)$ eingestellt.
@@ -571,7 +571,7 @@ accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot mat(l_1; 0) + "Rot"(theta_1 (t)) d
 &= "Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))
 $
 
-$"Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))$ wird im Folgenden als $accent("w", ->)$ bezeichnet.
+$"Rot"(theta_1 (t)) dot (mat(l_1; 0) + "Rot"(theta_2 (t)) dot mat(l_2; 0))$ wird im Folgenden als $accent("w", ->) = mat(w_1; w_2)$ bezeichnet.
 $accent("w", ->)$ ist bereits vollständig rechnerisch bestimmbar.
 Es ergibt sich:
 
@@ -590,9 +590,9 @@ theta_1 (t) &= "atan2"(v_2(t), v_1(t)) - "atan2"(w_2(t), w_1(t)) \
 &= "atan2"(v_2(t), v_1(t)) - "atan2"(l_2 "sin"(theta_2 (t)), l_1 + l_2 "cos"(theta_2 (t)))
 $
 
-Nun sind alle Winkel $theta_1$, $theta_2$ und $theta_3$ in Abhängigkeit von der Zeit $t$ bekannt. Ein Roboterarm kann nun die Strecke $accent("AB", -)$ abfahren.
+Nun sind alle Winkel $theta_1$, $theta_2$ und $theta_3$ in Abhängigkeit von der Zeit $t$ bekannt. Ein Roboterarm kann nun die Strecke $accent("AB", -)$ abfahren, indem er für jeden Zeitpunkt die Winkel berechnet.
 Hierfür wird zuerst der Winkel $theta_2 (t)$ bestimmt, im Anschluss der Winkel $theta_1 (t)$ und zuletzt der Winkel $theta_3 (t)$.
-Diese Winkelbestimmung erfolgt für jeden Zeitpunkt $t$.
+Je öfter die Winkel innerhalb des Zeitinveralls $[0, t_1]$ berechnet werden, desto genauer wird die Bewegung des Roboterarmes.
 
 = Nachwort & Fazit
 
@@ -609,7 +609,7 @@ Beispielsweise in der Filmproduktion, um eine Kamera auf einem immer gleichen Pf
 Es ist jedoch zu beachten, dass die (lineare) Interpolation nicht immer die beste Lösung ist, um einen Roboterarm zu bewegen.
 Wenn der Endeffektor keinem vorbestimmten Pfad folgen muss, können alle Gelenkwinkel des Roboters sofort auf den gewünschten Zielwert eingestellt werden.
 Dadurch braucht die Bewegung nur noch die Zeit, welche das langsamste Gelenk benötigt, um sich auf den Zielwert einzustellen. 
-Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter Umständen schwer vorhersehbar.
+Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter Umständen schwerer vorhersehbar.
 
 // ===== Anhang
 
