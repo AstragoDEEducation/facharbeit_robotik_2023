@@ -23,7 +23,7 @@
 
 = Einführung
 
-Diese Arbeit orientiert sich an der Online-Vorlesung "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]" @src-kin_4_4, erstellt von Herrn Professor Doktor Harald Löwe, veröffentlicht am 2021-05-02.
+Diese Arbeit orientiert sich an der Online-Vorlesung "Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok der TU Braunschweig]" (Bibliographieverweis: @src-kin_4_4), erstellt von Herrn Professor Doktor Harald Löwe, veröffentlicht am 2021-05-02.
 
 == Ziel dieser Arbeit 
 
@@ -541,7 +541,7 @@ Um die Winkel $theta_1 (t)$ und $theta_2 (t)$ mit Hilfe des inversen kinematisch
 Hierzu wird ein Vektor $accent("v", ->)$ gebildet, welcher von $"[O]"_"S"$ auf $[O_T]_"S"$ zeigt.
 
 $
-accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2) - mat(0; 0)
+accent("v", ->) (t) = mat(v_1(t); v_2(t)) = [O_T]_S - [O]_S = (mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2)) - mat(0; 0)
 $
 
 Die Länge des Vektors $accent("v", ->) (t)$ ist:
