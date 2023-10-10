@@ -527,13 +527,13 @@ $
 [O_T]_S = mat(x(t); y(t)) - frac((l_3 + rho), sqrt((b_1 - a_1)^2 + (b_2 - a_2)^2)) dot mat(b_1 - a_1; b_2 - a_2)
 $
 
-Der Winkel $theta_3$ in Abhängigkeit von der Zeit $t$ lässt sich nun wie folgt beschreiben:
+Der Winkel $theta_3 (t)$, in Abhängigkeit von der Zeit $t$ und der Gelenkwinkel $theta_1 (t)$ und $theta_2 (t)$, lässt sich nun wie folgt beschreiben:
 
 $
 theta_3 (t) = "atan2"(b_2 - a_2, b_1 - a_1) - theta_1 (t) - theta_2 (t)
 $
 
-Die Winkel $theta_1$ und $theta_2$ lassen sich nun mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
+Die Winkel $theta_1 (t)$ und $theta_2 (t)$ lassen sich mit Hilfe der Lösung des indirekten kinematischen Problems bestimmen.
 
 === Bestimmung der Winkel $theta_1 (t)$ und $theta_2 (t)$
 
@@ -556,7 +556,7 @@ Die Länge des Vektors $accent("v", ->) (t)$ ist:
 Da die Längen der einzelnen Armglieder bekannt sind, kann die bereits aus der Lösung des inversen kinematischen Problems bekannte Formel zur Berechnung des Winkels $theta_2$ verwendet werden:  
 
 $
-theta_2 (t) = plus.minus "arccos" frac(d(t)^2 - l_1^2 - l_2^2, 2 l_1 l_2)
+theta_2 (t) = plus.minus "arccos" (frac(d(t)^2 - l_1^2 - l_2^2, 2 l_1 l_2))
 $
 
 Es gibt zwei Lösungen für $theta_2 (t)$. Um unnötige Rotationen des Gelenkes $R_2$ zu vermeiden, wird die Lösung gewählt, welche den Winkel $theta_2 (t)$ weniger weit rotieren lässt. 
@@ -579,7 +579,7 @@ $
 accent("v", ->) (t) &= "Rot"(theta_1 (t)) dot accent("w", ->)
 $
 
-Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im Folgenden versuchen, den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ zu drehen. Dies ist jedoch nur möglich, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$.
+Da $accent("v", ->) (t)$ und $accent("w", ->) (t)$ die selbe Länge haben, kann man im den Vektor $accent("w", ->) (t)$ auf den Vektor $accent("v", ->) (t)$ drehen, wenn die Länge des Vektors $norm(accent("v", ->))(t) = norm(accent("w", ->)) (t) eq.not 0$ ist.
 Ist $norm(accent("v", ->)) (t) = norm(accent("w", ->)) (t) = 0$ würde dies bedeuten, dass sich der Punkt $"[O]"_"S"$ und der Punkt $[O_T]_"S"$ an der selben Stelle befinden. Dies würde dazu führen, dass jeder Winkel $theta_1 (t)$ eine richtige Lösung wäre.
 In diesem Fall kann ein beliebiger Winkel $theta_1 (t)$ gewählt werden.
 
@@ -590,7 +590,7 @@ theta_1 (t) &= "atan2"(v_2(t), v_1(t)) - "atan2"(w_2(t), w_1(t)) \
 &= "atan2"(v_2(t), v_1(t)) - "atan2"(l_2 "sin"(theta_2 (t)), l_1 + l_2 "cos"(theta_2 (t)))
 $
 
-Nun sind alle Winkel $theta_1$, $theta_2$ und $theta_3$ in Abhängigkeit von der Zeit $t$ bekannt. Ein Roboterarm kann nun die Strecke $accent("AB", -)$ abfahren, indem er für jeden Zeitpunkt die Winkel berechnet.
+Nun sind alle Winkel $theta_1$, $theta_2$ und $theta_3$ in Abhängigkeit von der Zeit $t$ bekannt. Ein Roboterarm kann nun die Strecke $accent("AB", -)$ abfahren, indem er für jeden Zeitpunkt die Winkel der Drehgelenke berechnet.
 Hierfür wird zuerst der Winkel $theta_2 (t)$ bestimmt, im Anschluss der Winkel $theta_1 (t)$ und zuletzt der Winkel $theta_3 (t)$.
 Je öfter die Winkel innerhalb des Zeitinveralls $[0, t_1]$ berechnet werden, desto genauer wird die Bewegung des Roboterarmes.
 
