@@ -14,10 +14,9 @@
 )
 
 // Text Settings
-#let default_text_size = 11pt
 
+#set text(size: 11pt)
 #set text(spacing: 150%)
-#set text(size: default_text_size)
 
 // ========== Content ==========
 
@@ -134,16 +133,6 @@ Die Überprüfung, ob die Punkte $[A]_S$ und $[B]_S$ mit der zugehörigen Streck
   ],
 )
 
-// == Bestimmung des Punktes $"[P]"_"S"$ (Wird das benötigt?)
-
-// // Da die Längen der einzelnen Armglieder bekannt sind und auch die Position der Stiftspitze _P_ im Bezug auf das Toolsystem _T_ bekannt ist, kann die Strecke zwischen den Punkten $"[A]"_"S"$ und $"[B]"_"S"$ parametrisiert werden.
-
-// Durch Anwendung des direkten kinematischen Problems kann der Punkt $"[P]"_"S"$ bestimmt werden.
-
-// $
-// "[P]"_"S" &= "Rot"(theta_1 + theta_2 + theta_3) dot vec("l"_"3" + rho, 0) + "Rot"(theta_1 + theta_2) dot vec("l"_"2", 0) + "Rot"(theta_1) dot vec("l"_"1", 0) \
-// &= vec((l_3 + rho) dot "cos"(theta_1 + theta_2 + theta_3) + l_2 "cos"(theta_1 + theta_2) + l_1 "cos"(theta_1), (l_3 + rho) dot "sin"(theta_1 + theta_2 + theta_3) + l_2 "sin"(theta_1 + theta_2) + l_1 "sin"(theta_1)) 
-// $
 
 == Parametrisierung der Strecke
 
@@ -683,41 +672,11 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
   ],
 ) <fig-st_st_gstr>
 
-// ===== Quellen und Bibliographie 
+// ===== Quellen 
   
 #pagebreak()
 
 = Quellen
-
-// #enum(
-//   enum.item()[
-//     Prof. Dr. Harald Löwe. Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=iozyhA0z3lk
-//   ],
-
-//   enum.item()[
-//     Prof. Dr. Harald Löwe. Robotik Teil 04 [3/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=cjMWJupFtt4
-//   ],
-
-//   enum.item()[
-//     Prof. Dr. Harald Löwe. Robotik Teil 04 [4/5] [Schülerlabor Mathe-Lok Der TU Braunschweig], (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=-ONzaWY9ZUo
-//   ],
-
-//   enum.item()[
-//     “Endeffektor.” https://de.wikipedia.org/wiki/Endeffektor (accessed: Oct. 3, 2023).
-//   ],
-
-//   enum.item()[
-//     Martin Seyr, “Autonomous mobile robot motion control,” Thesis, 2006. Accessed: Sep. 6, 2023. [Online]. Available: http://media.obvsg.at/AC05033038-2001
-//   ],
-
-//   enum.item()[
-//     “Konzentizität.” https://de.wikipedia.org/wiki/Konzentrizit%C3%A4t (accessed: Oct. 7, 2023).
-//   ],
-
-//   enum.item()[
-//     Freya Holmér. The Beauty of Bézier Curves, (2021). Accessed: Oct. 3, 2023. [Online Video]. Available: https://www.youtube.com/watch?v=aVwxzDHniEw
-//   ],
-// )
 
 #enum(
   enum.item()[
