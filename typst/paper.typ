@@ -680,7 +680,7 @@ Die Bewegung des Endeffektors ist dadurch jedoch nicht mehr geradlinig und unter
 
 #enum(
   enum.item()[
-    Prof. Dr. Harald Löwe, "Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig]", Online-Video, 2021, abgerufen am: 3. Oktober 2023 Verfügbar unter: https://www.youtube.com/watch?v=iozyhA0z3lk
+    Prof. Dr. Harald Löwe, "Robotik Teil 04 [2/5] [Schülerlabor Mathe-Lok Der TU Braunschweig]", Online-Video, 2021, abgerufen am: 3. Oktober 2023. Verfügbar unter: https://www.youtube.com/watch?v=iozyhA0z3lk
   ],
 
   enum.item()[
