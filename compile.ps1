@@ -1,1 +1,1 @@
-typst compile papera.typ
+typst compile paper.typ
